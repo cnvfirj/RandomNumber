@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">RandomNumber</string>
+
+    <string name="input_from">from</string>
+    <string name="input_to">to</string>
+    <string name="input_quantity">quantity</string>
+    <string name="tutorial_input">Enter the boundaries of the desired number</string>
+
 </resources>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="fragmentMain"
+            type="com.kittendevelop.randomnumber.ui.FragmentMain" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tutorial_input"
+        android:layout_gravity="center_horizontal"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText style="@style/input_bound_field"
+            android:id="@+id/input_from"
+            android:hint="@string/input_from"
+            android:text="@{fragmentMain.value}"
+            app:addTextChangedListener="@{fragmentMain.from}"/>
+
+        <EditText style="@style/input_bound_field"
+            android:id="@+id/input_to"
+            android:hint="@string/input_to"
+            app:addTextChangedListener="@{fragmentMain.to}"/>
+
+    </LinearLayout>
+
+    </LinearLayout>
+</layout>
