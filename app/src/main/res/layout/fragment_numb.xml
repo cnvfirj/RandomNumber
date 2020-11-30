@@ -4,8 +4,11 @@
 
     <data>
         <variable
-            name="fragmentMain"
-            type="com.kittendevelop.randomnumber.ui.FragmentMain" />
+            name="fragmentNumb"
+            type="com.kittendevelop.randomnumber.ui.number.FragmentNumb" />
+        <variable
+            name="fill"
+            type="com.kittendevelop.randomnumber.ui.number.InputFill" />
     </data>
 
     <LinearLayout
@@ -14,7 +17,8 @@
         android:orientation="vertical">
 
         <include layout="@layout/input_bound"
-            app:fragmentMain="@{fragmentMain}"/>
+            app:fragmentNumb="@{fragmentNumb}"
+            app:fill="@{fill}"/>
 
     </LinearLayout>
 </layout>

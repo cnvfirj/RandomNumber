@@ -1,6 +1,6 @@
-package com.kittendevelop.randomnumber.ui;
+package com.kittendevelop.randomnumber.ui.number;
 
-public class ModelMain {
+public class ModelNumb {
 
 //    private StringBuilder mValueFrom;
 //    private StringBuilder mValueTo;

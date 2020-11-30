@@ -1,17 +1,10 @@
 package com.kittendevelop.randomnumber;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
-import androidx.databinding.ViewDataBinding;
 
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.widget.EditText;
 
-import com.kittendevelop.randomnumber.ui.FragmentMain;
-
-import static com.kittendevelop.randomnumber.help.Massages.MASSAGE;
+import com.kittendevelop.randomnumber.ui.number.FragmentNumb;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.container, FragmentMain.newInstance())
+                    .replace(R.id.container, FragmentNumb.newInstance())
                     .commitNow();
         }
     }

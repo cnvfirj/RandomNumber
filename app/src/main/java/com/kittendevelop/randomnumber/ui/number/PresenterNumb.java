@@ -1,16 +1,16 @@
-package com.kittendevelop.randomnumber.ui;
+package com.kittendevelop.randomnumber.ui.number;
 
 import android.text.Editable;
 import android.text.TextWatcher;
 
 import static com.kittendevelop.randomnumber.help.Massages.MASSAGE;
 
-public class PresenterMain {
+public class PresenterNumb {
 
     private StringBuilder mValueFrom;
     private StringBuilder mValueTo;
 
-    public PresenterMain() {
+    public PresenterNumb() {
         mValueFrom = new StringBuilder();
         mValueTo = new StringBuilder();
     }

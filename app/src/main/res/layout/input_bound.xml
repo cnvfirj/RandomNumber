@@ -5,14 +5,18 @@
 
     <data>
         <variable
-            name="fragmentMain"
-            type="com.kittendevelop.randomnumber.ui.FragmentMain" />
+            name="fragmentNumb"
+            type="com.kittendevelop.randomnumber.ui.number.FragmentNumb" />
+        <variable
+            name="fill"
+            type="com.kittendevelop.randomnumber.ui.number.InputFill" />
     </data>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="3dp">
 
     <TextView
         android:layout_width="wrap_content"
@@ -25,16 +29,19 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <EditText style="@style/input_bound_field"
+        <EditText style="@style/input_bound_field_numb"
             android:id="@+id/input_from"
             android:hint="@string/input_from"
-            android:text="@{fragmentMain.value}"
-            app:addTextChangedListener="@{fragmentMain.from}"/>
+            android:text="@{fill.valueFrom}"
+            android:backgroundTint="@{fill.colorBackground.intValue()}"
+            app:addTextChangedListener="@{fill.watchFrom}"/>
 
-        <EditText style="@style/input_bound_field"
+        <EditText style="@style/input_bound_field_numb"
             android:id="@+id/input_to"
             android:hint="@string/input_to"
-            app:addTextChangedListener="@{fragmentMain.to}"/>
+            android:text="@{fill.valueTo}"
+            app:addTextChangedListener="@{fill.watchTo}"
+            android:backgroundTint="@{fill.colorBackground.intValue()}"/>
 
     </LinearLayout>
 
