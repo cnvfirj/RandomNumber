@@ -6,7 +6,12 @@ import android.text.TextWatcher;
 
 import androidx.databinding.ObservableField;
 
-public class InputFill {
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
+import static com.kittendevelop.randomnumber.help.Massages.MASSAGE;
+
+public class SelectorInputBound {
 
     private String mValueFrom;
     private String mValueTo;
@@ -33,11 +38,14 @@ public class InputFill {
 
         @Override
         public void afterTextChanged(Editable editable) {
-             mValueFrom = editable.toString();
-             if(!mValueFrom.equals("")){
-                 mFrom = Integer.parseInt(mValueFrom);
-             }else mFrom = 0;
-            switchColorBackground();
+            if(editable.toString().equals("+"))editable.clear();
+            else {
+                mValueFrom = editable.toString();
+                if (!mValueFrom.equals("") && !mValueFrom.equals("-")) {
+                    mFrom = Integer.parseInt(mValueFrom);
+                } else mFrom = 0;
+                switchColorBackground();
+            }
         }
     };
 
@@ -54,31 +62,60 @@ public class InputFill {
 
         @Override
         public void afterTextChanged(Editable editable) {
-            mValueTo = editable.toString();
-            if(!mValueTo.equals("")){
-                mTo = Integer.parseInt(mValueTo);
-            }else mTo = 0;
-            switchColorBackground();
+            if(editable.toString().equals("+"))editable.clear();
+            else {
+                mValueTo = editable.toString();
+                if (!mValueTo.equals("") && !mValueTo.equals("-")) {
+                    mTo = Integer.parseInt(mValueTo);
+                } else mTo = 0;
+                switchColorBackground();
+            }
 
         }
     };
 
-    public InputFill() {
-        this.mColorBackground.set(Color.GRAY);
-        this.mValueFrom = "";
-        this.mValueTo = "";
-    }
 
-    public InputFill(int colorYes, int colorNo, int valueFrom, int valueTo){
-        mColorNo = colorNo;
-        mColorYes = colorYes;
-        mFrom = valueFrom;
-        mTo = valueTo;
+    @Inject
+    public SelectorInputBound() {
+        mColorNo = Color.RED;
+        mColorYes = Color.GRAY;
+        mFrom = 0;
+        mTo = 0;
+        mValueFrom = "";
+        mValueTo = "";
         switchColorBackground();
     }
 
     public ObservableField<Integer> getColorBackground() {
         return mColorBackground;
+    }
+
+    public void applyParams(){
+        switchColorBackground();
+    }
+
+    public SelectorInputBound setFrom(int mFrom) {
+        this.mFrom = mFrom;
+//        if(mFrom!=0)
+            mValueFrom = String.valueOf(mFrom);
+        return this;
+    }
+
+    public SelectorInputBound setTo(int mTo) {
+        this.mTo = mTo;
+//        if(mTo!=0)
+            mValueTo = String.valueOf(mTo);
+        return this;
+    }
+
+    public SelectorInputBound setColorYes(int mColorYes) {
+        this.mColorYes = mColorYes;
+        return this;
+    }
+
+    public SelectorInputBound setColorNo(int mColorNo) {
+        this.mColorNo = mColorNo;
+        return this;
     }
 
     public boolean isReadiness(){

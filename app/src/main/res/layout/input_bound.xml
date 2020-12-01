@@ -4,12 +4,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+<!--        <variable-->
+<!--            name="fragmentNumb"-->
+<!--            type="com.kittendevelop.randomnumber.ui.number.FragmentNumb" />-->
         <variable
-            name="fragmentNumb"
-            type="com.kittendevelop.randomnumber.ui.number.FragmentNumb" />
-        <variable
-            name="fill"
-            type="com.kittendevelop.randomnumber.ui.number.InputFill" />
+            name="selector"
+            type="com.kittendevelop.randomnumber.ui.number.SelectorInputBound" />
     </data>
 
     <LinearLayout
@@ -32,16 +32,16 @@
         <EditText style="@style/input_bound_field_numb"
             android:id="@+id/input_from"
             android:hint="@string/input_from"
-            android:text="@{fill.valueFrom}"
-            android:backgroundTint="@{fill.colorBackground.intValue()}"
-            app:addTextChangedListener="@{fill.watchFrom}"/>
+            android:text="@{selector.valueFrom}"
+            android:backgroundTint="@{selector.colorBackground.intValue()}"
+            app:addTextChangedListener="@{selector.watchFrom}"/>
 
         <EditText style="@style/input_bound_field_numb"
             android:id="@+id/input_to"
             android:hint="@string/input_to"
-            android:text="@{fill.valueTo}"
-            app:addTextChangedListener="@{fill.watchTo}"
-            android:backgroundTint="@{fill.colorBackground.intValue()}"/>
+            android:text="@{selector.valueTo}"
+            app:addTextChangedListener="@{selector.watchTo}"
+            android:backgroundTint="@{selector.colorBackground.intValue()}"/>
 
     </LinearLayout>
 

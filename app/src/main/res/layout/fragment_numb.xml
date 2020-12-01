@@ -3,12 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+<!--        <variable-->
+<!--            name="fragmentNumb"-->
+<!--            type="com.kittendevelop.randomnumber.ui.number.FragmentNumb" />-->
         <variable
-            name="fragmentNumb"
-            type="com.kittendevelop.randomnumber.ui.number.FragmentNumb" />
-        <variable
-            name="fill"
-            type="com.kittendevelop.randomnumber.ui.number.InputFill" />
+            name="selector"
+            type="com.kittendevelop.randomnumber.ui.number.SelectorInputBound" />
     </data>
 
     <LinearLayout
@@ -17,8 +17,10 @@
         android:orientation="vertical">
 
         <include layout="@layout/input_bound"
-            app:fragmentNumb="@{fragmentNumb}"
-            app:fill="@{fill}"/>
+            app:selector="@{selector}"/>
+<!--            app:fragmentNumb="@{fragmentNumb}"-->
+<!--            app:fill="@{fill}"-->
+
 
     </LinearLayout>
 </layout>

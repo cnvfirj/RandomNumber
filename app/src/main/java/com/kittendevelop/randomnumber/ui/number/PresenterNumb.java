@@ -1,33 +1,55 @@
 package com.kittendevelop.randomnumber.ui.number;
 
-import android.text.Editable;
-import android.text.TextWatcher;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 
-import static com.kittendevelop.randomnumber.help.Massages.MASSAGE;
+import com.kittendevelop.randomnumber.R;
+import com.kittendevelop.randomnumber.help.ApplyFeedback;
+
+import javax.inject.Inject;
 
 public class PresenterNumb {
 
-    private StringBuilder mValueFrom;
-    private StringBuilder mValueTo;
+    private SelectorInputBound mSelectorInputBound;
+    private FragmentFeedback mFeedback;
 
-    public PresenterNumb() {
-        mValueFrom = new StringBuilder();
-        mValueTo = new StringBuilder();
+    @Inject
+    public PresenterNumb(SelectorInputBound inputBound) {
+        mSelectorInputBound = inputBound;
     }
 
-    public void setFrom(CharSequence c){
-        mValueFrom.append(c);
+    public PresenterNumb bindView(FragmentFeedback view){
+        mFeedback = view;
+        initSelector();
+        return this;
     }
 
-    public void setTo(CharSequence c){
-        mValueTo.append(c);
+    public SelectorInputBound getSelector(){
+        return mSelectorInputBound;
     }
 
-    public String getValueFrom() {
-        return mValueFrom.toString();
+    public void end(){
+        saveParams();
+        mFeedback = null;
     }
 
-    public String getValueTo() {
-        return mValueTo.toString();
+    private void initSelector(){
+        SharedPreferences p = mFeedback.context().getSharedPreferences("OLD_VALUES_INPUT", Context.MODE_PRIVATE);
+        int from = p.getInt("M_FROM",0);
+        int to = p.getInt("M_TO",0);
+        mSelectorInputBound
+                .setFrom(from)
+                .setTo(to)
+                .setColorYes(mFeedback.context().getResources().getColor(R.color.willingness_yes,null))
+                .setColorNo(mFeedback.context().getResources().getColor(R.color.willingness_no,null))
+                .applyParams();
+    }
+
+    private void saveParams(){
+        Editor editor = mFeedback.context().getSharedPreferences("OLD_VALUES_INPUT",Context.MODE_PRIVATE).edit();
+        editor.putInt("M_FROM",mSelectorInputBound.getFrom());
+        editor.putInt("M_TO",mSelectorInputBound.getTo());
+        editor.apply();
     }
 }
