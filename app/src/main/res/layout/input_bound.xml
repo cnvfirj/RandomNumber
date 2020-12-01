@@ -4,9 +4,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-<!--        <variable-->
-<!--            name="fragmentNumb"-->
-<!--            type="com.kittendevelop.randomnumber.ui.number.FragmentNumb" />-->
         <variable
             name="selector"
             type="com.kittendevelop.randomnumber.ui.number.SelectorInputBound" />
@@ -32,6 +29,8 @@
         <EditText style="@style/input_bound_field_numb"
             android:id="@+id/input_from"
             android:hint="@string/input_from"
+            android:layout_weight="1"
+            android:autoSizeTextType="uniform"
             android:text="@{selector.valueFrom}"
             android:backgroundTint="@{selector.colorBackground.intValue()}"
             app:addTextChangedListener="@{selector.watchFrom}"/>
@@ -39,6 +38,7 @@
         <EditText style="@style/input_bound_field_numb"
             android:id="@+id/input_to"
             android:hint="@string/input_to"
+            android:layout_weight="1"
             android:text="@{selector.valueTo}"
             app:addTextChangedListener="@{selector.watchTo}"
             android:backgroundTint="@{selector.colorBackground.intValue()}"/>

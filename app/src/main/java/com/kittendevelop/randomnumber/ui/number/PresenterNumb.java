@@ -36,8 +36,8 @@ public class PresenterNumb {
 
     private void initSelector(){
         SharedPreferences p = mFeedback.context().getSharedPreferences("OLD_VALUES_INPUT", Context.MODE_PRIVATE);
-        int from = p.getInt("M_FROM",0);
-        int to = p.getInt("M_TO",0);
+        long from = p.getLong("M_FROM_",0);
+        long to = p.getLong("M_TO_",0);
         mSelectorInputBound
                 .setFrom(from)
                 .setTo(to)
@@ -48,8 +48,8 @@ public class PresenterNumb {
 
     private void saveParams(){
         Editor editor = mFeedback.context().getSharedPreferences("OLD_VALUES_INPUT",Context.MODE_PRIVATE).edit();
-        editor.putInt("M_FROM",mSelectorInputBound.getFrom());
-        editor.putInt("M_TO",mSelectorInputBound.getTo());
+        editor.putLong("M_FROM_",mSelectorInputBound.getFrom());
+        editor.putLong("M_TO_",mSelectorInputBound.getTo());
         editor.apply();
     }
 }

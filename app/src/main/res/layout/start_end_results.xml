@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+    </data>
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="3dp">
+
+    <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+    
+
+      <Button style="@style/start_end_results_numb"
+        android:id="@+id/search_number"/>
+
+      <view class="androidx.recyclerview.widget.RecyclerView"
+        style="@style/start_end_results_numb"
+        android:layout_width="match_parent"
+        android:id="@+id/search_excludud_numb"
+        android:scrollbars="horizontal"/>
+
+    </LinearLayout>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        style="@style/start_end_results_numb"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/search_results_numb"/>
+
+   </LinearLayout>
+
+</layout>

@@ -16,8 +16,8 @@ public class SelectorInputBound {
     private String mValueFrom;
     private String mValueTo;
 
-    private int mFrom;
-    private int mTo;
+    private long mFrom;
+    private long mTo;
 
     private int mColorYes;
     private int mColorNo;
@@ -42,7 +42,7 @@ public class SelectorInputBound {
             else {
                 mValueFrom = editable.toString();
                 if (!mValueFrom.equals("") && !mValueFrom.equals("-")) {
-                    mFrom = Integer.parseInt(mValueFrom);
+                    mFrom = Long.parseLong(mValueFrom);
                 } else mFrom = 0;
                 switchColorBackground();
             }
@@ -66,7 +66,7 @@ public class SelectorInputBound {
             else {
                 mValueTo = editable.toString();
                 if (!mValueTo.equals("") && !mValueTo.equals("-")) {
-                    mTo = Integer.parseInt(mValueTo);
+                    mTo = Long.parseLong(mValueTo);
                 } else mTo = 0;
                 switchColorBackground();
             }
@@ -94,14 +94,14 @@ public class SelectorInputBound {
         switchColorBackground();
     }
 
-    public SelectorInputBound setFrom(int mFrom) {
+    public SelectorInputBound setFrom(long mFrom) {
         this.mFrom = mFrom;
 //        if(mFrom!=0)
             mValueFrom = String.valueOf(mFrom);
         return this;
     }
 
-    public SelectorInputBound setTo(int mTo) {
+    public SelectorInputBound setTo(long mTo) {
         this.mTo = mTo;
 //        if(mTo!=0)
             mValueTo = String.valueOf(mTo);
@@ -130,11 +130,11 @@ public class SelectorInputBound {
         return mValueTo;
     }
 
-    public int getFrom() {
+    public long getFrom() {
         return mFrom;
     }
 
-    public int getTo() {
+    public long getTo() {
         return mTo;
     }
 

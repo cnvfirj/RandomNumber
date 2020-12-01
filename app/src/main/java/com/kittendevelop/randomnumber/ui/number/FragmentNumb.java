@@ -15,8 +15,6 @@ import com.kittendevelop.randomnumber.R;
 import com.kittendevelop.randomnumber.databinding.FragmentNumbBinding;
 import com.kittendevelop.randomnumber.ui.number.df.DaggerComponentFragmentNumb;
 
-import java.time.format.DateTimeFormatter;
-
 import javax.inject.Inject;
 
 
