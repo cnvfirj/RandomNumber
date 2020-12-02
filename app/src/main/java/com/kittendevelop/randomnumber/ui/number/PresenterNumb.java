@@ -7,6 +7,8 @@ import android.view.View;
 
 import com.kittendevelop.randomnumber.R;
 import com.kittendevelop.randomnumber.help.ApplyFeedback;
+import com.kittendevelop.randomnumber.ui.number.dialog.DialogWaiting;
+import com.kittendevelop.randomnumber.ui.number.dialog.ReceiverWaiting;
 
 import javax.inject.Inject;
 
@@ -57,7 +59,7 @@ public class PresenterNumb {
     }
 
     public void click(View v){
-        MASSAGE("click");
+        if(!ReceiverWaiting.instance().isAdded())mFeedback.startSearch(ReceiverWaiting.instance().dialog());
     }
 
     public void longClick(View v){

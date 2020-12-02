@@ -37,20 +37,15 @@ public class FragmentNumb extends Fragment implements FragmentFeedback {
 
     private View create(LayoutInflater inflater){
         View v = inflater.inflate(R.layout.fragment_numb,null);
-//        FragmentNumbBinding binding = FragmentNumbBinding.bind(v);
-//        binding.setSelector(mPresenter.getSelector());
-//        binding.setListener(mPresenter);
+        FragmentNumbBinding binding = FragmentNumbBinding.bind(v);
+        binding.setSelector(mPresenter.getSelector());
+        binding.setListener(mPresenter);
         return v;
     }
 
     @Override
     public Context context() {
         return getContext();
-    }
-
-    @Override
-    public Activity activity() {
-        return getActivity();
     }
 
     @Override
@@ -61,11 +56,11 @@ public class FragmentNumb extends Fragment implements FragmentFeedback {
 
     @Override
     public void startSearch(DialogFragment fragment) {
-
+        fragment.show(getChildFragmentManager(),"WAITING");
     }
 
     @Override
-    public void stopSearch(DialogFragment fragment) {
-
+    public void showResult(DialogFragment fragment) {
+        fragment.show(getChildFragmentManager(),"RESULT");
     }
 }
