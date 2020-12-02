@@ -27,13 +27,12 @@ public class ModelNumb {
 
     /*массив отсортирован по возрастанию*/
     public long correctExclude(long[]exceptions,long value,long min, long max,int step){
-        MASSAGE("recurs "+value);
         if(value<exceptions[step])return value;
-        if(value>max)correctExclude(exceptions,min,min,max,0);
+        if(value>max)return correctExclude(exceptions,min,min,max,0);
         for (int i=step;i<exceptions.length;i++){
             if(value==exceptions[i]){
-                correctExclude(exceptions,value+1,min,max,i);
-                break;
+                return correctExclude(exceptions,value+1,min,max,i);
+
             }
         }
         return value;
