@@ -27,7 +27,13 @@
         <item name="android:layout_margin">5dp</item>
     </style>
 
-
+    <style name="hints_search_numb">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
 
 
 </resources>

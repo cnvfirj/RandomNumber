@@ -3,11 +3,14 @@ package com.kittendevelop.randomnumber.ui.number;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.view.View;
 
 import com.kittendevelop.randomnumber.R;
 import com.kittendevelop.randomnumber.help.ApplyFeedback;
 
 import javax.inject.Inject;
+
+import static com.kittendevelop.randomnumber.help.Massages.MASSAGE;
 
 public class PresenterNumb {
 
@@ -51,5 +54,13 @@ public class PresenterNumb {
         editor.putLong("M_FROM_",mSelectorInputBound.getFrom());
         editor.putLong("M_TO_",mSelectorInputBound.getTo());
         editor.apply();
+    }
+
+    public void click(View v){
+        MASSAGE("click");
+    }
+
+    public void longClick(View v){
+
     }
 }

@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
 import com.kittendevelop.randomnumber.R;
@@ -17,10 +18,7 @@ import com.kittendevelop.randomnumber.ui.number.df.DaggerComponentFragmentNumb;
 
 import javax.inject.Inject;
 
-
 public class FragmentNumb extends Fragment implements FragmentFeedback {
-
-
 
     @Inject
     PresenterNumb mPresenter;
@@ -39,8 +37,9 @@ public class FragmentNumb extends Fragment implements FragmentFeedback {
 
     private View create(LayoutInflater inflater){
         View v = inflater.inflate(R.layout.fragment_numb,null);
-        FragmentNumbBinding binding = FragmentNumbBinding.bind(v);
-        binding.setSelector(mPresenter.getSelector());
+//        FragmentNumbBinding binding = FragmentNumbBinding.bind(v);
+//        binding.setSelector(mPresenter.getSelector());
+//        binding.setListener(mPresenter);
         return v;
     }
 
@@ -58,5 +57,15 @@ public class FragmentNumb extends Fragment implements FragmentFeedback {
     public void onDestroy() {
         super.onDestroy();
         mPresenter.end();
+    }
+
+    @Override
+    public void startSearch(DialogFragment fragment) {
+
+    }
+
+    @Override
+    public void stopSearch(DialogFragment fragment) {
+
     }
 }

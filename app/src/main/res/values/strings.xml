@@ -4,7 +4,8 @@
     <string name="input_from">от</string>
     <string name="input_to">до</string>
     <string name="input_quantity">quantity</string>
-    <string name="tutorial_input">Введи диаппазон поиска</string>
-    <string name="tutorial_search">Найди числа кроме исключенных</string>
+    <string name="hint_input">Диапазон поиска</string>
+    <string name="hint_search">Старт поиска и исключенные элементы</string>
+    <string name="hint_story">Прошлые результаты</string>
 
 </resources>

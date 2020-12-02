@@ -16,10 +16,8 @@
         android:padding="3dp">
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/tutorial_input"
-        android:layout_gravity="center_horizontal"/>
+        android:text="@string/hint_input"
+        style="@style/hints_search_numb" />
 
     <LinearLayout
         android:layout_width="match_parent"
