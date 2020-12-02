@@ -6,6 +6,5 @@ import com.kittendevelop.randomnumber.help.ApplyFeedback;
 
 public interface FragmentFeedback extends ApplyFeedback {
 
-    void startSearch(DialogFragment fragment);
-    void showResult(DialogFragment fragment);
+    void showDialog(DialogFragment fragment,String tag);
 }

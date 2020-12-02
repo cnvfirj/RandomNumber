@@ -7,5 +7,6 @@
     <string name="hint_input">Диапазон поиска</string>
     <string name="hint_search">Старт поиска и исключенные элементы</string>
     <string name="hint_story">Прошлые результаты</string>
+    <string name="max_length">Достигнуто максимальное значение вводимого числа</string>
 
 </resources>

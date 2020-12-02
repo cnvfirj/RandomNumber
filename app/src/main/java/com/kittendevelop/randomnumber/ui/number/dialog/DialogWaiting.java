@@ -22,7 +22,7 @@ public class DialogWaiting extends DialogFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         /*прозрачный фон*/
-        getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(getContext().getResources().getColor(R.color.transparent)));
+        getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(getContext().getResources().getColor(R.color.transparent,null)));
         /*отключение выхода при касании вне диалога*/
         setCancelable(false);
         getDialog().setCanceledOnTouchOutside(false);

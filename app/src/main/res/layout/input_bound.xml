@@ -28,7 +28,6 @@
             android:id="@+id/input_from"
             android:hint="@string/input_from"
             android:layout_weight="1"
-            android:autoSizeTextType="uniform"
             android:text="@{selector.valueFrom}"
             android:backgroundTint="@{selector.colorBackground.intValue()}"
             app:addTextChangedListener="@{selector.watchFrom}"/>

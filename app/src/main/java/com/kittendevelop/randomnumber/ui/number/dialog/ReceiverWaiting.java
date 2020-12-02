@@ -22,7 +22,7 @@ public class ReceiverWaiting {
     }
 
     public void stop(){
-        if(isAdded())mWaiting.dismiss();
+        mWaiting.dismiss();
     }
 
     public boolean isAdded(){
