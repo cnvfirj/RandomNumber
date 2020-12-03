@@ -26,15 +26,26 @@ public class ModelNumb {
     }
 
     /*массив отсортирован по возрастанию*/
-    public long correctExclude(long[]exceptions,long value,long min, long max,int step){
-        if(value<exceptions[step])return value;
-        if(value>max)return correctExclude(exceptions,min,min,max,0);
-        for (int i=step;i<exceptions.length;i++){
-            if(value==exceptions[i]){
-                return correctExclude(exceptions,value+1,min,max,i);
+    public long correctExclude(long[]exceptions,long value,long min, long max){
+        if(value>max)return correctExclude(exceptions,min,min,max);
+        if(checkСoincidence(exceptions,value,0,exceptions.length-1))
+            return correctExclude(exceptions,value+1,min,max);
+        return value;
+    }
 
+    private boolean checkСoincidence(long[]options,long value,int start, int end){
+        int check = (end-start)/2+start;
+        if(options[check]==value)return true;
+        if(start==end)return false;
+        else {
+            long v = options[check];
+            if(v<value){
+                return checkСoincidence(options,value,check+1,end);
+            }
+            else if(v>value){
+                return checkСoincidence(options,value,start,check-1);
             }
         }
-        return value;
+        return false;
     }
 }

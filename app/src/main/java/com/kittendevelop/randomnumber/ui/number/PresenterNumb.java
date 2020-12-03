@@ -62,7 +62,7 @@ public class PresenterNumb {
         mFeedback.showDialog(ReceiverWaiting.instance().dialog(),"WAITING");
         long s = mModelNumb.searchInDevice(mSelectorInputBound.getFrom(),mSelectorInputBound.getTo());
         MASSAGE("number "+s);
-        long correct = mModelNumb.correctExclude(new long[]{0,3,7},s,mSelectorInputBound.getFrom(),mSelectorInputBound.getTo(),0);
+        long correct = mModelNumb.correctExclude(new long[]{0,3,7},s,mSelectorInputBound.getFrom(),mSelectorInputBound.getTo());
         MASSAGE("correct "+correct);
         ReceiverWaiting.instance().stop();
     }
