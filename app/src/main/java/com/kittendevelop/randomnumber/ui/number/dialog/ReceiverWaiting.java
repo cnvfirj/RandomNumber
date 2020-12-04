@@ -22,11 +22,11 @@ public class ReceiverWaiting {
     }
 
     public void stop(){
-        mWaiting.dismiss();
+        if(isShowing())mWaiting.dismiss();
     }
 
-    public boolean isAdded(){
-        return mWaiting.isAdded();
+    public boolean isShowing(){
+        return mWaiting.getDialog().isShowing();
     }
 
     public DialogWaiting dialog(){

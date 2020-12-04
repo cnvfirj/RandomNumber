@@ -2,4 +2,8 @@
 <resources>
 
     <dimen name="width">85dp</dimen>
+
+    <dimen name="result_dialog_width">80%</dimen>
+    <dimen name="result_dialog_height">50%</dimen>
+
 </resources>

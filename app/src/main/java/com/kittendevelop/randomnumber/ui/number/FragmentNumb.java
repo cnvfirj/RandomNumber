@@ -19,6 +19,8 @@ import com.kittendevelop.randomnumber.ui.number.df.DaggerComponentFragmentNumb;
 
 import javax.inject.Inject;
 
+import static com.kittendevelop.randomnumber.help.Massages.MASSAGE;
+
 public class FragmentNumb extends Fragment implements FragmentFeedback {
 
     @Inject
@@ -32,6 +34,7 @@ public class FragmentNumb extends Fragment implements FragmentFeedback {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         DaggerComponentFragmentNumb.builder().build().inject(this);
+
         mPresenter.bindView(this);
         return create(inflater);
     }
@@ -55,9 +58,8 @@ public class FragmentNumb extends Fragment implements FragmentFeedback {
         mPresenter.end();
     }
 
-
     @Override
     public void showDialog(DialogFragment fragment, String tag) {
-        fragment.show(getChildFragmentManager(),tag);
+            fragment.show(getChildFragmentManager(),tag);
     }
 }

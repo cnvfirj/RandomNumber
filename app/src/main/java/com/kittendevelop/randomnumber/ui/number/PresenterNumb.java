@@ -1,18 +1,28 @@
 package com.kittendevelop.randomnumber.ui.number;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.view.View;
 
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.kittendevelop.randomnumber.R;
+import com.kittendevelop.randomnumber.ui.number.dialog.DialogResult;
 import com.kittendevelop.randomnumber.ui.number.dialog.ReceiverWaiting;
+import com.kittendevelop.randomnumber.ui.number.work.ThreadRequest;
+
+import java.util.TreeSet;
 
 import javax.inject.Inject;
 
+import io.reactivex.Observable;
+import io.reactivex.functions.Consumer;
+
 import static com.kittendevelop.randomnumber.help.Massages.MASSAGE;
 
-public class PresenterNumb {
+public class PresenterNumb{
 
     private SelectorInputBound mSelectorInputBound;
     private FragmentFeedback mFeedback;
@@ -59,15 +69,18 @@ public class PresenterNumb {
     }
 
     public void click(View v){
+        TreeSet<Long> set = new TreeSet<>();
         mFeedback.showDialog(ReceiverWaiting.instance().dialog(),"WAITING");
-        long s = mModelNumb.searchInDevice(mSelectorInputBound.getFrom(),mSelectorInputBound.getTo());
-        MASSAGE("number "+s);
-        long correct = mModelNumb.correctExclude(new long[]{0,3,7},s,mSelectorInputBound.getFrom(),mSelectorInputBound.getTo());
-        MASSAGE("correct "+correct);
-        ReceiverWaiting.instance().stop();
+        mModelNumb.request().setParams(set,mSelectorInputBound.getFrom(),mSelectorInputBound.getTo()).internalObservable().internalDisposable(this::result);
     }
 
     public void longClick(View v){
 
+    }
+
+    public void result(Long result) throws Exception{
+        mModelNumb.request().stopInternal();
+        ReceiverWaiting.instance().stop();
+        mFeedback.showDialog(new DialogResult(),"RESULT");
     }
 }

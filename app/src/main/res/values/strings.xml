@@ -8,5 +8,8 @@
     <string name="hint_search">Старт поиска и исключенные элементы</string>
     <string name="hint_story">Прошлые результаты</string>
     <string name="max_length">Достигнуто максимальное значение вводимого числа</string>
+    <string name="result_dew">Результат получен с использованием ресурсов устройства</string>
+    <string name="result_net">Результат получен с использованием веб сервиса Австралийского университета</string>
+
 
 </resources>

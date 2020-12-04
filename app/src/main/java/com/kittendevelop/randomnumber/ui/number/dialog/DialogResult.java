@@ -2,9 +2,12 @@ package com.kittendevelop.randomnumber.ui.number.dialog;
 
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -12,13 +15,23 @@ import androidx.fragment.app.DialogFragment;
 
 import com.kittendevelop.randomnumber.R;
 
-public class DialogNotice extends DialogFragment {
+public class DialogResult extends DialogFragment {
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(getContext().getResources().getColor(R.color.transparent,null)));
-        return inflater.inflate(R.layout.notice,null);
+        return inflater.inflate(R.layout.result,null);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        /*размер окна*/
+//        Window window = getDialog().getWindow();
+//        DisplayMetrics metrics = getContext().getResources().getDisplayMetrics();
+//
+//        window.setLayout((int)(metrics.widthPixels*0.8), (int) (metrics.heightPixels*0.5));
+//        window.setGravity(Gravity.CENTER);
+    }
 }
