@@ -14,7 +14,7 @@
         <TextView style="@style/hints_search_numb"
             android:id="@+id/result_info"
             android:gravity="center_horizontal"
-            android:text="@string/result_dew"
+            android:text="@string/result_report"
             android:textSize="15sp"
             app:autoSizeTextType="uniform"/>
 
@@ -45,9 +45,10 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <Button style="@style/start_end_results_numb"
+            <ImageButton style="@style/start_end_results_numb"
                 android:id="@+id/result_exit"
-                android:text="exit"/>
+                android:backgroundTint="@color/purple_700"
+                android:src="@drawable/ic_baseline_close_24"/>
 
             <Button style="@style/start_end_results_numb"
                 android:layout_width="match_parent"
