@@ -1,36 +1,26 @@
 package com.kittendevelop.randomnumber.ui.number.dialog;
 
-import android.app.Dialog;
+import com.kittendevelop.randomnumber.ui.number.df.DaggerComponentDialogs;
 
-public class ReceiverWaiting {
+import javax.inject.Inject;
+
+public class ReceiverWaiting extends ReceiverDialogs{
 
     private static ReceiverWaiting single;
 
-    private DialogWaiting mWaiting;
-
-    public ReceiverWaiting() {
-        mWaiting = new DialogWaiting();
+    @Inject
+    public ReceiverWaiting(DialogWaiting mDialog) {
+        super(mDialog);
     }
 
     public static ReceiverWaiting instance(){
         if(single==null){
             synchronized (ReceiverWaiting.class){
-                single = new ReceiverWaiting();
+                single = DaggerComponentDialogs.create().waiting();
+//                single = new ReceiverWaiting(new DialogWaiting());
             }
         }
         return single;
-    }
-
-    public void stop(){
-        if(isShowing())mWaiting.dismiss();
-    }
-
-    public boolean isShowing(){
-        return mWaiting.getDialog().isShowing();
-    }
-
-    public DialogWaiting dialog(){
-        return mWaiting;
     }
 
 }

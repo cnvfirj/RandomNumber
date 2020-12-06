@@ -24,14 +24,4 @@ public class DialogResult extends DialogFragment {
         return inflater.inflate(R.layout.result,null);
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        /*размер окна*/
-//        Window window = getDialog().getWindow();
-//        DisplayMetrics metrics = getContext().getResources().getDisplayMetrics();
-//
-//        window.setLayout((int)(metrics.widthPixels*0.8), (int) (metrics.heightPixels*0.5));
-//        window.setGravity(Gravity.CENTER);
-    }
 }
