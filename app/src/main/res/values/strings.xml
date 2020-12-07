@@ -9,7 +9,7 @@
     <string name="hint_story">Прошлые результаты</string>
     <string name="max_length">Достигнуто максимальное значение вводимого числа</string>
 
-    <string name="result_report">Результат сгенерирован %date% в %time%, в заданных пределах от %from% до %to%, с использованием ресурсов приложения </string>
+    <string name="result_report">Результат сгенерирован %date% в %time%, в заданных пределах от %from% до %to%, %resource%</string>
 
 
 
