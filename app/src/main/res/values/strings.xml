@@ -10,7 +10,7 @@
     <string name="max_length">Достигнуто максимальное значение вводимого числа</string>
 
     <string name="result_report">Результат сгенерирован %date% в %time%, в заданных пределах от %from% до %to%, %resource%</string>
-
+    <string name="add_to_ex">Добавь в исключаемые значения</string>
 
 
 </resources>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+
+    </data>
+
+<FrameLayout
+    android:layout_width="75dp"
+    android:layout_height="75dp"
+    android:background="@drawable/background_fields"
+    android:backgroundTint="@color/white"
+    android:id="@+id/result_container">
+
+
+
+    <TextView style="@style/text_fields"
+        android:id="@+id/result_numb"
+        android:text="0"
+        app:autoSizeMaxTextSize="50sp"
+        app:autoSizeMinTextSize="10sp"
+        app:autoSizeStepGranularity="2sp"
+        app:autoSizeTextType="uniform"/>
+
+</FrameLayout>
+</layout>

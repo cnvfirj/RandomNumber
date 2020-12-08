@@ -1,5 +1,7 @@
 package com.kittendevelop.randomnumber.ui.number.dialog;
 
+import android.os.Bundle;
+
 import androidx.fragment.app.DialogFragment;
 
 import com.kittendevelop.randomnumber.ui.number.df.DaggerComponentDialogs;
@@ -10,6 +12,7 @@ public class ReceiverResult extends ReceiverDialogs{
 
     private static ReceiverResult single;
 
+    private Bundle mBundle;
     @Inject
     public ReceiverResult(DialogResult mDialog) {
         super(mDialog);
@@ -23,5 +26,16 @@ public class ReceiverResult extends ReceiverDialogs{
             }
         }
         return single;
+    }
+
+    public ReceiverResult result(long result){
+        bundle().putString("RESULT_NUMB",Long.toString(result));
+        dialog().setArguments(bundle());
+        return this;
+    }
+
+    private Bundle bundle(){
+        if(mBundle==null)mBundle=new Bundle();
+        return mBundle;
     }
 }

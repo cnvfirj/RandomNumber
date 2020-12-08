@@ -32,6 +32,14 @@ public class ThreadRequest {
         mTo = to;
         return this;
     }
+
+    public ThreadRequest setParams(long from, long to){
+        mFrom = from;
+        mTo = to;
+        return this;
+    }
+
+
     public ThreadRequest internalObservable(){
         if(mObservable==null)mObservable = emitter();
         return this;
@@ -54,6 +62,7 @@ public class ThreadRequest {
         return Observable.create(new ObservableOnSubscribe<Long>() {
             @Override
             public void subscribe(@NonNull ObservableEmitter<Long> emitter) throws Exception {
+                /*здесь запрос в юазу исключений, из которых сформируем mEx*/
                emitter.onNext(SearchRandomNumberNonNet.searchInDevice3(mEx,mFrom,mTo));
                emitter.onComplete();
             }

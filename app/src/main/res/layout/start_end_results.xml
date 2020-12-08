@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
           <variable
@@ -29,10 +30,11 @@
           android:onClick="@{(v)->listener.click(v)}"/>
 
       <view class="androidx.recyclerview.widget.RecyclerView"
-        style="@style/start_end_results_numb"
-        android:layout_width="match_parent"
-        android:id="@+id/search_excludud_numb"
-        android:scrollbars="horizontal"/>
+          style="@style/start_end_results_numb"
+          android:layout_width="match_parent"
+          android:id="@+id/search_excluded_numb"
+          android:orientation="horizontal"
+          app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
     </LinearLayout>
 

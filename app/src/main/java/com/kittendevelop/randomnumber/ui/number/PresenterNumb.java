@@ -4,12 +4,14 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.media.MediaActionSound;
 import android.view.View;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.kittendevelop.randomnumber.R;
 import com.kittendevelop.randomnumber.ui.number.dialog.DialogResult;
+import com.kittendevelop.randomnumber.ui.number.dialog.ReceiverResult;
 import com.kittendevelop.randomnumber.ui.number.dialog.ReceiverWaiting;
 import com.kittendevelop.randomnumber.ui.number.work.ThreadRequest;
 
@@ -74,13 +76,14 @@ public class PresenterNumb{
         mModelNumb.request().setParams(set,mSelectorInputBound.getFrom(),mSelectorInputBound.getTo()).internalObservable().internalDisposable(this::result);
     }
 
-    public void longClick(View v){
-
-    }
-
+    /*тут надо или занести результат в базу данных,
+    * а потом в диалоге из нее дергать последний результат.
+    * Либо передавать результат в диалог, а потом оттуда
+    * вносить его в базу данных.
+    * А есть вариант, в процессе генерации результата, вносить его в базу данных*/
     public void result(Long result) throws Exception{
         mModelNumb.request().stopInternal();
         ReceiverWaiting.instance().stop();
-        mFeedback.showDialog(new DialogResult(),"RESULT");
+        mFeedback.showDialog(ReceiverResult.instance().result(result).dialog(),"RESULT");
     }
 }
