@@ -18,7 +18,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.kittendevelop.randomnumber.R;
 import com.kittendevelop.randomnumber.databinding.FragmentNumbBinding;
 import com.kittendevelop.randomnumber.ui.number.adapters.ExAdapter;
-import com.kittendevelop.randomnumber.ui.number.df.DaggerComponentFragmentNumb;
+import com.kittendevelop.randomnumber.ui.number.di.DaggerComponentFragmentNumb;
+//import com.kittendevelop.randomnumber.ui.number.di.DaggerComponentFragmentNumb;
 
 import javax.inject.Inject;
 

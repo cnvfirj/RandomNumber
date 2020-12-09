@@ -1,6 +1,6 @@
 package com.kittendevelop.randomnumber.ui.number.dialog;
 
-import com.kittendevelop.randomnumber.ui.number.df.DaggerComponentDialogs;
+import com.kittendevelop.randomnumber.ui.number.di.DaggerComponentDialogs;
 
 import javax.inject.Inject;
 

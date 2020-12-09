@@ -1,4 +1,4 @@
-package com.kittendevelop.randomnumber.ui.number.df;
+package com.kittendevelop.randomnumber.ui.number.di;
 
 import com.kittendevelop.randomnumber.ui.number.dialog.DialogResult;
 import com.kittendevelop.randomnumber.ui.number.dialog.ReceiverResult;

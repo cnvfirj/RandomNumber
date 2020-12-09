@@ -3,7 +3,6 @@ package com.kittendevelop.randomnumber.ui.number.dialog;
 import android.view.View;
 
 import com.kittendevelop.randomnumber.R;
-import com.kittendevelop.randomnumber.help.ApplyFeedback;
 
 import javax.inject.Inject;
 
