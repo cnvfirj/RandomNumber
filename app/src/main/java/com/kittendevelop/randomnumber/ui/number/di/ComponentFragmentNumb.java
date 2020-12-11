@@ -12,5 +12,4 @@ import dagger.Component;
 @Component
 public interface ComponentFragmentNumb {
     void inject(FragmentNumb fragment);
-//    PresenterNumb presenter();
 }

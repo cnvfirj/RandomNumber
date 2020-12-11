@@ -15,6 +15,12 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
 import com.kittendevelop.randomnumber.R;
+import com.kittendevelop.randomnumber.mainDI.DaggerMainApplicationComponent;
+import com.kittendevelop.randomnumber.ui.number.db.DataBaseGeneratedItems;
+
+import javax.inject.Inject;
+
+import static com.kittendevelop.randomnumber.help.Massages.MASSAGE;
 
 public class DialogWaiting extends DialogFragment {
 
@@ -27,6 +33,11 @@ public class DialogWaiting extends DialogFragment {
         setCancelable(false);
         getDialog().setCanceledOnTouchOutside(false);
         return inflater.inflate(R.layout.waiting,null);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
     }
 
     @Override
