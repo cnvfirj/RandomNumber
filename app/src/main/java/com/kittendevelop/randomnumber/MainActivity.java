@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-import com.kittendevelop.randomnumber.mainDI.DaggerMainApplicationComponent;
 import com.kittendevelop.randomnumber.mainDI.MainApplication;
 import com.kittendevelop.randomnumber.ui.number.FragmentNumb;
 import com.kittendevelop.randomnumber.ui.number.db.DataBaseGeneratedItems;
@@ -34,8 +33,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void inject(){
         ((MainApplication)getApplication()).component().inject(this);
-        if(db!=null)MASSAGE("++++++++++++++++++++++++++++++++++++");
-        else MASSAGE("------------------------------");
     }
 
 

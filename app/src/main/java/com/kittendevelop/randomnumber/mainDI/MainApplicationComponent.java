@@ -1,6 +1,7 @@
 package com.kittendevelop.randomnumber.mainDI;
 
 import com.kittendevelop.randomnumber.MainActivity;
+import com.kittendevelop.randomnumber.ui.number.FragmentNumb;
 import com.kittendevelop.randomnumber.ui.number.dialog.DialogWaiting;
 
 import javax.inject.Singleton;
@@ -12,5 +13,5 @@ import dagger.Component;
 public interface MainApplicationComponent {
     void inject(MainActivity activity);
     void inject(MainApplication application);
-    void inject(DialogWaiting dialog);
+    void inject(FragmentNumb fragment);
 }

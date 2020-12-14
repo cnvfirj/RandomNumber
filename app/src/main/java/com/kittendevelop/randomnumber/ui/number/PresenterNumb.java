@@ -10,6 +10,7 @@ import android.view.View;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.kittendevelop.randomnumber.R;
+import com.kittendevelop.randomnumber.mainDI.CallbackMainAppModule;
 import com.kittendevelop.randomnumber.ui.number.dialog.DialogResult;
 import com.kittendevelop.randomnumber.ui.number.dialog.ReceiverResult;
 import com.kittendevelop.randomnumber.ui.number.dialog.ReceiverWaiting;
@@ -26,19 +27,22 @@ import static com.kittendevelop.randomnumber.help.Massages.MASSAGE;
 
 public class PresenterNumb{
 
-    private SelectorInputBound mSelectorInputBound;
-    private FragmentFeedback mFeedback;
-    private ModelNumb mModelNumb;
+    private final SelectorInputBound mSelectorInputBound;
+    private final ModelNumb mModelNumb;
+    private final CallbackMainAppModule mAppCallback;
 
-    @Inject
-    public PresenterNumb(SelectorInputBound inputBound,ModelNumb modelNumb) {
+    private FragmentFeedback mFeedback;
+
+//    @Inject
+    public PresenterNumb(SelectorInputBound inputBound,ModelNumb modelNumb,CallbackMainAppModule callback) {
         mSelectorInputBound = inputBound;
         mModelNumb = modelNumb;
+        mAppCallback = callback;
+        initSelector();
     }
 
     public PresenterNumb bindView(FragmentFeedback view){
         mFeedback = view;
-        initSelector();
         return this;
     }
 
@@ -48,25 +52,24 @@ public class PresenterNumb{
 
     public void end(){
         saveParams();
-        mFeedback = null;
     }
 
     private void initSelector(){
-        SharedPreferences p = mFeedback.context().getSharedPreferences("OLD_VALUES_INPUT", Context.MODE_PRIVATE);
+        SharedPreferences p = mAppCallback.preferences("OLD_VALUES_INPUT");
         long from = p.getLong("M_FROM_",0);
         long to = p.getLong("M_TO_",0);
         mSelectorInputBound
                 .setFrom(from)
                 .setTo(to)
-                .setColorYes(mFeedback.context().getResources().getColor(R.color.willingness_yes,null))
-                .setColorNo(mFeedback.context().getResources().getColor(R.color.willingness_no,null))
+                .setColorYes(mAppCallback.resources().getColor(R.color.willingness_yes,null))
+                .setColorNo(mAppCallback.resources().getColor(R.color.willingness_no,null))
                 .applyParams();
     }
 
     private void saveParams(){
-        Editor editor = mFeedback.context().getSharedPreferences("OLD_VALUES_INPUT",Context.MODE_PRIVATE).edit();
-        editor.putLong("M_FROM_",mSelectorInputBound.getFrom());
-        editor.putLong("M_TO_",mSelectorInputBound.getTo());
+        Editor editor = mAppCallback.editor("OLD_VALUES_INPUT");
+        mAppCallback.editor("OLD_VALUES_INPUT").putLong("M_FROM_",mSelectorInputBound.getFrom());
+        mAppCallback.editor("OLD_VALUES_INPUT").putLong("M_TO_",mSelectorInputBound.getTo());
         editor.apply();
     }
 

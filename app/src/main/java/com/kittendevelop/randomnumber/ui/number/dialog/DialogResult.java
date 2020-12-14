@@ -16,10 +16,7 @@ import androidx.fragment.app.DialogFragment;
 
 import com.kittendevelop.randomnumber.R;
 import com.kittendevelop.randomnumber.databinding.ResultBinding;
-import com.kittendevelop.randomnumber.help.ApplyFeedback;
-import com.kittendevelop.randomnumber.ui.number.PresenterNumb;
 import com.kittendevelop.randomnumber.ui.number.di.DaggerComponentDialogs;
-//import com.kittendevelop.randomnumber.ui.number.di.DaggerComponentDialogs;
 
 import javax.inject.Inject;
 

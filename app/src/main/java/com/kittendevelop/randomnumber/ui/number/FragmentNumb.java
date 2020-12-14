@@ -1,35 +1,33 @@
 package com.kittendevelop.randomnumber.ui.number;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.kittendevelop.randomnumber.R;
 import com.kittendevelop.randomnumber.databinding.FragmentNumbBinding;
-import com.kittendevelop.randomnumber.mainDI.DaggerMainApplicationComponent;
+import com.kittendevelop.randomnumber.mainDI.MainApplication;
 import com.kittendevelop.randomnumber.ui.number.adapters.ExAdapter;
-import com.kittendevelop.randomnumber.ui.number.di.DaggerComponentFragmentNumb;
-//import com.kittendevelop.randomnumber.ui.number.di.DaggerComponentFragmentNumb;
+import com.kittendevelop.randomnumber.ui.number.db.DataBaseGeneratedItems;
 
 import javax.inject.Inject;
-
-import static com.kittendevelop.randomnumber.help.Massages.MASSAGE;
 
 public class FragmentNumb extends Fragment implements FragmentFeedback {
 
     @Inject
     PresenterNumb mPresenter;
+
+
+    @Inject
+    DataBaseGeneratedItems mDataBaseGeneratedItems;
 
     private RecyclerView mListExceptions;
     private RecyclerView mListStory;
@@ -41,7 +39,6 @@ public class FragmentNumb extends Fragment implements FragmentFeedback {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        DaggerComponentFragmentNumb.builder().build().inject(this);
         mPresenter.bindView(this);
         return create(inflater);
     }
@@ -50,6 +47,12 @@ public class FragmentNumb extends Fragment implements FragmentFeedback {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initLists(view);
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        ((MainApplication)getActivity().getApplication()).component().inject(this);
     }
 
     private View create(LayoutInflater inflater){

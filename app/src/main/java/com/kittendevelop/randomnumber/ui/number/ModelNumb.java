@@ -11,7 +11,7 @@ public class ModelNumb {
 
     private ThreadRequest mThreadRequest;
 
-    @Inject
+//    @Inject
     public ModelNumb(ThreadRequest threadRequest) {
         mThreadRequest = threadRequest;
     }

@@ -75,7 +75,7 @@ public class SelectorInputBound {
     };
 
 
-    @Inject
+//    @Inject
     public SelectorInputBound() {
         mColorNo = Color.RED;
         mColorYes = Color.GRAY;
@@ -96,14 +96,12 @@ public class SelectorInputBound {
 
     public SelectorInputBound setFrom(long mFrom) {
         this.mFrom = mFrom;
-//        if(mFrom!=0)
             mValueFrom = String.valueOf(mFrom);
         return this;
     }
 
     public SelectorInputBound setTo(long mTo) {
         this.mTo = mTo;
-//        if(mTo!=0)
             mValueTo = String.valueOf(mTo);
         return this;
     }

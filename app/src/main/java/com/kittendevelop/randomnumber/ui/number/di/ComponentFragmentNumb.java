@@ -8,8 +8,8 @@ import javax.inject.Singleton;
 import dagger.Component;
 
 
-@Singleton
-@Component
+//@Singleton
+//@Component
 public interface ComponentFragmentNumb {
     void inject(FragmentNumb fragment);
 }
