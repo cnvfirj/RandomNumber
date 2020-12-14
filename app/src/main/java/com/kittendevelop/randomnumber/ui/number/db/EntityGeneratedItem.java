@@ -6,7 +6,7 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "GENERATED_ITEM")
-public class EntityGeneratedItem {
+public class EntityGeneratedItem extends BaseEntity {
 
     /*абсолютное время*/
     @PrimaryKey
@@ -48,10 +48,22 @@ public class EntityGeneratedItem {
     @ColumnInfo(name = "source")
     public int mSource;
 
+    public EntityGeneratedItem() {
+    }
 
     public EntityGeneratedItem(long id, String value) {
         mId = id;
         mValue = value;
+    }
+
+    public EntityGeneratedItem value(String value){
+        mValue = value;
+        return this;
+    }
+
+    public EntityGeneratedItem id(long id){
+        mId = id;
+        return this;
     }
 
     public EntityGeneratedItem confines(long from, long to){
@@ -79,6 +91,9 @@ public class EntityGeneratedItem {
         return this;
     }
 
+
+
+    @Override
     public long getId() {
         return mId;
     }

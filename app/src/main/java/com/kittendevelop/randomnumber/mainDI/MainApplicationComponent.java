@@ -14,4 +14,5 @@ public interface MainApplicationComponent {
     void inject(MainActivity activity);
     void inject(MainApplication application);
     void inject(FragmentNumb fragment);
+
 }

@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.kittendevelop.randomnumber.R;
 import com.kittendevelop.randomnumber.mainDI.CallbackMainAppModule;
+import com.kittendevelop.randomnumber.ui.number.db.DataBaseGeneratedItems;
 import com.kittendevelop.randomnumber.ui.number.dialog.DialogResult;
 import com.kittendevelop.randomnumber.ui.number.dialog.ReceiverResult;
 import com.kittendevelop.randomnumber.ui.number.dialog.ReceiverWaiting;
@@ -30,7 +31,6 @@ public class PresenterNumb{
     private final SelectorInputBound mSelectorInputBound;
     private final ModelNumb mModelNumb;
     private final CallbackMainAppModule mAppCallback;
-
     private FragmentFeedback mFeedback;
 
 //    @Inject
@@ -68,8 +68,8 @@ public class PresenterNumb{
 
     private void saveParams(){
         Editor editor = mAppCallback.editor("OLD_VALUES_INPUT");
-        mAppCallback.editor("OLD_VALUES_INPUT").putLong("M_FROM_",mSelectorInputBound.getFrom());
-        mAppCallback.editor("OLD_VALUES_INPUT").putLong("M_TO_",mSelectorInputBound.getTo());
+        editor.putLong("M_FROM_",mSelectorInputBound.getFrom());
+        editor.putLong("M_TO_",mSelectorInputBound.getTo());
         editor.apply();
     }
 

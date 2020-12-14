@@ -46,11 +46,10 @@ public class MainApplicationModule implements CallbackMainAppModule{
     @Provides
     @Singleton
     public DataBaseGeneratedItems dataBaseGeneratedItems(){
-        return Room.databaseBuilder(mainApplication,DataBaseGeneratedItems.class,"db__")
+        return Room.databaseBuilder(mainApplication,DataBaseGeneratedItems.class,"numb_data_base")
                 .fallbackToDestructiveMigration()
                 .build();
     }
-
 
     @Provides
     @Singleton

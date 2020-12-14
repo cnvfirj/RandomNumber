@@ -22,7 +22,6 @@ public class ThreadRequest {
     private Observable<Long>mObservable;
     private Disposable mDisposable;
 
-    @Inject
     public ThreadRequest() {
     }
 

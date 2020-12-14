@@ -40,6 +40,11 @@ public interface DaoGeneratedItem {
     @Query("SELECT * FROM GENERATED_ITEM WHERE value = :value")
     EntityGeneratedItem value(String value);
 
+    @Query("SELECT * FROM GENERATED_ITEM WHERE id = :id")
+    EntityGeneratedItem id(long id);
+
+
+
 
 
 

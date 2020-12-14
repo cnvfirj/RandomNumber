@@ -20,11 +20,10 @@ import com.kittendevelop.randomnumber.ui.number.db.DataBaseGeneratedItems;
 
 import javax.inject.Inject;
 
-public class FragmentNumb extends Fragment implements FragmentFeedback {
+public class FragmentNumb extends Fragment implements FragmentFeedback{
 
     @Inject
     PresenterNumb mPresenter;
-
 
     @Inject
     DataBaseGeneratedItems mDataBaseGeneratedItems;

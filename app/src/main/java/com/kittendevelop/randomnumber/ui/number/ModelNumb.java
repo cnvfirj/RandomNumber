@@ -1,5 +1,6 @@
 package com.kittendevelop.randomnumber.ui.number;
 
+import com.kittendevelop.randomnumber.ui.number.db.DataBaseGeneratedItems;
 import com.kittendevelop.randomnumber.ui.number.work.SearchRandomNumberNonNet;
 import com.kittendevelop.randomnumber.ui.number.work.ThreadRequest;
 
@@ -15,10 +16,10 @@ public class ModelNumb {
     public ModelNumb(ThreadRequest threadRequest) {
         mThreadRequest = threadRequest;
     }
-
-    public long searchInDevice(TreeSet<Long> ex,long from, long to){
-        return SearchRandomNumberNonNet.searchInDevice3(ex,from,to);
-    }
+//
+//    public long searchInDevice(TreeSet<Long> ex,long from, long to){
+//        return SearchRandomNumberNonNet.searchInDevice3(ex,from,to);
+//    }
 
     public ThreadRequest request(){
         return mThreadRequest;

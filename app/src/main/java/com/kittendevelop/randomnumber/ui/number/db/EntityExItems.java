@@ -6,7 +6,7 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "EX_ITEMS")
-public class EntityExItems {
+public class EntityExItems extends BaseEntity{
 
     @PrimaryKey
     @ColumnInfo(name = "id")
@@ -24,15 +24,16 @@ public class EntityExItems {
         this.mDelimiter = delimiter;
     }
 
-    public long getmId() {
+    @Override
+    public long getId() {
         return mId;
     }
 
-    public String getmTableEx() {
+    public String getTableEx() {
         return mTableEx;
     }
 
-    public String getmDelimiter() {
+    public String getDelimiter() {
         return mDelimiter;
     }
 }
