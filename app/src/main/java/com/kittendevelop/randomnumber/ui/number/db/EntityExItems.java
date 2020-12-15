@@ -8,25 +8,33 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "EX_ITEMS")
 public class EntityExItems extends BaseEntity{
 
-    @PrimaryKey
-    @ColumnInfo(name = "id")
-    public long mId;
-
     @ColumnInfo(name = "tableEx")
     public String mTableEx;
 
     @ColumnInfo(name = "delimiter")
     public String mDelimiter;
 
-    public EntityExItems(long id, String tableEx, String delimiter) {
-        this.mId = id;
-        this.mTableEx = tableEx;
-        this.mDelimiter = delimiter;
+    @ColumnInfo(name = "source")
+    public int mSource;
+
+
+    public EntityExItems setTableEx(String mTableEx) {
+        this.mTableEx = mTableEx;
+        return this;
     }
 
-    @Override
-    public long getId() {
-        return mId;
+    public EntityExItems setDelimiter(String mDelimiter) {
+        this.mDelimiter = mDelimiter;
+        return this;
+    }
+
+    public EntityExItems setSource(int mSource) {
+        this.mSource = mSource;
+        return this;
+    }
+
+    public int getSource() {
+        return mSource;
     }
 
     public String getTableEx() {

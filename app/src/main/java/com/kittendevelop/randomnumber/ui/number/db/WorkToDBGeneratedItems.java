@@ -2,46 +2,41 @@ package com.kittendevelop.randomnumber.ui.number.db;
 
 import com.kittendevelop.randomnumber.help.CreateParamsItem;
 
-public class WorkToDBGeneratedItems {
+public class WorkToDBGeneratedItems extends BaseWorkDB {
 
-    private DaoGeneratedItem mTable;
-
-    public WorkToDBGeneratedItems(DaoGeneratedItem table) {
-        mTable = table;
+    public WorkToDBGeneratedItems(BaseDao table) {
+        super(table);
     }
 
-    public void addItem(String value,long from, long to, int source, ResultWorkDB result){
-        EntityGeneratedItem item = new EntityGeneratedItem().confines(from, to).value(value);
-        addParams(item);
-    }
-
-    private boolean delete(EntityGeneratedItem item){
-        mTable.delete(item);
-        return mTable.id(item.getId())==null;
-
-    }
-
-    private boolean insert (EntityGeneratedItem item){
-        mTable.insert(item);
-        return mTable.id(item.getId())!=null;
-    }
-
-
-
-
-
-    private void addParams(EntityGeneratedItem item){
-        int[]params = CreateParamsItem.date();
-        long id = 1;
-        for (int i:params){
-            id*=i;
+    @Override
+    boolean clear() {
+        boolean b = true;
+        for (EntityGeneratedItem item:table().all()){
+            if(!delete(item))b = false;
         }
-        item.id(id)
-                .date(params[0],0,params[1])
-                .time(params[2],params[3],params[4]);
+        return b;
+    }
+
+    @Override
+    BaseEntity entity(long id) {
+        return table().id(id);
+    }
+
+    @Override
+    boolean insert(BaseEntity entity) {
+        del(entity);
+        return entity(entity.getId())==null;
+    }
+
+    @Override
+    boolean delete(BaseEntity entity) {
+        del(entity);
+        return entity(entity.getId())!=null;
     }
 
 
-
+    private DaoGeneratedItem table(){
+        return (DaoGeneratedItem)mTable;
+    }
 
 }

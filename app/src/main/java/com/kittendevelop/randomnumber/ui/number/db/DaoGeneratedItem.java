@@ -9,15 +9,7 @@ import androidx.room.Query;
 import java.util.List;
 
 @Dao
-public interface DaoGeneratedItem {
-    @Insert
-    void insert(EntityGeneratedItem perm);
-//
-//    @Update
-//    void update(EntityGeneratedItem perm);
-
-    @Delete
-    void delete(EntityGeneratedItem perm);
+public interface DaoGeneratedItem extends BaseDao{
 
     @Query("SELECT * FROM GENERATED_ITEM")
     List<EntityGeneratedItem>all();
@@ -42,6 +34,11 @@ public interface DaoGeneratedItem {
 
     @Query("SELECT * FROM GENERATED_ITEM WHERE id = :id")
     EntityGeneratedItem id(long id);
+
+    @Query("SELECT * FROM GENERATED_ITEM WHERE id = :id")
+    EntityGeneratedItem id(long id,String table);
+
+
 
 
 
