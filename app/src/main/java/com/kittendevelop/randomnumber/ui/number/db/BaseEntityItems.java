@@ -6,6 +6,9 @@ import androidx.room.Entity;
 @Entity
 public abstract class BaseEntityItems extends BaseEntity{
 
+
+    @ColumnInfo(name = "number")
+    public long mNumber;
     @ColumnInfo(name = "value")
     public String mValue;
 
@@ -52,8 +55,9 @@ public abstract class BaseEntityItems extends BaseEntity{
         return this;
     }
 
-    public BaseEntityItems value(String value){
-        mValue = value;
+    public BaseEntityItems value(long number){
+        mNumber = number;
+        mValue = Long.toString(number);
         return this;
     }
 
@@ -87,5 +91,9 @@ public abstract class BaseEntityItems extends BaseEntity{
 
     public String getValue() {
         return mValue;
+    }
+
+    public long getNumber(){
+        return mNumber;
     }
 }

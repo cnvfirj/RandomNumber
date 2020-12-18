@@ -1,22 +1,21 @@
 package com.kittendevelop.randomnumber.mainDI;
 
+import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.res.Resources;
 
-import androidx.fragment.app.FragmentManager;
 import androidx.room.Room;
 
-import com.kittendevelop.randomnumber.R;
 import com.kittendevelop.randomnumber.ui.number.ModelNumb;
 import com.kittendevelop.randomnumber.ui.number.PresenterNumb;
 import com.kittendevelop.randomnumber.ui.number.SelectorInputBound;
 import com.kittendevelop.randomnumber.ui.number.db.DataBaseGeneratedItems;
-import com.kittendevelop.randomnumber.ui.number.work.ThreadRequest;
+import com.kittendevelop.randomnumber.ui.number.work.ThreadRequestResult;
+import com.kittendevelop.randomnumber.ui.number.work.ThreadWorkDB;
 
 import java.lang.annotation.Retention;
-import java.time.format.DateTimeFormatter;
 
 import javax.inject.Qualifier;
 import javax.inject.Singleton;
@@ -54,7 +53,7 @@ public class MainApplicationModule implements CallbackMainAppModule{
     @Provides
     @Singleton
     public PresenterNumb presenterNumb(){
-        return new PresenterNumb(new SelectorInputBound(), new ModelNumb(new ThreadRequest()),this);
+        return new PresenterNumb(new SelectorInputBound(), new ModelNumb(new ThreadRequestResult(),new ThreadWorkDB(dataGeneratedItems())),this);
     }
 
 
@@ -72,6 +71,11 @@ public class MainApplicationModule implements CallbackMainAppModule{
     @Override
     public Editor editor(String TAG) {
         return preferences(TAG).edit();
+    }
+
+    @Override
+    public DataBaseGeneratedItems dataGeneratedItems() {
+        return dataBaseGeneratedItems();
     }
 
     @Qualifier

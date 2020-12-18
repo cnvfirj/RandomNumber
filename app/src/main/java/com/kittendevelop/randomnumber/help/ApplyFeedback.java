@@ -7,4 +7,5 @@ import androidx.fragment.app.Fragment;
 
 public interface ApplyFeedback {
     Context context();
+    Activity activity();
 }

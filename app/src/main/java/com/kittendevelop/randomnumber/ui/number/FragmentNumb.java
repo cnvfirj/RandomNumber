@@ -1,5 +1,6 @@
 package com.kittendevelop.randomnumber.ui.number;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -25,8 +26,8 @@ public class FragmentNumb extends Fragment implements FragmentFeedback{
     @Inject
     PresenterNumb mPresenter;
 
-    @Inject
-    DataBaseGeneratedItems mDataBaseGeneratedItems;
+//    @Inject
+//    DataBaseGeneratedItems mDataBaseGeneratedItems;
 
     private RecyclerView mListExceptions;
     private RecyclerView mListStory;
@@ -61,10 +62,20 @@ public class FragmentNumb extends Fragment implements FragmentFeedback{
         binding.setListener(mPresenter);
         return v;
     }
+//
+//    @Override
+//    public DataBaseGeneratedItems dataBase() {
+//        return mDataBaseGeneratedItems;
+//    }
 
     @Override
     public Context context() {
         return getContext();
+    }
+
+    @Override
+    public Activity activity() {
+        return getActivity();
     }
 
     @Override

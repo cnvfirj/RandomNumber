@@ -1,32 +1,26 @@
 package com.kittendevelop.randomnumber.ui.number;
 
-import android.app.Dialog;
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
-import android.media.MediaActionSound;
 import android.view.View;
-
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.kittendevelop.randomnumber.R;
 import com.kittendevelop.randomnumber.mainDI.CallbackMainAppModule;
+import com.kittendevelop.randomnumber.mainDI.MainApplication;
 import com.kittendevelop.randomnumber.ui.number.db.DataBaseGeneratedItems;
-import com.kittendevelop.randomnumber.ui.number.dialog.DialogResult;
+import com.kittendevelop.randomnumber.ui.number.db.EntityGeneratedItem;
 import com.kittendevelop.randomnumber.ui.number.dialog.ReceiverResult;
 import com.kittendevelop.randomnumber.ui.number.dialog.ReceiverWaiting;
-import com.kittendevelop.randomnumber.ui.number.work.ThreadRequest;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.TreeSet;
 
 import javax.inject.Inject;
 
-import io.reactivex.Observable;
-import io.reactivex.functions.Consumer;
-
-import static com.kittendevelop.randomnumber.help.Massages.MASSAGE;
-
 public class PresenterNumb{
+
 
     private final SelectorInputBound mSelectorInputBound;
     private final ModelNumb mModelNumb;
@@ -41,9 +35,9 @@ public class PresenterNumb{
         initSelector();
     }
 
-    public PresenterNumb bindView(FragmentFeedback view){
+    public void bindView(FragmentFeedback view){
         mFeedback = view;
-        return this;
+
     }
 
     public SelectorInputBound getSelector(){
@@ -55,7 +49,7 @@ public class PresenterNumb{
     }
 
     public void pause(){
-        mModelNumb.request().dispose();
+        mModelNumb.requestResultNumber().dispose();
     }
 
     private void initSelector(){
@@ -78,9 +72,9 @@ public class PresenterNumb{
     }
 
     public void click(View v){
-        TreeSet<Long> set = new TreeSet<>();
+        List<Long> set = new ArrayList<>();
         mFeedback.showDialog(ReceiverWaiting.instance().dialog(),"WAITING");
-        mModelNumb.request().setParams(set,mSelectorInputBound.getFrom(),mSelectorInputBound.getTo()).internalObservable().internalDisposable(this::result);
+        mModelNumb.requestNumber(this::resultRequestEntity,mSelectorInputBound.getFrom(),mSelectorInputBound.getTo());
     }
 
     /*тут надо или занести результат в базу данных,
@@ -88,9 +82,12 @@ public class PresenterNumb{
     * Либо передавать результат в диалог, а потом оттуда
     * вносить его в базу данных.
     * А есть вариант, в процессе генерации результата, вносить его в базу данных*/
-    public void result(Long result) throws Exception{
-//        mModelNumb.request().dispose();
+
+    public void resultRequestEntity(EntityGeneratedItem item) throws Exception{
         ReceiverWaiting.instance().stop();
-        mFeedback.showDialog(ReceiverResult.instance().result(result).dialog(),"RESULT");
+        mFeedback.showDialog(ReceiverResult.instance().result(item.getNumber()).dialog(),"RESULT");
     }
+
+
+
 }

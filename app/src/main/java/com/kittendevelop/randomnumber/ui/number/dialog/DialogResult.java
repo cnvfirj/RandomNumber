@@ -1,5 +1,6 @@
 package com.kittendevelop.randomnumber.ui.number.dialog;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -40,6 +41,11 @@ public class DialogResult extends DialogFragment implements DialogFeedback {
     @Override
     public Context context() {
         return getContext();
+    }
+
+    @Override
+    public Activity activity() {
+        return getActivity();
     }
 
     @Override

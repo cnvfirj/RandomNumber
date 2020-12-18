@@ -1,6 +1,7 @@
 package com.kittendevelop.randomnumber.ui.number.work;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -10,7 +11,7 @@ public class SearchRandomNumberNonNet {
 
     /*поиск с cозданием списка элементов. ищем случайный из них*/
     /*если диапазон чисел большой, то это громоздко*/
-    public static long searchInDevice2(TreeSet<Long>ex,long from,long to){
+    public static long searchInDevice2(List<Long>ex,long from,long to){
         ArrayList<Long> list = new ArrayList<>();
         while (from<=to){
             if(!ex.contains(from)){
@@ -25,7 +26,7 @@ public class SearchRandomNumberNonNet {
 
     /*поиск числа из диапазона, с проверкой в списе исключений*/
     /*если список длинный то это громоздко*/
-    public static long searchInDevice3(TreeSet<Long>ex,long from,long to){
+    public static long searchInDevice3(List<Long> ex, long from, long to){
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
@@ -33,7 +34,7 @@ public class SearchRandomNumberNonNet {
         }
         long delta = (to-from)+1;
         long val = (long)(Math.random()*delta)+from;
-        if(ex.contains(val))return searchInDevice3(ex,from,to);
+        if(ex!=null&&ex.contains(val))return searchInDevice3(ex,from,to);
         return val;
     }
 
