@@ -7,22 +7,20 @@ import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 public class NumbWorkDB {
 
     public void delete(BaseWorkDB workDB,BaseEntity entity,ResultWorkDB result){
-          workDB.delete(entity);
+//          workDB.delete(entity);
     }
 
     public void insert(BaseWorkDB workDB, BaseEntity entity,ResultWorkDB result){
-           workDB.insert(entity);
+//           workDB.insert(entity);
     }
 
     public void clear(BaseWorkDB workDB,ResultWorkDB result){
-        workDB.clear();
+//        workDB.clear();
     }
 
     Observable<Boolean>workDB(int operation, BaseWorkDB workDB,BaseEntity entity){

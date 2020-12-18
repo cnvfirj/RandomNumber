@@ -7,7 +7,7 @@ import androidx.room.Query;
 import java.util.List;
 
 @Dao
-public interface DaoGeneratedEx {
+public interface DaoGeneratedEx extends BaseDao{
 
     @Query("SELECT * FROM GENERATED_EX")
     List<EntityGeneratedEx> all();

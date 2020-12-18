@@ -74,6 +74,12 @@ public class FragmentNumb extends Fragment implements FragmentFeedback{
     }
 
     @Override
+    public void onPause() {
+        super.onPause();
+        mPresenter.pause();
+    }
+
+    @Override
     public void showDialog(DialogFragment fragment, String tag) {
             fragment.show(getChildFragmentManager(),tag);
     }

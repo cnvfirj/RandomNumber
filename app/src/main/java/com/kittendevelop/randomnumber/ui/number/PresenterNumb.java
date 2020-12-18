@@ -54,6 +54,10 @@ public class PresenterNumb{
         saveParams();
     }
 
+    public void pause(){
+        mModelNumb.request().dispose();
+    }
+
     private void initSelector(){
         SharedPreferences p = mAppCallback.preferences("OLD_VALUES_INPUT");
         long from = p.getLong("M_FROM_",0);
@@ -85,7 +89,7 @@ public class PresenterNumb{
     * вносить его в базу данных.
     * А есть вариант, в процессе генерации результата, вносить его в базу данных*/
     public void result(Long result) throws Exception{
-        mModelNumb.request().stopInternal();
+//        mModelNumb.request().dispose();
         ReceiverWaiting.instance().stop();
         mFeedback.showDialog(ReceiverResult.instance().result(result).dialog(),"RESULT");
     }

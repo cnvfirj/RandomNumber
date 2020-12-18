@@ -43,12 +43,11 @@ public class ThreadRequest {
         if(mObservable==null)mObservable = emitter();
         return this;
     }
-    public ThreadRequest internalDisposable(Consumer<Long> consumer){
+    public void internalDisposable(Consumer<Long> consumer){
         mDisposable = mObservable.subscribe(consumer);
-        return this;
     }
 
-    public void stopInternal(){
+    public void dispose(){
        mDisposable.dispose();
     }
 
@@ -61,7 +60,7 @@ public class ThreadRequest {
         return Observable.create(new ObservableOnSubscribe<Long>() {
             @Override
             public void subscribe(@NonNull ObservableEmitter<Long> emitter) throws Exception {
-                /*здесь запрос в юазу исключений, из которых сформируем mEx*/
+                /*здесь запрос в bазу исключений, из которых сформируем mEx*/
                emitter.onNext(SearchRandomNumberNonNet.searchInDevice3(mEx,mFrom,mTo));
                emitter.onComplete();
             }

@@ -35,8 +35,6 @@ public interface DaoGeneratedItem extends BaseDao{
     @Query("SELECT * FROM GENERATED_ITEM WHERE id = :id")
     EntityGeneratedItem id(long id);
 
-    @Query("SELECT * FROM GENERATED_ITEM WHERE id = :id")
-    EntityGeneratedItem id(long id,String table);
 
 
 
