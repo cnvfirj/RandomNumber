@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.net.ConnectivityManager;
 
 import com.kittendevelop.randomnumber.ui.number.db.DataBaseGeneratedItems;
 
@@ -14,4 +15,5 @@ public interface CallbackMainAppModule {
     SharedPreferences preferences(String TAG);
     SharedPreferences.Editor editor(String TAG);
     DataBaseGeneratedItems dataGeneratedItems();
+    ConnectivityManager connection();
 }

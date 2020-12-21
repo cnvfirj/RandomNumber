@@ -1,6 +1,7 @@
 package com.kittendevelop.randomnumber.ui.number.work;
 
 import java.util.List;
+import java.util.Set;
 import java.util.TreeSet;
 
 public class SearchRandomNumberNetwork {
@@ -9,7 +10,7 @@ public class SearchRandomNumberNetwork {
         return false;
     }
 
-    public static long searchInNet(List<Long> ex, long from, long t){
+    public static long searchInNet(Set<Long> ex, long from, long t){
         return Long.MAX_VALUE;
     }
 }

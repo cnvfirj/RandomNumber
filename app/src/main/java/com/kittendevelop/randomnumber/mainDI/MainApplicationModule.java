@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.res.Resources;
+import android.net.ConnectivityManager;
 
 import androidx.room.Room;
 
@@ -53,7 +54,7 @@ public class MainApplicationModule implements CallbackMainAppModule{
     @Provides
     @Singleton
     public PresenterNumb presenterNumb(){
-        return new PresenterNumb(new SelectorInputBound(), new ModelNumb(new ThreadRequestResult(),new ThreadWorkDB(dataGeneratedItems())),this);
+        return new PresenterNumb(new SelectorInputBound(), new ModelNumb(workNumb(),workDBNumb()),this);
     }
 
 
@@ -73,9 +74,24 @@ public class MainApplicationModule implements CallbackMainAppModule{
         return preferences(TAG).edit();
     }
 
+
+    @Provides
+    @Singleton
+    @Override
+    public ConnectivityManager connection() {
+        return (ConnectivityManager) applicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+    }
+
     @Override
     public DataBaseGeneratedItems dataGeneratedItems() {
         return dataBaseGeneratedItems();
+    }
+
+    private ThreadRequestResult workNumb(){
+        return new ThreadRequestResult(connection());
+    }
+    private ThreadWorkDB workDBNumb(){
+        return new ThreadWorkDB(dataGeneratedItems());
     }
 
     @Qualifier

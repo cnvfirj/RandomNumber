@@ -2,6 +2,7 @@ package com.kittendevelop.randomnumber.ui.number.work;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -26,7 +27,7 @@ public class SearchRandomNumberNonNet {
 
     /*поиск числа из диапазона, с проверкой в списе исключений*/
     /*если список длинный то это громоздко*/
-    public static long searchInDevice3(List<Long> ex, long from, long to){
+    public static long searchInDevice3(Set<Long> ex, long from, long to){
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {

@@ -72,9 +72,10 @@ public class PresenterNumb{
     }
 
     public void click(View v){
-        List<Long> set = new ArrayList<>();
         mFeedback.showDialog(ReceiverWaiting.instance().dialog(),"WAITING");
-        mModelNumb.requestNumber(this::resultRequestEntity,mSelectorInputBound.getFrom(),mSelectorInputBound.getTo());
+//        mModelNumb.requestNumber(this::resultRequestEntity,mSelectorInputBound.getFrom(),mSelectorInputBound.getTo());
+        mModelNumb.requestGeneratedNumber(this::resultRequestEntity,mSelectorInputBound.getFrom(),mSelectorInputBound.getTo());
+
     }
 
     /*тут надо или занести результат в базу данных,

@@ -9,7 +9,13 @@ import androidx.room.Query;
 import java.util.List;
 
 @Dao
-public interface DaoGeneratedItem extends BaseDao{
+public interface DaoGeneratedItem{
+
+    @Insert
+    void insert(EntityGeneratedItem ex);
+
+    @Delete
+    void delete(EntityGeneratedItem ex);
 
     @Query("SELECT * FROM GENERATED_ITEM")
     List<EntityGeneratedItem>all();

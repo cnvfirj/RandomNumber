@@ -2,15 +2,26 @@ package com.kittendevelop.randomnumber.ui.number.db;
 
 
 import androidx.room.Dao;
+import androidx.room.Delete;
+import androidx.room.Insert;
 import androidx.room.Query;
 
 import java.util.List;
 
 @Dao
-public interface DaoGeneratedEx extends BaseDao{
+public interface DaoGeneratedEx {
+
+    @Insert
+    void insert(EntityGeneratedEx ex);
+
+    @Delete
+    void delete(EntityGeneratedEx ex);
 
     @Query("SELECT * FROM GENERATED_EX")
     List<EntityGeneratedEx> all();
+
+    @Query("SELECT number, value FROM BaseEntityItems")
+    List<SelectEx> allValues();
 
     @Query("SELECT * FROM GENERATED_EX WHERE source = :source")
     List<EntityGeneratedEx>source(int source);
@@ -29,4 +40,5 @@ public interface DaoGeneratedEx extends BaseDao{
 
     @Query("SELECT * FROM GENERATED_EX WHERE id = :id")
     EntityGeneratedEx id(long id);
+
 }

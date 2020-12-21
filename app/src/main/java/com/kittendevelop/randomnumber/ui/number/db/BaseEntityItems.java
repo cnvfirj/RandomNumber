@@ -3,12 +3,16 @@ package com.kittendevelop.randomnumber.ui.number.db;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
 @Entity
 public abstract class BaseEntityItems extends BaseEntity{
 
 
     @ColumnInfo(name = "number")
     public long mNumber;
+
     @ColumnInfo(name = "value")
     public String mValue;
 
@@ -95,5 +99,10 @@ public abstract class BaseEntityItems extends BaseEntity{
 
     public long getNumber(){
         return mNumber;
+    }
+
+    private void addParams(){
+        Calendar calendar = GregorianCalendar.getInstance();
+
     }
 }
