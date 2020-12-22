@@ -2,6 +2,7 @@ package com.kittendevelop.randomnumber.ui.number;
 
 import android.annotation.SuppressLint;
 
+import com.kittendevelop.randomnumber.ui.number.db.EntityGeneratedEx;
 import com.kittendevelop.randomnumber.ui.number.db.EntityGeneratedItem;
 import com.kittendevelop.randomnumber.ui.number.work.ThreadRequestResult;
 import com.kittendevelop.randomnumber.ui.number.work.ThreadWorkDB;
@@ -33,20 +34,20 @@ public class ModelNumb {
         return mThreadRequest;
     }
 
-    public void requestNumber(Consumer<EntityGeneratedItem>consumer, long from, long to){
-        mThreadRequest.setParams(from, to).internalObservable().internalDisposable(consumer);
-    }
-
     @SuppressLint("CheckResult")
     public void requestGeneratedNumber(Consumer<EntityGeneratedItem>consumer, long from, long to){
         mThreadRequest.setParams(from,to);
        mThreadWorkDB
-               .listExValues()
-               .flatMap(requestNumber())
-               .flatMap(addToDB())
+               .listExValues()//запрашиваем в бд исключения
+               .flatMap(requestNumber())//генерируем число
+               .flatMap(addToDB())//добавляем его в базу данных
                .subscribe(consumer);
     }
 
+    @SuppressLint("CheckResult")
+    public void requestGeneratedEx(Consumer<EntityGeneratedEx>consumer, long value, int source){
+        mThreadWorkDB.insertWorkItemEx(value,source).subscribe(consumer);
+    }
 
     private Function<Set<Long>,Observable<EntityGeneratedItem>>requestNumber(){
         return new Function<Set<Long>, Observable<EntityGeneratedItem>>() {

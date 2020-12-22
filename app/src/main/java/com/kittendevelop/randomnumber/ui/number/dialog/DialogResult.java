@@ -11,9 +11,11 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
 
 import com.kittendevelop.randomnumber.R;
 import com.kittendevelop.randomnumber.databinding.ResultBinding;
+import com.kittendevelop.randomnumber.ui.number.ParentFragmentCallback;
 import com.kittendevelop.randomnumber.ui.number.di.DaggerComponentDialogs;
 
 import javax.inject.Inject;
@@ -22,6 +24,7 @@ public class DialogResult extends DialogFragment implements DialogFeedback {
 
     @Inject
     ResultPresenter mPresenter;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -44,8 +47,8 @@ public class DialogResult extends DialogFragment implements DialogFeedback {
     }
 
     @Override
-    public Activity activity() {
-        return getActivity();
+    public DialogFragment fragment() {
+        return this;
     }
 
     @Override

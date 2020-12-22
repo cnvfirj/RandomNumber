@@ -7,7 +7,9 @@ import com.kittendevelop.randomnumber.ui.number.db.BaseEntity;
 import com.kittendevelop.randomnumber.ui.number.db.BaseEntityItems;
 import com.kittendevelop.randomnumber.ui.number.db.DataBaseGeneratedItems;
 import com.kittendevelop.randomnumber.ui.number.db.EntityExItems;
+import com.kittendevelop.randomnumber.ui.number.db.EntityGeneratedEx;
 import com.kittendevelop.randomnumber.ui.number.db.EntityGeneratedItem;
+import com.kittendevelop.randomnumber.ui.number.db.FillNewBaseEntityItem;
 import com.kittendevelop.randomnumber.ui.number.db.SelectEx;
 
 import java.security.acl.LastOwnerException;
@@ -35,6 +37,8 @@ public class ThreadWorkDB {
         this.mDataBaseItems = dataBaseItems;
     }
 
+
+    /*запрос в бд на исключенные числа*/
     public Observable<Set<Long>>listExValues(){
         return Observable.create(new ObservableOnSubscribe<Set<Long>>() {
             @Override
@@ -50,20 +54,35 @@ public class ThreadWorkDB {
                 .subscribeOn(Schedulers.io());
     }
 
+    /*добавляем число в базу данный истории
+    * Плюс возвращаем добавленный в бд элемент в качестве проверки*/
     public Observable<EntityGeneratedItem>insertWorkItemNumb(EntityGeneratedItem entity){
         return Observable.create(new ObservableOnSubscribe<EntityGeneratedItem>() {
             @Override
             public void subscribe(@NonNull ObservableEmitter<EntityGeneratedItem> emitter) throws Exception {
-//                MASSAGE("insert "+entity.getNumber());
                 mDataBaseItems.workWithItems().insert(entity);
-//                MASSAGE("get "+entity.getValue());
-
-                emitter.onNext(mDataBaseItems.workWithItems().id(entity.getId()));
+                EntityGeneratedItem e = mDataBaseItems.workWithItems().id(entity.getId());
+                if(e!=null)emitter.onNext(e);
                 emitter.onComplete();
             }
         }).observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .doOnError(throwable -> {MASSAGE("error insert "+throwable.getMessage());});
+                .subscribeOn(Schedulers.io());
+    }
+
+    public Observable<EntityGeneratedEx>insertWorkItemEx(long value,int source){
+        return Observable.create(new ObservableOnSubscribe<EntityGeneratedEx>() {
+            @Override
+            public void subscribe(@NonNull ObservableEmitter<EntityGeneratedEx> emitter) throws Exception {
+                EntityGeneratedEx entity = new EntityGeneratedEx();
+                entity.value(value).source(source);
+                FillNewBaseEntityItem.fill(entity);
+                mDataBaseItems.workWithEx().insert(entity);
+                EntityGeneratedEx e = mDataBaseItems.workWithEx().id(entity.getId());
+                if(e!=null)emitter.onNext(e);
+                emitter.onComplete();
+            }
+        }).observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io());
     }
 
 

@@ -30,6 +30,7 @@ public class ThreadRequestResult {
     private Disposable mDisposable;
     private ConnectivityManager mConnect;
 
+    /*получаем элемент для проверки интернет соединения*/
     public ThreadRequestResult(ConnectivityManager connect) {
         this.mConnect = connect;
     }
@@ -66,7 +67,6 @@ public class ThreadRequestResult {
         return Observable.create(new ObservableOnSubscribe<EntityGeneratedItem>() {
             @Override
             public void subscribe(@NonNull ObservableEmitter<EntityGeneratedItem> emitter) throws Exception {
-                /*здесь запрос в bазу исключений, из которых сформируем mEx*/
                 EntityGeneratedItem entity = new EntityGeneratedItem().confines(mFrom,mTo);
                 FillNewBaseEntityItem.fill(entity);
                 if(SearchRandomNumberNetwork.check()){

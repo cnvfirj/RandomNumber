@@ -12,6 +12,8 @@ import javax.inject.Inject;
 
 public class ReceiverResult extends ReceiverDialogs{
 
+    public static final String TAG = "RESULT";
+
     private static ReceiverResult single;
 
     private Bundle mBundle;

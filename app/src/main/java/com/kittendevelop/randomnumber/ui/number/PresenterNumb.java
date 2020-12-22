@@ -8,6 +8,7 @@ import com.kittendevelop.randomnumber.R;
 import com.kittendevelop.randomnumber.mainDI.CallbackMainAppModule;
 import com.kittendevelop.randomnumber.mainDI.MainApplication;
 import com.kittendevelop.randomnumber.ui.number.db.DataBaseGeneratedItems;
+import com.kittendevelop.randomnumber.ui.number.db.EntityGeneratedEx;
 import com.kittendevelop.randomnumber.ui.number.db.EntityGeneratedItem;
 import com.kittendevelop.randomnumber.ui.number.dialog.ReceiverResult;
 import com.kittendevelop.randomnumber.ui.number.dialog.ReceiverWaiting;
@@ -19,6 +20,8 @@ import java.util.TreeSet;
 
 import javax.inject.Inject;
 
+import static com.kittendevelop.randomnumber.help.Massages.MASSAGE;
+
 public class PresenterNumb{
 
 
@@ -27,7 +30,6 @@ public class PresenterNumb{
     private final CallbackMainAppModule mAppCallback;
     private FragmentFeedback mFeedback;
 
-//    @Inject
     public PresenterNumb(SelectorInputBound inputBound,ModelNumb modelNumb,CallbackMainAppModule callback) {
         mSelectorInputBound = inputBound;
         mModelNumb = modelNumb;
@@ -73,20 +75,24 @@ public class PresenterNumb{
 
     public void click(View v){
         mFeedback.showDialog(ReceiverWaiting.instance().dialog(),"WAITING");
-//        mModelNumb.requestNumber(this::resultRequestEntity,mSelectorInputBound.getFrom(),mSelectorInputBound.getTo());
         mModelNumb.requestGeneratedNumber(this::resultRequestEntity,mSelectorInputBound.getFrom(),mSelectorInputBound.getTo());
-
     }
 
-    /*тут надо или занести результат в базу данных,
-    * а потом в диалоге из нее дергать последний результат.
-    * Либо передавать результат в диалог, а потом оттуда
-    * вносить его в базу данных.
-    * А есть вариант, в процессе генерации результата, вносить его в базу данных*/
-
+    /*после выполнения всей работы закрываем ожидание
+    * и открываем диалог с результатом.
+    * В бд истории результат добавлен*/
     public void resultRequestEntity(EntityGeneratedItem item) throws Exception{
         ReceiverWaiting.instance().stop();
-        mFeedback.showDialog(ReceiverResult.instance().result(item.getNumber()).dialog(),"RESULT");
+        mFeedback.showDialog(ReceiverResult.instance().result(item.getNumber()).dialog(),ReceiverResult.TAG);
+    }
+
+    public void addValueToEX(long value){
+        MASSAGE("ex value "+value);
+        mModelNumb.requestGeneratedEx(this::resultRequestEx,value,EntityGeneratedEx.SOURCE_AUTO);
+    }
+
+    public void resultRequestEx(EntityGeneratedEx item) throws Exception{
+        MASSAGE("add to ex "+item.getValue());
     }
 
 

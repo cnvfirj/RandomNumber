@@ -18,16 +18,14 @@ import com.kittendevelop.randomnumber.databinding.FragmentNumbBinding;
 import com.kittendevelop.randomnumber.mainDI.MainApplication;
 import com.kittendevelop.randomnumber.ui.number.adapters.ExAdapter;
 import com.kittendevelop.randomnumber.ui.number.db.DataBaseGeneratedItems;
+import com.kittendevelop.randomnumber.ui.number.dialog.ReceiverResult;
 
 import javax.inject.Inject;
 
-public class FragmentNumb extends Fragment implements FragmentFeedback{
+public class FragmentNumb extends Fragment implements FragmentFeedback, ParentFragmentCallback{
 
     @Inject
     PresenterNumb mPresenter;
-
-//    @Inject
-//    DataBaseGeneratedItems mDataBaseGeneratedItems;
 
     private RecyclerView mListExceptions;
     private RecyclerView mListStory;
@@ -62,11 +60,6 @@ public class FragmentNumb extends Fragment implements FragmentFeedback{
         binding.setListener(mPresenter);
         return v;
     }
-//
-//    @Override
-//    public DataBaseGeneratedItems dataBase() {
-//        return mDataBaseGeneratedItems;
-//    }
 
     @Override
     public Context context() {
@@ -74,8 +67,8 @@ public class FragmentNumb extends Fragment implements FragmentFeedback{
     }
 
     @Override
-    public Activity activity() {
-        return getActivity();
+    public void addToEx(long value, String tag) {
+        if(tag.equals(ReceiverResult.TAG))mPresenter.addValueToEX(value);
     }
 
     @Override
@@ -100,7 +93,6 @@ public class FragmentNumb extends Fragment implements FragmentFeedback{
         mListExceptions.setAdapter(new ExAdapter().setColors(new int[]{getContext().getResources().getColor(R.color.willingness_no,null)}));
         mListStory = v.findViewById(R.id.story_results_numb);
         mListStory.setAdapter(new ExAdapter().setColors(new int[]{getContext().getResources().getColor(R.color.willingness_no,null)}));
-//        mListExceptions.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
 
     }
 }
