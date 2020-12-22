@@ -8,6 +8,8 @@ import androidx.room.Query;
 
 import java.util.List;
 
+import io.reactivex.Flowable;
+
 @Dao
 public interface DaoGeneratedEx {
 
@@ -19,9 +21,6 @@ public interface DaoGeneratedEx {
 
     @Query("SELECT * FROM GENERATED_EX")
     List<EntityGeneratedEx> all();
-
-    @Query("SELECT number, value FROM BaseEntityItems")
-    List<SelectEx> allValues();
 
     @Query("SELECT * FROM GENERATED_EX WHERE source = :source")
     List<EntityGeneratedEx>source(int source);
@@ -40,5 +39,14 @@ public interface DaoGeneratedEx {
 
     @Query("SELECT * FROM GENERATED_EX WHERE id = :id")
     EntityGeneratedEx id(long id);
+
+//    @Query("SELECT * FROM GENERATED_ITEM")
+//    Flowable<List<EntityGeneratedEx>>allFlow();
+//
+//    @Query("SELECT * FROM GENERATED_ITEM WHERE value = :value")
+//    Flowable<EntityGeneratedEx> valueFlow(String value);
+//
+//    @Query("SELECT * FROM GENERATED_ITEM WHERE id = :id")
+//    Flowable<EntityGeneratedEx> idFlow(long id);
 
 }

@@ -10,7 +10,6 @@ import com.kittendevelop.randomnumber.ui.number.db.EntityExItems;
 import com.kittendevelop.randomnumber.ui.number.db.EntityGeneratedEx;
 import com.kittendevelop.randomnumber.ui.number.db.EntityGeneratedItem;
 import com.kittendevelop.randomnumber.ui.number.db.FillNewBaseEntityItem;
-import com.kittendevelop.randomnumber.ui.number.db.SelectEx;
 
 import java.security.acl.LastOwnerException;
 import java.util.ArrayList;
@@ -44,7 +43,7 @@ public class ThreadWorkDB {
             @Override
             public void subscribe(@NonNull ObservableEmitter<Set<Long>> emitter) throws Exception {
                 Set<Long> list = new TreeSet<>();
-                for (SelectEx ex:mDataBaseItems.workWithEx().allValues()){
+                for (EntityGeneratedEx ex:mDataBaseItems.workWithEx().all()){
                     list.add(ex.mNumber);
                 }
                 emitter.onNext(list);

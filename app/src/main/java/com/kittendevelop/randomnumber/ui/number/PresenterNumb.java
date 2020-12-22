@@ -75,7 +75,9 @@ public class PresenterNumb{
 
     public void click(View v){
         mFeedback.showDialog(ReceiverWaiting.instance().dialog(),"WAITING");
-        mModelNumb.requestGeneratedNumber(this::resultRequestEntity,mSelectorInputBound.getFrom(),mSelectorInputBound.getTo());
+        mModelNumb.requestGeneratedNumber(
+                this::resultRequestEntity,mSelectorInputBound.getFrom(),mSelectorInputBound.getTo()
+        );
     }
 
     /*после выполнения всей работы закрываем ожидание
@@ -83,12 +85,15 @@ public class PresenterNumb{
     * В бд истории результат добавлен*/
     public void resultRequestEntity(EntityGeneratedItem item) throws Exception{
         ReceiverWaiting.instance().stop();
-        mFeedback.showDialog(ReceiverResult.instance().result(item.getNumber()).dialog(),ReceiverResult.TAG);
+        mFeedback.showDialog(
+                ReceiverResult.instance().result(item.getNumber()).dialog(),ReceiverResult.TAG
+        );
     }
 
     public void addValueToEX(long value){
-        MASSAGE("ex value "+value);
-        mModelNumb.requestGeneratedEx(this::resultRequestEx,value,EntityGeneratedEx.SOURCE_AUTO);
+        mModelNumb.requestGeneratedEx(
+                this::resultRequestEx,value,EntityGeneratedEx.SOURCE_AUTO
+        );
     }
 
     public void resultRequestEx(EntityGeneratedEx item) throws Exception{
