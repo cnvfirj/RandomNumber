@@ -101,8 +101,4 @@ public abstract class BaseEntityItems extends BaseEntity{
         return mNumber;
     }
 
-    private void addParams(){
-        Calendar calendar = GregorianCalendar.getInstance();
-
-    }
 }

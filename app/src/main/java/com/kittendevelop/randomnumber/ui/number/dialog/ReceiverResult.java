@@ -6,6 +6,7 @@ import androidx.fragment.app.DialogFragment;
 
 //import com.kittendevelop.randomnumber.ui.number.di.DaggerComponentDialogs;
 
+import com.kittendevelop.randomnumber.ui.number.db.EntityGeneratedItem;
 import com.kittendevelop.randomnumber.ui.number.di.DaggerComponentDialogs;
 
 import javax.inject.Inject;
@@ -32,8 +33,9 @@ public class ReceiverResult extends ReceiverDialogs{
         return single;
     }
 
-    public ReceiverResult result(long result){
-        bundle().putString("RESULT_NUMB",Long.toString(result));
+    public ReceiverResult result(EntityGeneratedItem item){
+//        bundle().putString("RESULT_NUMB",Long.toString(item.getNumber()));
+        bundle().putSerializable("RESULT_ITEM",item);
         dialog().setArguments(bundle());
         return this;
     }

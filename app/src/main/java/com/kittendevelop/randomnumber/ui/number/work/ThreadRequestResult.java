@@ -73,13 +73,13 @@ public class ThreadRequestResult {
                     addParams(entity,EntityGeneratedItem.SOURCE_NET,SearchRandomNumberNetwork.searchInNet(mEx,mFrom,mTo));
 
                 }else {
-                    addParams(entity,EntityGeneratedItem.SOURCE_APP,SearchRandomNumberNonNet.searchInDevice3(mEx,mFrom,mTo));
+                    addParams(entity,EntityGeneratedItem.SOURCE_APP,SearchRandomNumberNonNet.generate(mEx,mFrom,mTo));
                 }
                 emitter.onNext(entity);
                 emitter.onComplete();
             }
         }).observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io());
+                .subscribeOn(Schedulers.computation());
     }
 
     private void addParams(EntityGeneratedItem item, int source, long value){

@@ -18,7 +18,7 @@
         <TextView style="@style/hints_search_numb"
             android:id="@+id/result_info"
             android:gravity="center_horizontal"
-            android:text="@string/result_report"
+            android:text="@{presenter.report()}"
             android:textSize="15sp"
             app:autoSizeTextType="uniform"/>
 

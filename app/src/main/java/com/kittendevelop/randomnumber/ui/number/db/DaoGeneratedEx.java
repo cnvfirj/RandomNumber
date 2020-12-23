@@ -9,6 +9,7 @@ import androidx.room.Query;
 import java.util.List;
 
 import io.reactivex.Flowable;
+import io.reactivex.Maybe;
 
 @Dao
 public interface DaoGeneratedEx {
@@ -40,13 +41,16 @@ public interface DaoGeneratedEx {
     @Query("SELECT * FROM GENERATED_EX WHERE id = :id")
     EntityGeneratedEx id(long id);
 
+//   @Query("SELECT * FROM GENERATED_EX WHERE id = :id")
+//    Maybe<EntityGeneratedEx> idRx(long id);
+//
+//    @Query("SELECT * FROM GENERATED_EX WHERE value = :value")
+//    Maybe<EntityGeneratedEx> valueRx(String value);
+//
 //    @Query("SELECT * FROM GENERATED_ITEM")
-//    Flowable<List<EntityGeneratedEx>>allFlow();
-//
-//    @Query("SELECT * FROM GENERATED_ITEM WHERE value = :value")
-//    Flowable<EntityGeneratedEx> valueFlow(String value);
-//
-//    @Query("SELECT * FROM GENERATED_ITEM WHERE id = :id")
-//    Flowable<EntityGeneratedEx> idFlow(long id);
+//    Flowable<List<EntityGeneratedEx>>allRx();
+
+
+
 
 }

@@ -4,8 +4,10 @@ package com.kittendevelop.randomnumber.ui.number.db;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 
+import java.io.Serializable;
+
 @Entity(tableName = "GENERATED_ITEM")
-public class EntityGeneratedItem extends BaseEntityItems {
+public class EntityGeneratedItem extends BaseEntityItems{
 
     public static final int SOURCE_NET = 0;
     public static final int SOURCE_APP = 1;

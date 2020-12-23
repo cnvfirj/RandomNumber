@@ -7,18 +7,12 @@ import com.kittendevelop.randomnumber.ui.number.db.EntityGeneratedItem;
 import com.kittendevelop.randomnumber.ui.number.work.ThreadRequestResult;
 import com.kittendevelop.randomnumber.ui.number.work.ThreadWorkDB;
 
-import java.util.List;
 import java.util.Set;
-import java.util.TreeSet;
 
 import io.reactivex.Observable;
-import io.reactivex.ObservableEmitter;
-import io.reactivex.ObservableOnSubscribe;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
-import io.reactivex.schedulers.Schedulers;
 
 public class ModelNumb {
 
@@ -67,9 +61,5 @@ public class ModelNumb {
             }
         };
     }
-
-
-
-
 
 }

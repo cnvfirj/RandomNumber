@@ -8,7 +8,7 @@ import androidx.room.RoomDatabase;
         version = DataBaseGeneratedItems.VERSION, exportSchema = DataBaseGeneratedItems.EXPORT)
 public abstract class DataBaseGeneratedItems extends RoomDatabase {
 
-    static final int VERSION = 5;
+    static final int VERSION = 6;
     static final boolean EXPORT = false;
 
     public abstract DaoGeneratedItem workWithItems();
