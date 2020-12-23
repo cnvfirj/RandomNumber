@@ -27,14 +27,12 @@ public class ReceiverResult extends ReceiverDialogs{
         if(single==null){
             synchronized (ReceiverWaiting.class){
                 single = DaggerComponentDialogs.create().result();
-//                single = new ReceiverResult(new DialogResult());
             }
         }
         return single;
     }
 
     public ReceiverResult result(EntityGeneratedItem item){
-//        bundle().putString("RESULT_NUMB",Long.toString(item.getNumber()));
         bundle().putSerializable("RESULT_ITEM",item);
         dialog().setArguments(bundle());
         return this;

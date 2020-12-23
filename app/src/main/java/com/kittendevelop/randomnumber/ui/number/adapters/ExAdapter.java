@@ -41,6 +41,7 @@ public class ExAdapter extends RecyclerView.Adapter<ExAdapter.ExAdapterHolder>{
         mColors = colors;
         return this;
     }
+
     public void setTitles(String[]titles){
         mTitles = titles;
     }
