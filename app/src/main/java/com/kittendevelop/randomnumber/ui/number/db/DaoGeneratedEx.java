@@ -41,6 +41,9 @@ public interface DaoGeneratedEx {
     @Query("SELECT * FROM GENERATED_EX WHERE id = :id")
     EntityGeneratedEx id(long id);
 
+    @Query("SELECT id, number, value FROM GENERATED_EX")
+    List<CommonValues>commonValues();
+
 //   @Query("SELECT * FROM GENERATED_EX WHERE id = :id")
 //    Maybe<EntityGeneratedEx> idRx(long id);
 //

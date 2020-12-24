@@ -11,14 +11,16 @@ import androidx.recyclerview.widget.DiffUtil;
 
 import com.kittendevelop.randomnumber.R;
 import com.kittendevelop.randomnumber.ui.number.db.BaseEntityItems;
+import com.kittendevelop.randomnumber.ui.number.db.CommonValues;
 
-public class EntityItemsAdapter extends PagedListAdapter<BaseEntityItems, EntityItemsAdapter.ItemHolder> {
+import javax.inject.Inject;
 
-    private int[]mColors;
+public class EntityItemsAdapter extends PagedListAdapter<CommonValues, EntityItemsAdapter.ItemHolder> {
 
 
 
-    public EntityItemsAdapter(@NonNull DiffUtil.ItemCallback<BaseEntityItems> diffCallback) {
+    @Inject
+    public EntityItemsAdapter(@NonNull DiffUtil.ItemCallback<CommonValues> diffCallback) {
         super(diffCallback);
     }
 
@@ -30,22 +32,17 @@ public class EntityItemsAdapter extends PagedListAdapter<BaseEntityItems, Entity
 
     @Override
     public void onBindViewHolder(@NonNull ItemHolder holder, int position) {
-         holder.bind(position);
+         holder.bind(getItem(position));
     }
 
-    public EntityItemsAdapter setColors(int[]colors){
-        mColors = colors;
-        return this;
-    }
 
     private ItemHolder holder(ViewGroup parent){
-         ItemHolder holder = new ItemHolder(LayoutInflater.from(parent.getContext())
+         return new ItemHolder(LayoutInflater.from(parent.getContext())
                  .inflate(R.layout.item_number_list, parent, false));
-         holder.setColors(mColors);
-         return holder;
     }
 
     protected static class ItemHolder extends NumberHolder{
+
 
         public ItemHolder(@NonNull View itemView) {
             super(itemView);
@@ -53,6 +50,10 @@ public class EntityItemsAdapter extends PagedListAdapter<BaseEntityItems, Entity
 
         @Override
         public void onClick(View view) {
+
+        }
+
+        public void bind(CommonValues item){
 
         }
     }

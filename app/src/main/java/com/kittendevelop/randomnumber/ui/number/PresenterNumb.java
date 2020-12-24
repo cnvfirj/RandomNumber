@@ -2,23 +2,25 @@ package com.kittendevelop.randomnumber.ui.number;
 
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.View;
+
+import androidx.paging.PagedList;
+import androidx.paging.PositionalDataSource;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.kittendevelop.randomnumber.R;
 import com.kittendevelop.randomnumber.mainDI.CallbackMainAppModule;
-import com.kittendevelop.randomnumber.mainDI.MainApplication;
-import com.kittendevelop.randomnumber.ui.number.db.DataBaseGeneratedItems;
+import com.kittendevelop.randomnumber.ui.number.adapters.EntityItemsAdapter;
 import com.kittendevelop.randomnumber.ui.number.db.EntityGeneratedEx;
 import com.kittendevelop.randomnumber.ui.number.db.EntityGeneratedItem;
+import com.kittendevelop.randomnumber.ui.number.di.DaggerComponentAdapter;
 import com.kittendevelop.randomnumber.ui.number.dialog.ReceiverResult;
 import com.kittendevelop.randomnumber.ui.number.dialog.ReceiverWaiting;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.TreeSet;
-
-import javax.inject.Inject;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 import static com.kittendevelop.randomnumber.help.Massages.MASSAGE;
 
@@ -100,6 +102,33 @@ public class PresenterNumb{
         MASSAGE("add to ex "+item.getValue());
     }
 
+    public void fillLists(RecyclerView st, RecyclerView ex){
+        EntityItemsAdapter aSt = DaggerComponentAdapter.create().adapter();
+        EntityItemsAdapter aEx = DaggerComponentAdapter.create().adapter();
+        PagedList.Config config = new PagedList.Config.Builder()
+                .setEnablePlaceholders(false)
+                .setPageSize(10)
+                .build();
+        aSt.submitList(pagedList(mModelNumb.dataSource(0),config));
+        aEx.submitList(pagedList(mModelNumb.dataSource(1),config));
+        st.setAdapter(aSt);
+        ex.setAdapter(aEx);
+    }
 
+    private PagedList pagedList(PositionalDataSource source, PagedList.Config config){
+        return new PagedList.Builder<>(source,config)
+                .setFetchExecutor(Executors.newSingleThreadExecutor())
+                .setNotifyExecutor(new MainThreadExecutor())
+                .build();
+    }
+
+    class MainThreadExecutor implements Executor {
+        private final Handler mHandler = new Handler(Looper.getMainLooper());
+
+        @Override
+        public void execute(Runnable command) {
+            mHandler.post(command);
+        }
+    }
 
 }

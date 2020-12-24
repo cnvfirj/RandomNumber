@@ -2,6 +2,7 @@ package com.kittendevelop.randomnumber.ui.number;
 
 import android.annotation.SuppressLint;
 
+import com.kittendevelop.randomnumber.ui.number.adapters.AdapterDataSource;
 import com.kittendevelop.randomnumber.ui.number.db.EntityGeneratedEx;
 import com.kittendevelop.randomnumber.ui.number.db.EntityGeneratedItem;
 import com.kittendevelop.randomnumber.ui.number.work.ThreadRequestResult;
@@ -26,6 +27,10 @@ public class ModelNumb {
 
     public ThreadRequestResult requestResultNumber(){
         return mThreadRequest;
+    }
+
+    public AdapterDataSource dataSource(int table){
+        return mThreadWorkDB.getAdapterDataSource(table);
     }
 
     @SuppressLint("CheckResult")

@@ -21,7 +21,7 @@ public interface DaoGeneratedItem{
     void delete(EntityGeneratedItem ex);
 
     @Query("SELECT * FROM GENERATED_ITEM")
-    List<EntityGeneratedItem>all();
+    List<EntityGeneratedEx>all();
 
     @Query("SELECT * FROM GENERATED_ITEM WHERE source = :source")
     List<EntityGeneratedItem>source(int source);
@@ -43,6 +43,9 @@ public interface DaoGeneratedItem{
 
     @Query("SELECT * FROM GENERATED_ITEM WHERE id = :id")
     EntityGeneratedItem id(long id);
+
+    @Query("SELECT id,value,number FROM GENERATED_ITEM")
+    List<CommonValues>commonValues();
 
 //    @Query("SELECT * FROM GENERATED_EX WHERE id = :id")
 //    Maybe<EntityGeneratedItem> idRx(long id);

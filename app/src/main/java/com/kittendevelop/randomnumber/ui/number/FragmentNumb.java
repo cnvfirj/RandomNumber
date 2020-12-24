@@ -16,8 +16,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.kittendevelop.randomnumber.R;
 import com.kittendevelop.randomnumber.databinding.FragmentNumbBinding;
 import com.kittendevelop.randomnumber.mainDI.MainApplication;
-import com.kittendevelop.randomnumber.ui.number.adapters.ExAdapter;
-import com.kittendevelop.randomnumber.ui.number.db.DataBaseGeneratedItems;
 import com.kittendevelop.randomnumber.ui.number.dialog.ReceiverResult;
 
 import javax.inject.Inject;
@@ -89,10 +87,10 @@ public class FragmentNumb extends Fragment implements FragmentFeedback, ParentFr
     }
 
     private void initLists(View v){
-        mListExceptions = v.findViewById(R.id.search_excluded_numb);
-        mListExceptions.setAdapter(new ExAdapter().setColors(new int[]{getContext().getResources().getColor(R.color.willingness_no,null)}));
-        mListStory = v.findViewById(R.id.story_results_numb);
-        mListStory.setAdapter(new ExAdapter().setColors(new int[]{getContext().getResources().getColor(R.color.willingness_no,null)}));
-
+//        mListExceptions = v.findViewById(R.id.search_excluded_numb);
+//        mListExceptions.setAdapter(new ExAdapter().setColors(new int[]{getContext().getResources().getColor(R.color.willingness_no,null)}));
+//        mListStory = v.findViewById(R.id.story_results_numb);
+//        mListStory.setAdapter(new ExAdapter().setColors(new int[]{getContext().getResources().getColor(R.color.willingness_no,null)}));
+        mPresenter.fillLists(v.findViewById(R.id.story_results_numb),v.findViewById(R.id.search_excluded_numb));
     }
 }

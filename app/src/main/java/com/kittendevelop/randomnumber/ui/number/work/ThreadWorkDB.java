@@ -3,8 +3,10 @@ package com.kittendevelop.randomnumber.ui.number.work;
 import android.content.Context;
 import android.net.ConnectivityManager;
 
+import com.kittendevelop.randomnumber.ui.number.adapters.AdapterDataSource;
 import com.kittendevelop.randomnumber.ui.number.db.BaseEntity;
 import com.kittendevelop.randomnumber.ui.number.db.BaseEntityItems;
+import com.kittendevelop.randomnumber.ui.number.db.CommonValues;
 import com.kittendevelop.randomnumber.ui.number.db.DataBaseGeneratedItems;
 import com.kittendevelop.randomnumber.ui.number.db.EntityExItems;
 import com.kittendevelop.randomnumber.ui.number.db.EntityGeneratedEx;
@@ -37,13 +39,17 @@ public class ThreadWorkDB {
     }
 
 
+    public AdapterDataSource getAdapterDataSource(int table){
+        return new AdapterDataSource(mDataBaseItems,table);
+    }
+
     /*запрос в бд на исключенные числа*/
     public Observable<Set<Long>>listExValues(){
         return Observable.create(new ObservableOnSubscribe<Set<Long>>() {
             @Override
             public void subscribe(@NonNull ObservableEmitter<Set<Long>> emitter) throws Exception {
                 Set<Long> list = new TreeSet<>();
-                for (EntityGeneratedEx ex:mDataBaseItems.workWithEx().all()){
+                for (BaseEntityItems ex:mDataBaseItems.workWithEx().all()){
                     list.add(ex.mNumber);
                 }
                 emitter.onNext(list);
@@ -59,9 +65,11 @@ public class ThreadWorkDB {
         return Observable.create(new ObservableOnSubscribe<EntityGeneratedItem>() {
             @Override
             public void subscribe(@NonNull ObservableEmitter<EntityGeneratedItem> emitter) throws Exception {
+
                 mDataBaseItems.workWithItems().insert(entity);
                 EntityGeneratedItem e = mDataBaseItems.workWithItems().id(entity.getId());
                 if(e!=null)emitter.onNext(e);
+
                 emitter.onComplete();
             }
         }).observeOn(AndroidSchedulers.mainThread())
@@ -83,7 +91,5 @@ public class ThreadWorkDB {
         }).observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io());
     }
-
-
 
 }
