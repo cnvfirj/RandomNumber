@@ -73,7 +73,7 @@ public class AdapterDataSource extends PositionalDataSource<CommonValues> {
                 public int compare(CommonValues c1, CommonValues t1) {
                     Long d1 = c1.mId;
                     Long d2 = t1.mId;
-                    return d1.compareTo(d2);
+                    return d2.compareTo(d1);
                 }
             });
 

@@ -44,6 +44,7 @@ public class EntityItemsAdapter extends PagedListAdapter<CommonValues, EntityIte
     protected static class ItemHolder extends NumberHolder{
 
 
+        private CommonValues mItem;
         public ItemHolder(@NonNull View itemView) {
             super(itemView);
         }
@@ -54,7 +55,12 @@ public class EntityItemsAdapter extends PagedListAdapter<CommonValues, EntityIte
         }
 
         public void bind(CommonValues item){
+          mItem = item;
+          getTitle().setText(mItem.mValue);
+        }
 
+        public CommonValues getItem() {
+            return mItem;
         }
     }
 }

@@ -23,7 +23,7 @@ public abstract class NumberHolder extends RecyclerView.ViewHolder implements Vi
 
     }
 
-    public TextView getTitle() {
+    protected TextView getTitle() {
         return mTitle;
     }
 

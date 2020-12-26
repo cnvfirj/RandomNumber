@@ -60,7 +60,7 @@ public class ThreadRequestResult {
 
 
     public void dispose(){
-       mDisposable.dispose();
+       if(mDisposable!=null)mDisposable.dispose();
     }
 
     public Observable<EntityGeneratedItem>generatedItemObservable(){

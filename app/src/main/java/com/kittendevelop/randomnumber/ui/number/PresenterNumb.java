@@ -1,5 +1,6 @@
 package com.kittendevelop.randomnumber.ui.number;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Handler;
@@ -8,6 +9,7 @@ import android.view.View;
 
 import androidx.paging.PagedList;
 import androidx.paging.PositionalDataSource;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.kittendevelop.randomnumber.R;
@@ -103,16 +105,21 @@ public class PresenterNumb{
     }
 
     public void fillLists(RecyclerView st, RecyclerView ex){
+
+        ((GridLayoutManager)st.getLayoutManager()).setSpanCount(5);
         EntityItemsAdapter aSt = DaggerComponentAdapter.create().adapter();
         EntityItemsAdapter aEx = DaggerComponentAdapter.create().adapter();
-        PagedList.Config config = new PagedList.Config.Builder()
-                .setEnablePlaceholders(false)
-                .setPageSize(10)
-                .build();
-        aSt.submitList(pagedList(mModelNumb.dataSource(0),config));
-        aEx.submitList(pagedList(mModelNumb.dataSource(1),config));
+        aSt.submitList(pagedList(mModelNumb.dataSource(0),config(100)));
+        aEx.submitList(pagedList(mModelNumb.dataSource(1),config(12)));
         st.setAdapter(aSt);
         ex.setAdapter(aEx);
+    }
+
+    private PagedList.Config config(int pagedSize){
+        return new PagedList.Config.Builder()
+                .setEnablePlaceholders(false)
+                .setPageSize(pagedSize)
+                .build();
     }
 
     private PagedList pagedList(PositionalDataSource source, PagedList.Config config){
