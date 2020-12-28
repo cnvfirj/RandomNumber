@@ -20,6 +20,9 @@ public interface DaoGeneratedItem{
     @Delete
     void delete(EntityGeneratedItem ex);
 
+    @Query("SELECT COUNT(id) FROM GENERATED_ITEM")
+    int count();
+
     @Query("SELECT * FROM GENERATED_ITEM")
     List<EntityGeneratedEx>all();
 

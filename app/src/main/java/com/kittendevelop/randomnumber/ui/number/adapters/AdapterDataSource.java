@@ -3,6 +3,7 @@ package com.kittendevelop.randomnumber.ui.number.adapters;
 import androidx.annotation.NonNull;
 import androidx.paging.PositionalDataSource;
 
+import com.kittendevelop.randomnumber.help.Massages;
 import com.kittendevelop.randomnumber.ui.number.db.BaseEntityItems;
 import com.kittendevelop.randomnumber.ui.number.db.CommonValues;
 import com.kittendevelop.randomnumber.ui.number.db.DataBaseGeneratedItems;
@@ -35,7 +36,8 @@ public class AdapterDataSource extends PositionalDataSource<CommonValues> {
           query().subscribe(new Consumer<List<CommonValues>>() {
               @Override
               public void accept(List<CommonValues> commonValues) throws Exception {
-                  callback.onResult(commonValues,0);
+                  Massages.MASSAGE("init "+commonValues.size());
+                  callback.onResult(commonValues,0,commonValues.size());
               }
           });
     }
@@ -45,6 +47,7 @@ public class AdapterDataSource extends PositionalDataSource<CommonValues> {
          query().subscribe(new Consumer<List<CommonValues>>() {
              @Override
              public void accept(List<CommonValues> commonValues) throws Exception {
+                 Massages.MASSAGE("Range size "+params.loadSize+" position "+params.startPosition);
                  callback.onResult(commonValues);
              }
          });

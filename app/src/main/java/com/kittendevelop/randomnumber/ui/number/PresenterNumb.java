@@ -109,15 +109,15 @@ public class PresenterNumb{
         ((GridLayoutManager)st.getLayoutManager()).setSpanCount(5);
         EntityItemsAdapter aSt = DaggerComponentAdapter.create().adapter();
         EntityItemsAdapter aEx = DaggerComponentAdapter.create().adapter();
-        aSt.submitList(pagedList(mModelNumb.dataSource(0),config(100)));
-        aEx.submitList(pagedList(mModelNumb.dataSource(1),config(12)));
+        aSt.submitList(pagedList(mModelNumb.dataSource(0),config(60)));
+        aEx.submitList(pagedList(mModelNumb.dataSource(1),config(8)));
         st.setAdapter(aSt);
         ex.setAdapter(aEx);
     }
 
     private PagedList.Config config(int pagedSize){
         return new PagedList.Config.Builder()
-                .setEnablePlaceholders(false)
+//                .setEnablePlaceholders(false)
                 .setPageSize(pagedSize)
                 .build();
     }
