@@ -5,11 +5,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.databinding.DataBindingUtil;
 import androidx.paging.PagedListAdapter;
 import androidx.recyclerview.widget.AsyncDifferConfig;
 import androidx.recyclerview.widget.DiffUtil;
 
 import com.kittendevelop.randomnumber.R;
+import com.kittendevelop.randomnumber.databinding.ItemNumberListBinding;
+import com.kittendevelop.randomnumber.help.Massages;
 import com.kittendevelop.randomnumber.ui.number.db.BaseEntityItems;
 import com.kittendevelop.randomnumber.ui.number.db.CommonValues;
 
@@ -37,30 +40,34 @@ public class EntityItemsAdapter extends PagedListAdapter<CommonValues, EntityIte
 
 
     private ItemHolder holder(ViewGroup parent){
+//        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+//        ItemNumberListBinding binding = DataBindingUtil.inflate(inflater, R.layout.item_number_list, parent, false);
          return new ItemHolder(LayoutInflater.from(parent.getContext())
                  .inflate(R.layout.item_number_list, parent, false));
     }
 
     protected static class ItemHolder extends NumberHolder{
 
+        private ItemNumberListBinding mBinding;
 
-        private CommonValues mItem;
         public ItemHolder(@NonNull View itemView) {
             super(itemView);
+            mBinding = ItemNumberListBinding.bind(itemView);
+            mBinding.setClick(this);
         }
 
-        @Override
-        public void onClick(View view) {
-
-        }
 
         public void bind(CommonValues item){
-          mItem = item;
-          getTitle().setText(mItem.mValue);
+          mBinding.setTitle(item);
         }
 
         public CommonValues getItem() {
-            return mItem;
+            return mBinding.getTitle();
+        }
+
+        @Override
+        public void click() {
+            Massages.MASSAGE("click");
         }
     }
 }

@@ -12,19 +12,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.kittendevelop.randomnumber.R;
 
-public abstract class NumberHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+public abstract class NumberHolder extends RecyclerView.ViewHolder{
 
-    private TextView mTitle;
-
+    protected TextView mTitle;
 
     public NumberHolder(@NonNull View itemView) {
         super(itemView);
         mTitle = itemView.findViewById(R.id.result_numb);
-
     }
 
     protected TextView getTitle() {
         return mTitle;
     }
+
+    public abstract void click();
 
 }

@@ -89,8 +89,7 @@ public class PresenterNumb{
     * В бд истории результат добавлен*/
     public void resultRequestEntity(EntityGeneratedItem item) throws Exception{
         ReceiverWaiting.instance().stop();
-        mFeedback.showDialog(
-                ReceiverResult.instance().result(item).dialog(),ReceiverResult.TAG
+        mFeedback.showDialog(ReceiverResult.instance().result(item).dialog(),ReceiverResult.TAG
         );
     }
 

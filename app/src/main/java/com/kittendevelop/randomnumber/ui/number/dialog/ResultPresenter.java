@@ -34,20 +34,22 @@ public class ResultPresenter {
     }
 
     public String report(){
-        String[] split = mView.context().getResources().getString(mModel.idMassage()).split("%%");
         StringBuilder report = new StringBuilder();
-        report.append(split[0]);
-        report.append(mModel.getDate());
-        report.append(split[1]);
-        report.append(mModel.getTime());
-        report.append(split[2]);
-        report.append(mModel.getItem().getFrom());
-        report.append(split[3]);
-        report.append(mModel.getItem().getTo());
-        report.append(split[4]);
-        report.append(mView.context().getResources().getString(mModel.idSource()));
+        if(!value().equals("ERROR")) {
+            String[] split = mView.context().getResources().getString(mModel.idMassage()).split("%%");
+            report.append(split[0]);
+            report.append(mModel.getDate());
+            report.append(split[1]);
+            report.append(mModel.getTime());
+            report.append(split[2]);
+            report.append(mModel.getItem().getFrom());
+            report.append(split[3]);
+            report.append(mModel.getItem().getTo());
+            report.append(split[4]);
+        }
+            report.append(mView.context().getResources().getString(mModel.idSource()));
+            return report.toString();
 
-        return report.toString();
     }
 
     public String textApply(){
@@ -61,8 +63,11 @@ public class ResultPresenter {
                mView.exitDialog();
                break;
            case R.id.result_aply:
-               ParentFragmentCallback mCallback = (ParentFragmentCallback) mView.fragment().getParentFragment();
-               if(mCallback !=null) mCallback.addToEx(Long.parseLong(mModel.lastResult()),ReceiverResult.TAG);
+               if(!mModel.lastResult().equals("ERROR")) {
+                   ParentFragmentCallback mCallback = (ParentFragmentCallback) mView.fragment().getParentFragment();
+                   if (mCallback != null)
+                       mCallback.addToEx(Long.parseLong(mModel.lastResult()), ReceiverResult.TAG);
+               }
                mView.exitDialog();
                break;
        }

@@ -15,5 +15,4 @@ public class CommonValues {
     @ColumnInfo(name = "value")
     public String mValue;
 
-
 }

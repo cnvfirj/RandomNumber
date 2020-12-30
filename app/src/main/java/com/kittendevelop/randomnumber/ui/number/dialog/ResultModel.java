@@ -27,7 +27,8 @@ public class ResultModel {
     }
 
     public String lastResult(){
-        return mItem.getValue();
+        if(mItem.getNumber()==Long.MIN_VALUE)return "ERROR";
+        else return mItem.getValue();
     }
 
     public int idApply(){
@@ -39,8 +40,10 @@ public class ResultModel {
     }
 
     public int idSource(){
-        if(mItem.getSource()==EntityGeneratedItem.SOURCE_NET)return R.string.source_net;
-        else return R.string.source_app;
+        if(mItem.getNumber()!=Long.MIN_VALUE) {
+            if (mItem.getSource() == EntityGeneratedItem.SOURCE_NET) return R.string.source_net;
+            else return R.string.source_app;
+        }else return R.string.result_report_error;
     }
 
     public String getDate() {

@@ -25,9 +25,6 @@ public class FragmentNumb extends Fragment implements FragmentFeedback, ParentFr
     @Inject
     PresenterNumb mPresenter;
 
-    private RecyclerView mListExceptions;
-    private RecyclerView mListStory;
-
     public static FragmentNumb newInstance(){
         return new FragmentNumb();
     }

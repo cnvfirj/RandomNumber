@@ -65,10 +65,12 @@ public class ThreadWorkDB {
         return Observable.create(new ObservableOnSubscribe<EntityGeneratedItem>() {
             @Override
             public void subscribe(@NonNull ObservableEmitter<EntityGeneratedItem> emitter) throws Exception {
-
-                mDataBaseItems.workWithItems().insert(entity);
-                EntityGeneratedItem e = mDataBaseItems.workWithItems().id(entity.getId());
-                if(e!=null)emitter.onNext(e);
+                /*роверка на ошибку*/
+                if(entity.getNumber()!=Long.MIN_VALUE){
+                    mDataBaseItems.workWithItems().insert(entity);
+                    EntityGeneratedItem e = mDataBaseItems.workWithItems().id(entity.getId());
+                    if(e!=null)emitter.onNext(e);
+                }else emitter.onNext(entity);
 
                 emitter.onComplete();
             }
