@@ -33,6 +33,8 @@ import static com.kittendevelop.randomnumber.help.Massages.MASSAGE;
 public class ThreadWorkDB {
 
     private DataBaseGeneratedItems mDataBaseItems;
+    private AdapterDataSource mDataStory;
+    private AdapterDataSource mDataEx;
 
     public ThreadWorkDB(DataBaseGeneratedItems dataBaseItems) {
         this.mDataBaseItems = dataBaseItems;
@@ -40,7 +42,13 @@ public class ThreadWorkDB {
 
 
     public AdapterDataSource getAdapterDataSource(int table){
-        return new AdapterDataSource(mDataBaseItems,table);
+        if(table==0){
+            if(mDataStory==null)mDataStory = new AdapterDataSource(mDataBaseItems,table);
+            return mDataStory;
+        }else {
+            if(mDataEx==null)mDataEx = new AdapterDataSource(mDataBaseItems,table);
+            return mDataEx;
+        }
     }
 
     /*запрос в бд на исключенные числа*/

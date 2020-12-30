@@ -20,6 +20,7 @@ public class ModelNumb {
     private ThreadRequestResult mThreadRequest;
     private ThreadWorkDB mThreadWorkDB;
 
+
     public ModelNumb(ThreadRequestResult threadRequest,ThreadWorkDB threadWorkDB) {
         mThreadRequest = threadRequest;
         mThreadWorkDB = threadWorkDB;
@@ -31,6 +32,16 @@ public class ModelNumb {
 
     public AdapterDataSource dataSource(int table){
         return mThreadWorkDB.getAdapterDataSource(table);
+    }
+
+    public AdapterDataSource dataSource(int table,int pos){
+        return mThreadWorkDB.getAdapterDataSource(table).position(pos);
+    }
+
+
+
+    public AdapterDataSource jumpList(int table, int pos){
+       return mThreadWorkDB.getAdapterDataSource(table).position(pos);
     }
 
     @SuppressLint("CheckResult")

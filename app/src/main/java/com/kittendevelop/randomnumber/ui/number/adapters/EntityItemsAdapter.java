@@ -40,8 +40,6 @@ public class EntityItemsAdapter extends PagedListAdapter<CommonValues, EntityIte
 
 
     private ItemHolder holder(ViewGroup parent){
-//        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-//        ItemNumberListBinding binding = DataBindingUtil.inflate(inflater, R.layout.item_number_list, parent, false);
          return new ItemHolder(LayoutInflater.from(parent.getContext())
                  .inflate(R.layout.item_number_list, parent, false));
     }
@@ -67,7 +65,7 @@ public class EntityItemsAdapter extends PagedListAdapter<CommonValues, EntityIte
 
         @Override
         public void click() {
-            Massages.MASSAGE("click");
+            Massages.MASSAGE("click "+mBinding.getTitle().mValue);
         }
     }
 }

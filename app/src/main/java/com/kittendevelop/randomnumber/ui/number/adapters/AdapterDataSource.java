@@ -24,20 +24,25 @@ public class AdapterDataSource extends PositionalDataSource<CommonValues> {
 
     private DataBaseGeneratedItems mdb;
     private int mTable;
+    private int mPosition;
 
     public AdapterDataSource(DataBaseGeneratedItems mdb, int table) {
         this.mdb = mdb;
         this.mTable = table;
+        this.mPosition = 0;
     }
 
+    public AdapterDataSource position(int position){
+        this.mPosition = position;
+        return this;
+    }
 
     @Override
     public void loadInitial(@NonNull LoadInitialParams params, @NonNull LoadInitialCallback<CommonValues> callback) {
           query().subscribe(new Consumer<List<CommonValues>>() {
               @Override
               public void accept(List<CommonValues> commonValues) throws Exception {
-                  Massages.MASSAGE("init "+commonValues.size());
-                  callback.onResult(commonValues,0,commonValues.size());
+                  callback.onResult(commonValues,mPosition,commonValues.size());
               }
           });
     }
@@ -47,7 +52,6 @@ public class AdapterDataSource extends PositionalDataSource<CommonValues> {
          query().subscribe(new Consumer<List<CommonValues>>() {
              @Override
              public void accept(List<CommonValues> commonValues) throws Exception {
-                 Massages.MASSAGE("Range size "+params.loadSize+" position "+params.startPosition);
                  callback.onResult(commonValues);
              }
          });

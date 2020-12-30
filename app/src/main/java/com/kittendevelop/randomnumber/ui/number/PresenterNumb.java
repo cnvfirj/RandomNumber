@@ -34,10 +34,15 @@ public class PresenterNumb{
     private final CallbackMainAppModule mAppCallback;
     private FragmentFeedback mFeedback;
 
+    private EntityItemsAdapter mAdapterStory;
+    private EntityItemsAdapter mAdapterEx;
+
     public PresenterNumb(SelectorInputBound inputBound,ModelNumb modelNumb,CallbackMainAppModule callback) {
         mSelectorInputBound = inputBound;
         mModelNumb = modelNumb;
         mAppCallback = callback;
+        mAdapterStory = DaggerComponentAdapter.create().adapter();
+        mAdapterEx = DaggerComponentAdapter.create().adapter();
         initSelector();
     }
 
@@ -89,8 +94,8 @@ public class PresenterNumb{
     * В бд истории результат добавлен*/
     public void resultRequestEntity(EntityGeneratedItem item) throws Exception{
         ReceiverWaiting.instance().stop();
-        mFeedback.showDialog(ReceiverResult.instance().result(item).dialog(),ReceiverResult.TAG
-        );
+        mFeedback.showDialog(ReceiverResult.instance().result(item).dialog(),ReceiverResult.TAG);
+        if(!item.getValue().equals("ERROR"))mAdapterStory.submitList(pagedList(mModelNumb.dataSource(0),config(60)));
     }
 
     public void addValueToEX(long value){
@@ -100,18 +105,18 @@ public class PresenterNumb{
     }
 
     public void resultRequestEx(EntityGeneratedEx item) throws Exception{
-        MASSAGE("add to ex "+item.getValue());
+        mAdapterEx.submitList(pagedList(mModelNumb.dataSource(1),config(8)));
     }
 
     public void fillLists(RecyclerView st, RecyclerView ex){
 
         ((GridLayoutManager)st.getLayoutManager()).setSpanCount(5);
-        EntityItemsAdapter aSt = DaggerComponentAdapter.create().adapter();
-        EntityItemsAdapter aEx = DaggerComponentAdapter.create().adapter();
-        aSt.submitList(pagedList(mModelNumb.dataSource(0),config(60)));
-        aEx.submitList(pagedList(mModelNumb.dataSource(1),config(8)));
-        st.setAdapter(aSt);
-        ex.setAdapter(aEx);
+//        EntityItemsAdapter aSt = DaggerComponentAdapter.create().adapter();
+//        EntityItemsAdapter aEx = DaggerComponentAdapter.create().adapter();
+        mAdapterStory.submitList(pagedList(mModelNumb.dataSource(0),config(60)));
+        mAdapterEx.submitList(pagedList(mModelNumb.dataSource(1),config(8)));
+        st.setAdapter(mAdapterStory);
+        ex.setAdapter(mAdapterEx);
     }
 
     private PagedList.Config config(int pagedSize){
