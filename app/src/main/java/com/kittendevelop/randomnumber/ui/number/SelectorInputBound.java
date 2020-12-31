@@ -23,9 +23,9 @@ public class SelectorInputBound {
     private int mColorNo;
     private boolean mReadiness;
 
-    private ObservableField<Integer> mColorBackground = new ObservableField<>();
+    private final ObservableField<Integer> mColorBackground = new ObservableField<>();
 
-    private TextWatcher mTextFrom = new TextWatcher() {
+    private final TextWatcher mTextFrom = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -49,7 +49,7 @@ public class SelectorInputBound {
         }
     };
 
-    private TextWatcher mTextTo = new TextWatcher() {
+    private final TextWatcher mTextTo = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 

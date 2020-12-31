@@ -1,6 +1,5 @@
 package com.kittendevelop.randomnumber.ui.number;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Handler;
@@ -15,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.kittendevelop.randomnumber.R;
 import com.kittendevelop.randomnumber.mainDI.CallbackMainAppModule;
 import com.kittendevelop.randomnumber.ui.number.adapters.EntityItemsAdapter;
+import com.kittendevelop.randomnumber.ui.number.db.CommonValues;
 import com.kittendevelop.randomnumber.ui.number.db.EntityGeneratedEx;
 import com.kittendevelop.randomnumber.ui.number.db.EntityGeneratedItem;
 import com.kittendevelop.randomnumber.ui.number.di.DaggerComponentAdapter;
@@ -23,8 +23,6 @@ import com.kittendevelop.randomnumber.ui.number.dialog.ReceiverWaiting;
 
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
-
-import static com.kittendevelop.randomnumber.help.Massages.MASSAGE;
 
 public class PresenterNumb{
 
@@ -95,7 +93,8 @@ public class PresenterNumb{
     public void resultRequestEntity(EntityGeneratedItem item) throws Exception{
         ReceiverWaiting.instance().stop();
         mFeedback.showDialog(ReceiverResult.instance().result(item).dialog(),ReceiverResult.TAG);
-        if(!item.getValue().equals("ERROR"))mAdapterStory.submitList(pagedList(mModelNumb.dataSource(0),config(60)));
+        if(!item.getValue().equals("ERROR"))
+            mAdapterStory.submitList(pagedList(mModelNumb.dataSource(0),config(80)));
     }
 
     public void addValueToEX(long value){
@@ -105,35 +104,32 @@ public class PresenterNumb{
     }
 
     public void resultRequestEx(EntityGeneratedEx item) throws Exception{
-        mAdapterEx.submitList(pagedList(mModelNumb.dataSource(1),config(8)));
+        mAdapterEx.submitList(pagedList(mModelNumb.dataSource(1),config(20)));
     }
 
     public void fillLists(RecyclerView st, RecyclerView ex){
 
         ((GridLayoutManager)st.getLayoutManager()).setSpanCount(5);
-//        EntityItemsAdapter aSt = DaggerComponentAdapter.create().adapter();
-//        EntityItemsAdapter aEx = DaggerComponentAdapter.create().adapter();
-        mAdapterStory.submitList(pagedList(mModelNumb.dataSource(0),config(60)));
-        mAdapterEx.submitList(pagedList(mModelNumb.dataSource(1),config(8)));
+        mAdapterStory.submitList(pagedList(mModelNumb.dataSource(0),config(680)));
+        mAdapterEx.submitList(pagedList(mModelNumb.dataSource(1),config(20)));
         st.setAdapter(mAdapterStory);
         ex.setAdapter(mAdapterEx);
     }
 
     private PagedList.Config config(int pagedSize){
         return new PagedList.Config.Builder()
-//                .setEnablePlaceholders(false)
                 .setPageSize(pagedSize)
                 .build();
     }
 
-    private PagedList pagedList(PositionalDataSource source, PagedList.Config config){
+    private PagedList<CommonValues> pagedList(PositionalDataSource<CommonValues> source, PagedList.Config config){
         return new PagedList.Builder<>(source,config)
                 .setFetchExecutor(Executors.newSingleThreadExecutor())
                 .setNotifyExecutor(new MainThreadExecutor())
                 .build();
     }
 
-    class MainThreadExecutor implements Executor {
+    static class MainThreadExecutor implements Executor {
         private final Handler mHandler = new Handler(Looper.getMainLooper());
 
         @Override
