@@ -3,6 +3,7 @@ package com.kittendevelop.randomnumber.ui.number;
 import android.annotation.SuppressLint;
 
 import com.kittendevelop.randomnumber.ui.number.adapters.AdapterDataSource;
+import com.kittendevelop.randomnumber.ui.number.db.BaseEntityItems;
 import com.kittendevelop.randomnumber.ui.number.db.EntityGeneratedEx;
 import com.kittendevelop.randomnumber.ui.number.db.EntityGeneratedItem;
 import com.kittendevelop.randomnumber.ui.number.work.ThreadRequestResult;
@@ -40,8 +41,19 @@ public class ModelNumb {
 
 
 
+
     public AdapterDataSource jumpList(int table, int pos){
        return mThreadWorkDB.getAdapterDataSource(table).position(pos);
+    }
+
+    @SuppressLint("CheckResult")
+    public void requestItemStory(long id, Consumer<BaseEntityItems>consumer){
+        mThreadWorkDB.data().workWithItems().idRx(id).subscribe(consumer);
+    }
+
+    @SuppressLint("CheckResult")
+    public void requestItemEx(long id, Consumer<BaseEntityItems>consumer){
+        mThreadWorkDB.data().workWithEx().idRx(id).subscribe(consumer);
     }
 
     @SuppressLint("CheckResult")

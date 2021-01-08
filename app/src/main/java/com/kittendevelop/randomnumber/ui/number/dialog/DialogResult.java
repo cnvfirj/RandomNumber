@@ -21,7 +21,7 @@ import com.kittendevelop.randomnumber.ui.number.di.DaggerComponentDialogs;
 
 import javax.inject.Inject;
 
-public class DialogResult extends DialogFragment implements DialogFeedback {
+public class DialogResult extends BaseDialog{
 
     @Inject
     ResultPresenter mPresenter;
@@ -29,13 +29,13 @@ public class DialogResult extends DialogFragment implements DialogFeedback {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(getContext().getResources().getColor(R.color.transparent,null)));
         DaggerComponentDialogs.builder().build().inject(this);
         mPresenter.setResult((EntityGeneratedItem) getArguments().getSerializable("RESULT_ITEM")).bindView(this);
-        return create(inflater);
+        return super.onCreateView(inflater,container,savedInstanceState);
     }
 
-    private View create(LayoutInflater inflater){
+    @Override
+    protected View create(LayoutInflater inflater){
         View v = inflater.inflate(R.layout.result,null);
         ResultBinding binding = ResultBinding.bind(v);
         binding.setPresenter(mPresenter);
@@ -43,23 +43,9 @@ public class DialogResult extends DialogFragment implements DialogFeedback {
     }
 
     @Override
-    public Context context() {
-        return getContext();
-    }
-
-    @Override
-    public DialogFragment fragment() {
-        return this;
-    }
-
-    @Override
-    public void exitDialog() {
-        dismiss();
-    }
-
-    @Override
     public void onDestroy() {
         super.onDestroy();
         mPresenter.destroy();
     }
+
 }

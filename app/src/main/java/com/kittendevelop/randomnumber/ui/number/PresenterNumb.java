@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.kittendevelop.randomnumber.R;
 import com.kittendevelop.randomnumber.mainDI.CallbackMainAppModule;
 import com.kittendevelop.randomnumber.ui.number.adapters.EntityItemsAdapter;
+import com.kittendevelop.randomnumber.ui.number.db.BaseEntityItems;
 import com.kittendevelop.randomnumber.ui.number.db.CommonValues;
 import com.kittendevelop.randomnumber.ui.number.db.EntityGeneratedEx;
 import com.kittendevelop.randomnumber.ui.number.db.EntityGeneratedItem;
@@ -23,6 +24,8 @@ import com.kittendevelop.randomnumber.ui.number.dialog.ReceiverWaiting;
 
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
+
+import static com.kittendevelop.randomnumber.help.Massages.MASSAGE;
 
 public class PresenterNumb{
 
@@ -90,12 +93,25 @@ public class PresenterNumb{
     /*после выполнения всей работы закрываем ожидание
     * и открываем диалог с результатом.
     * В бд истории результат добавлен*/
-    public void resultRequestEntity(EntityGeneratedItem item) throws Exception{
+    private void resultRequestEntity(EntityGeneratedItem item) throws Exception{
         ReceiverWaiting.instance().stop();
         mFeedback.showDialog(ReceiverResult.instance().result(item).dialog(),ReceiverResult.TAG);
         if(!item.getValue().equals("ERROR"))
             mAdapterStory.submitList(pagedList(mModelNumb.dataSource(0),config(80)));
     }
+
+    private void resultRequestStory(BaseEntityItems item) throws Exception{
+        ReceiverWaiting.instance().remove();
+        MASSAGE("dialog story "+item.mValue);
+
+    }
+
+    private void resultRequestEx(BaseEntityItems item) throws Exception{
+        ReceiverWaiting.instance().remove();
+        MASSAGE("dialog ex "+item.mValue);
+    }
+
+
 
     public void addValueToEX(long value){
         mModelNumb.requestGeneratedEx(
@@ -108,10 +124,17 @@ public class PresenterNumb{
     }
 
     public void fillLists(RecyclerView st, RecyclerView ex){
-
         ((GridLayoutManager)st.getLayoutManager()).setSpanCount(5);
         mAdapterStory.submitList(pagedList(mModelNumb.dataSource(0),config(680)));
         mAdapterEx.submitList(pagedList(mModelNumb.dataSource(1),config(20)));
+        mAdapterStory.setListen(item -> {
+            mFeedback.showDialog(ReceiverWaiting.instance().dialog(),"WAITING");
+            mModelNumb.requestItemStory(item.mId,PresenterNumb.this::resultRequestStory);
+        });
+        mAdapterEx.setListen(item -> {
+            mFeedback.showDialog(ReceiverWaiting.instance().dialog(),"WAITING");
+            mModelNumb.requestItemEx(item.mId,PresenterNumb.this::resultRequestEx);
+        });
         st.setAdapter(mAdapterStory);
         ex.setAdapter(mAdapterEx);
     }
@@ -136,6 +159,10 @@ public class PresenterNumb{
         public void execute(Runnable command) {
             mHandler.post(command);
         }
+    }
+
+    public interface ListenItems{
+        void item(CommonValues item);
     }
 
 }

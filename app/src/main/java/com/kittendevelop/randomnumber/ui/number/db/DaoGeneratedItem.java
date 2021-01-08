@@ -50,14 +50,13 @@ public interface DaoGeneratedItem{
     @Query("SELECT id,value,number FROM GENERATED_ITEM")
     List<CommonValues>commonValues();
 
-//    @Query("SELECT * FROM GENERATED_EX WHERE id = :id")
-//    Maybe<EntityGeneratedItem> idRx(long id);
-//
-//    @Query("SELECT * FROM GENERATED_EX WHERE value = :value")
-//    Maybe<EntityGeneratedItem> valueRx(String value);
-//
-//    @Query("SELECT * FROM GENERATED_ITEM")
-//    Flowable<List<EntityGeneratedItem>>allRx();
+    @Query("SELECT * FROM GENERATED_ITEM")
+    Flowable<List<EntityGeneratedItem>>allRx();
+
+    @Query("SELECT * FROM GENERATED_ITEM WHERE id = :id")
+    Flowable<EntityGeneratedItem>idRx(long id);
+
+
 
 
 

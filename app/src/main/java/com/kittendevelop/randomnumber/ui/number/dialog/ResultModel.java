@@ -5,6 +5,8 @@ import com.kittendevelop.randomnumber.ui.number.db.EntityGeneratedItem;
 
 import javax.inject.Inject;
 
+import static com.kittendevelop.randomnumber.help.Massages.MASSAGE;
+
 public class ResultModel {
 
     private EntityGeneratedItem mItem;

@@ -1,6 +1,7 @@
 package com.kittendevelop.randomnumber.ui.number.di;
 
 
+import com.kittendevelop.randomnumber.ui.number.dialog.DialogItem;
 import com.kittendevelop.randomnumber.ui.number.dialog.DialogResult;
 import com.kittendevelop.randomnumber.ui.number.dialog.DialogWaiting;
 
@@ -18,6 +19,11 @@ public class ModuleDialogs {
     @Provides
     DialogWaiting dialogWait(){
         return new DialogWaiting();
+    }
+
+    @Provides
+    DialogItem dialogItem(){
+        return new DialogItem();
     }
 
 }

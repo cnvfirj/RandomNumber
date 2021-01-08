@@ -40,6 +40,9 @@ public class ThreadWorkDB {
         this.mDataBaseItems = dataBaseItems;
     }
 
+    public DataBaseGeneratedItems data(){
+        return mDataBaseItems;
+    }
 
     public AdapterDataSource getAdapterDataSource(int table){
         if(table==0){

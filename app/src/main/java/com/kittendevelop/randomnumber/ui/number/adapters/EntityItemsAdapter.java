@@ -1,5 +1,6 @@
 package com.kittendevelop.randomnumber.ui.number.adapters;
 
+import android.app.LauncherActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.DiffUtil;
 import com.kittendevelop.randomnumber.R;
 import com.kittendevelop.randomnumber.databinding.ItemNumberListBinding;
 import com.kittendevelop.randomnumber.help.Massages;
+import com.kittendevelop.randomnumber.ui.number.PresenterNumb;
 import com.kittendevelop.randomnumber.ui.number.db.BaseEntityItems;
 import com.kittendevelop.randomnumber.ui.number.db.CommonValues;
 
@@ -20,7 +22,7 @@ import javax.inject.Inject;
 
 public class EntityItemsAdapter extends PagedListAdapter<CommonValues, EntityItemsAdapter.ItemHolder> {
 
-
+    private PresenterNumb.ListenItems mListenItems;
 
     @Inject
     public EntityItemsAdapter(@NonNull DiffUtil.ItemCallback<CommonValues> diffCallback) {
@@ -38,13 +40,21 @@ public class EntityItemsAdapter extends PagedListAdapter<CommonValues, EntityIte
          holder.bind(getItem(position));
     }
 
+    public void setListen(PresenterNumb.ListenItems listen){
+        mListenItems = listen;
+    }
+
 
     private ItemHolder holder(ViewGroup parent){
          return new ItemHolder(LayoutInflater.from(parent.getContext())
                  .inflate(R.layout.item_number_list, parent, false));
     }
 
-    protected static class ItemHolder extends NumberHolder{
+    private void clickItem(CommonValues item){
+        if(mListenItems!=null)mListenItems.item(item);
+    }
+
+    protected class ItemHolder extends NumberHolder{
 
         private ItemNumberListBinding mBinding;
 
@@ -65,7 +75,8 @@ public class EntityItemsAdapter extends PagedListAdapter<CommonValues, EntityIte
 
         @Override
         public void click() {
-            Massages.MASSAGE("click "+mBinding.getTitle().mValue);
+
+            clickItem(mBinding.getTitle());
         }
     }
 }

@@ -47,14 +47,11 @@ public interface DaoGeneratedEx {
     @Query("SELECT id, number, value FROM GENERATED_EX")
     List<CommonValues>commonValues();
 
-//   @Query("SELECT * FROM GENERATED_EX WHERE id = :id")
-//    Maybe<EntityGeneratedEx> idRx(long id);
-//
-//    @Query("SELECT * FROM GENERATED_EX WHERE value = :value")
-//    Maybe<EntityGeneratedEx> valueRx(String value);
-//
-//    @Query("SELECT * FROM GENERATED_ITEM")
-//    Flowable<List<EntityGeneratedEx>>allRx();
+    @Query("SELECT * FROM GENERATED_EX")
+    Flowable<List<EntityGeneratedEx>>allRx();
+
+    @Query("SELECT * FROM GENERATED_EX WHERE id = :id")
+    Flowable<EntityGeneratedEx>idRx(long id);
 
 
 

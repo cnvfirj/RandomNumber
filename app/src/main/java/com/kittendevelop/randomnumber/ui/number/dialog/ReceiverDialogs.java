@@ -14,6 +14,10 @@ public abstract class ReceiverDialogs {
         if(isShowing())mDialog.dismiss();
     }
 
+    public void remove(){
+        mDialog.dismiss();
+    }
+
     public boolean isShowing(){
         return mDialog.getDialog().isShowing();
     }
