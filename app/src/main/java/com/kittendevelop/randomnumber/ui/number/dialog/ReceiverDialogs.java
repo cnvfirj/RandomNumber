@@ -4,7 +4,7 @@ import androidx.fragment.app.DialogFragment;
 
 public abstract class ReceiverDialogs {
 
-    private DialogFragment mDialog;
+    private final DialogFragment mDialog;
 
     public ReceiverDialogs(DialogFragment mDialog) {
         this.mDialog = mDialog;

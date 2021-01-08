@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="presenter"
+            type="com.kittendevelop.randomnumber.ui.number.dialog.ItemPresenter" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/background_fields">
+
+        <TextView style="@style/hints_search_numb"
+            android:id="@+id/result_info"
+            android:gravity="center_horizontal"
+            android:text="@{presenter.report()}"
+            android:textSize="15sp"
+            app:autoSizeTextType="uniform"/>
+
+        <FrameLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/background_fields"
+            android:backgroundTint="@color/white"
+            android:id="@+id/result_container">
+
+
+
+            <TextView style="@style/text_fields"
+                android:id="@+id/result_numb"
+                android:text="@{presenter.value()}"
+                app:autoSizeMaxTextSize="50sp"
+                app:autoSizeMinTextSize="10sp"
+                app:autoSizeStepGranularity="2sp"
+                app:autoSizeTextType="uniform"/>
+
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageButton style="@style/start_end_results_numb"
+                android:id="@+id/item_exit"
+                android:backgroundTint="@color/willingness_no"
+                android:src="@drawable/ic_baseline_close_24"
+                android:clickable="true"
+                android:onClick="@{(v)->presenter.click(v)}"/>
+
+            <ImageButton style="@style/start_end_results_numb"
+                android:layout_width="match_parent"
+                android:id="@+id/item_del"
+                android:onClick="@{(v)->presenter.click(v)}"/>
+
+             <ImageButton style="@style/start_end_results_numb"
+                android:layout_width="match_parent"
+                android:id="@+id/item_clear"
+                android:onClick="@{(v)->presenter.click(v)}"/>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>

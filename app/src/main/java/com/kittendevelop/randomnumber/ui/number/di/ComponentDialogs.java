@@ -1,5 +1,6 @@
 package com.kittendevelop.randomnumber.ui.number.di;
 
+import com.kittendevelop.randomnumber.ui.number.dialog.DialogItem;
 import com.kittendevelop.randomnumber.ui.number.dialog.DialogResult;
 import com.kittendevelop.randomnumber.ui.number.dialog.ReceiverItem;
 import com.kittendevelop.randomnumber.ui.number.dialog.ReceiverResult;
@@ -17,4 +18,5 @@ public interface ComponentDialogs {
     ReceiverItem item();
     
     void inject(DialogResult dialog);
+    void inject(DialogItem dialog);
 }

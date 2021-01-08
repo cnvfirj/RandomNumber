@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.kittendevelop.randomnumber.R;
 import com.kittendevelop.randomnumber.databinding.FragmentNumbBinding;
 import com.kittendevelop.randomnumber.mainDI.MainApplication;
+import com.kittendevelop.randomnumber.ui.number.db.EntityGeneratedEx;
 import com.kittendevelop.randomnumber.ui.number.dialog.ReceiverResult;
 
 import javax.inject.Inject;
@@ -61,9 +62,13 @@ public class FragmentNumb extends Fragment implements FragmentFeedback, ParentFr
         return getContext();
     }
 
+
+    /*этим методом добавляем число в исключение*/
+    /*по тэгу определяем откуда пришел результат*/
+    /*ручной ввод или поиск*/
     @Override
     public void addToEx(long value, String tag) {
-        if(tag.equals(ReceiverResult.TAG))mPresenter.addValueToEX(value);
+        if(tag.equals(ReceiverResult.TAG))mPresenter.addValueToEX(value, EntityGeneratedEx.SOURCE_AUTO);
     }
 
     @Override
@@ -84,10 +89,6 @@ public class FragmentNumb extends Fragment implements FragmentFeedback, ParentFr
     }
 
     private void initLists(View v){
-//        mListExceptions = v.findViewById(R.id.search_excluded_numb);
-//        mListExceptions.setAdapter(new ExAdapter().setColors(new int[]{getContext().getResources().getColor(R.color.willingness_no,null)}));
-//        mListStory = v.findViewById(R.id.story_results_numb);
-//        mListStory.setAdapter(new ExAdapter().setColors(new int[]{getContext().getResources().getColor(R.color.willingness_no,null)}));
         mPresenter.fillLists(v.findViewById(R.id.story_results_numb),v.findViewById(R.id.search_excluded_numb));
     }
 }

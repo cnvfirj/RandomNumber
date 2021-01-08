@@ -30,7 +30,9 @@ public class DialogResult extends BaseDialog{
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         DaggerComponentDialogs.builder().build().inject(this);
-        mPresenter.setResult((EntityGeneratedItem) getArguments().getSerializable("RESULT_ITEM")).bindView(this);
+        mPresenter
+                .setResult((EntityGeneratedItem) getArguments().getSerializable("RESULT_ITEM"))
+                .bindView(this);
         return super.onCreateView(inflater,container,savedInstanceState);
     }
 

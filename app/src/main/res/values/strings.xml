@@ -9,12 +9,20 @@
     <string name="hint_story">Прошлые результаты</string>
     <string name="max_length">Достигнуто максимальное значение вводимого числа</string>
 
-    <string name="result_report">Результат сгенерирован %date% в %time%, в заданных пределах от %from% до %to%, %resource%</string>
-    <string name="massage_report">Результат сгенерирован %% в %%, в заданных пределах от %% до %%, %%</string>
+<!--    <string name="result_report">Результат сгенерирован %date% в %time%, в заданных пределах от %from% до %to%, %resource%</string>-->
+    <string name="massage_report">Результат сгенерирован %% в %%, в заданных пределах от %% до %% %%</string>
     <string name="result_report_error">Результат сгенерировать невозможно. Отредактируй исключения.</string>
     <string name="add_to_ex">Добавь в исключаемые значения</string>
-    <string name="source_app">с помощью ресурсов приложения</string>
-    <string name="source_net">с помощью сервиса, предоставленного Австралийским университетом</string>
+    <string name="source_app"> с помощью ресурсов приложения</string>
+    <string name="source_net"> с помощью сервиса, предоставленного Австралийским университетом</string>
+
+    <string name="redact_report_ex">Исключение сгенерировано %% в %%, </string>
+    <string name="redact_report_manual_enter"> с помощью ручного ввода</string>
+    <string name="redact_report_result_enter"> из полученного результата</string>
+
+
+
+
 
 
 

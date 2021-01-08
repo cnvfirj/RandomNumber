@@ -19,6 +19,7 @@ import com.kittendevelop.randomnumber.ui.number.db.CommonValues;
 import com.kittendevelop.randomnumber.ui.number.db.EntityGeneratedEx;
 import com.kittendevelop.randomnumber.ui.number.db.EntityGeneratedItem;
 import com.kittendevelop.randomnumber.ui.number.di.DaggerComponentAdapter;
+import com.kittendevelop.randomnumber.ui.number.dialog.ReceiverItem;
 import com.kittendevelop.randomnumber.ui.number.dialog.ReceiverResult;
 import com.kittendevelop.randomnumber.ui.number.dialog.ReceiverWaiting;
 
@@ -94,7 +95,7 @@ public class PresenterNumb{
     * и открываем диалог с результатом.
     * В бд истории результат добавлен*/
     private void resultRequestEntity(EntityGeneratedItem item) throws Exception{
-        ReceiverWaiting.instance().stop();
+        ReceiverWaiting.instance().remove();
         mFeedback.showDialog(ReceiverResult.instance().result(item).dialog(),ReceiverResult.TAG);
         if(!item.getValue().equals("ERROR"))
             mAdapterStory.submitList(pagedList(mModelNumb.dataSource(0),config(80)));
@@ -103,19 +104,22 @@ public class PresenterNumb{
     private void resultRequestStory(BaseEntityItems item) throws Exception{
         ReceiverWaiting.instance().remove();
         MASSAGE("dialog story "+item.mValue);
+        mFeedback.showDialog(ReceiverItem.instance().item(item).dialog(),ReceiverItem.TAG_STORY);
 
     }
 
     private void resultRequestEx(BaseEntityItems item) throws Exception{
         ReceiverWaiting.instance().remove();
         MASSAGE("dialog ex "+item.mValue);
+        mFeedback.showDialog(ReceiverItem.instance().item(item).dialog(),ReceiverItem.TAG_EX);
     }
 
 
 
-    public void addValueToEX(long value){
+    /*добавляем исключение в бд*/
+    public void addValueToEX(long value,int source){
         mModelNumb.requestGeneratedEx(
-                this::resultRequestEx,value,EntityGeneratedEx.SOURCE_AUTO
+                this::resultRequestEx,value,source
         );
     }
 

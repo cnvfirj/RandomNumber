@@ -10,7 +10,10 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
 import com.kittendevelop.randomnumber.R;
+import com.kittendevelop.randomnumber.databinding.RedactBinding;
 import com.kittendevelop.randomnumber.databinding.ResultBinding;
+import com.kittendevelop.randomnumber.ui.number.db.BaseEntityItems;
+import com.kittendevelop.randomnumber.ui.number.di.DaggerComponentDialogs;
 
 import javax.inject.Inject;
 
@@ -23,18 +26,24 @@ public class DialogItem extends BaseDialog {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        DaggerComponentDialogs.builder().build().inject(this);
+        mPresenter
+                .setItem((BaseEntityItems)getArguments().getSerializable("ITEM_ITEM"),getTag())
+                .bindView(this);
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    protected View create(LayoutInflater inflater) {
+        View v = inflater.inflate(R.layout.redact,null);
+        RedactBinding binding = RedactBinding.bind(v);
+        binding.setPresenter(mPresenter);
+        return v;
     }
 
-
     @Override
-    protected View create(LayoutInflater inflater) {
-        View v = inflater.inflate(R.layout.result,null);
-        return v;
+    public void onDestroy() {
+        super.onDestroy();
+        mPresenter.destroy();
     }
 }
