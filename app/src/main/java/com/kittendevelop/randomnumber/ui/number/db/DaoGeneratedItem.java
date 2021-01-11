@@ -10,6 +10,7 @@ import java.util.List;
 
 import io.reactivex.Flowable;
 import io.reactivex.Maybe;
+import io.reactivex.Single;
 
 @Dao
 public interface DaoGeneratedItem{
@@ -51,10 +52,10 @@ public interface DaoGeneratedItem{
     List<CommonValues>commonValues();
 
     @Query("SELECT * FROM GENERATED_ITEM")
-    Flowable<List<EntityGeneratedItem>>allRx();
+    Single<List<EntityGeneratedItem>> allRx();
 
     @Query("SELECT * FROM GENERATED_ITEM WHERE id = :id")
-    Flowable<EntityGeneratedItem>idRx(long id);
+    Single<EntityGeneratedItem>idRx(long id);
 
 
 

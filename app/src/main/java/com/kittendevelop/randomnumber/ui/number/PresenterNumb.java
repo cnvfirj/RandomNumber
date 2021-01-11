@@ -26,6 +26,11 @@ import com.kittendevelop.randomnumber.ui.number.dialog.ReceiverWaiting;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
+import io.reactivex.annotations.NonNull;
+import io.reactivex.observers.DisposableMaybeObserver;
+import io.reactivex.observers.DisposableObserver;
+import io.reactivex.observers.DisposableSingleObserver;
+
 import static com.kittendevelop.randomnumber.help.Massages.MASSAGE;
 
 public class PresenterNumb{
@@ -95,22 +100,21 @@ public class PresenterNumb{
     * и открываем диалог с результатом.
     * В бд истории результат добавлен*/
     private void resultRequestEntity(EntityGeneratedItem item) throws Exception{
-        ReceiverWaiting.instance().remove();
+        ReceiverWaiting.instance().stop();
+//        ReceiverItem.instance().stop();
         mFeedback.showDialog(ReceiverResult.instance().result(item).dialog(),ReceiverResult.TAG);
         if(!item.getValue().equals("ERROR"))
             mAdapterStory.submitList(pagedList(mModelNumb.dataSource(0),config(80)));
     }
 
     private void resultRequestStory(BaseEntityItems item) throws Exception{
-        ReceiverWaiting.instance().remove();
+        ReceiverWaiting.instance().stop();
         MASSAGE("dialog story "+item.mValue);
         mFeedback.showDialog(ReceiverItem.instance().item(item).dialog(),ReceiverItem.TAG_STORY);
-
     }
 
     private void resultRequestEx(BaseEntityItems item) throws Exception{
-        ReceiverWaiting.instance().remove();
-        MASSAGE("dialog ex "+item.mValue);
+        ReceiverWaiting.instance().stop();
         mFeedback.showDialog(ReceiverItem.instance().item(item).dialog(),ReceiverItem.TAG_EX);
     }
 
@@ -133,11 +137,39 @@ public class PresenterNumb{
         mAdapterEx.submitList(pagedList(mModelNumb.dataSource(1),config(20)));
         mAdapterStory.setListen(item -> {
             mFeedback.showDialog(ReceiverWaiting.instance().dialog(),"WAITING");
-            mModelNumb.requestItemStory(item.mId,PresenterNumb.this::resultRequestStory);
+//            mModelNumb.requestItemStory(item.mId,PresenterNumb.this::resultRequestStory);
+           mModelNumb.requestItemStory(item.mId, new DisposableSingleObserver<BaseEntityItems>() {
+               @Override
+               public void onSuccess(@NonNull BaseEntityItems item) {
+                   ReceiverWaiting.instance().stop();
+                   MASSAGE("dialog story "+item.mValue);
+                   mFeedback.showDialog(ReceiverItem.instance().item(item).dialog(),ReceiverItem.TAG_STORY);
+               }
+
+               @Override
+               public void onError(@NonNull Throwable e) {
+
+               }
+           });
+
         });
         mAdapterEx.setListen(item -> {
             mFeedback.showDialog(ReceiverWaiting.instance().dialog(),"WAITING");
-            mModelNumb.requestItemEx(item.mId,PresenterNumb.this::resultRequestEx);
+//            mModelNumb.requestItemEx(item.mId,PresenterNumb.this::resultRequestEx);
+            mModelNumb.requestItemEx(item.mId, new DisposableSingleObserver<BaseEntityItems>() {
+                @Override
+                public void onSuccess(@NonNull BaseEntityItems item) {
+                    ReceiverWaiting.instance().stop();
+                    MASSAGE("dialog story "+item.mValue);
+                    mFeedback.showDialog(ReceiverItem.instance().item(item).dialog(),ReceiverItem.TAG_EX);
+                }
+
+                @Override
+                public void onError(@NonNull Throwable e) {
+
+                }
+            });
+
         });
         st.setAdapter(mAdapterStory);
         ex.setAdapter(mAdapterEx);
@@ -155,6 +187,8 @@ public class PresenterNumb{
                 .setNotifyExecutor(new MainThreadExecutor())
                 .build();
     }
+
+
 
     static class MainThreadExecutor implements Executor {
         private final Handler mHandler = new Handler(Looper.getMainLooper());

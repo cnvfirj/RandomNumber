@@ -17,7 +17,6 @@ public class ReceiverWaiting extends ReceiverDialogs{
         if(single==null){
             synchronized (ReceiverWaiting.class){
                 single = DaggerComponentDialogs.create().waiting();
-//                single = new ReceiverWaiting(new DialogWaiting());
             }
         }
         return single;

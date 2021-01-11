@@ -17,6 +17,8 @@ import com.kittendevelop.randomnumber.ui.number.di.DaggerComponentDialogs;
 
 import javax.inject.Inject;
 
+import static com.kittendevelop.randomnumber.help.Massages.MASSAGE;
+
 public class DialogItem extends BaseDialog {
 
 
@@ -45,5 +47,17 @@ public class DialogItem extends BaseDialog {
     public void onDestroy() {
         super.onDestroy();
         mPresenter.destroy();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        MASSAGE("resume item "+getTag());
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        MASSAGE("pause item "+getTag());
     }
 }

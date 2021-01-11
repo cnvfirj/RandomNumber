@@ -1,6 +1,7 @@
 package com.kittendevelop.randomnumber.ui.number.dialog;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,6 +14,8 @@ import androidx.fragment.app.DialogFragment;
 
 import com.kittendevelop.randomnumber.R;
 
+import static com.kittendevelop.randomnumber.help.Massages.MASSAGE;
+
 public abstract class BaseDialog extends DialogFragment implements DialogFeedback{
 
 
@@ -23,6 +26,11 @@ public abstract class BaseDialog extends DialogFragment implements DialogFeedbac
         return create(inflater);
     }
 
+    @Override
+    public void onDismiss(@NonNull DialogInterface dialog) {
+        super.onDismiss(dialog);
+        MASSAGE("dissmis dialog "+getTag());
+    }
 
     @Override
     public void exitDialog() {

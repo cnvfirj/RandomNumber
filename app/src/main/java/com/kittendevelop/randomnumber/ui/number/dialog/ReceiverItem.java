@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.DialogFragment;
 
+import com.kittendevelop.randomnumber.help.Massages;
 import com.kittendevelop.randomnumber.ui.number.db.BaseEntityItems;
 import com.kittendevelop.randomnumber.ui.number.db.EntityGeneratedItem;
 import com.kittendevelop.randomnumber.ui.number.di.DaggerComponentDialogs;
@@ -43,5 +44,11 @@ public class ReceiverItem extends ReceiverDialogs{
     private Bundle bundle(){
         if(mBundle==null)mBundle=new Bundle();
         return mBundle;
+    }
+
+    @Override
+    public DialogFragment dialog() {
+        Massages.MASSAGE("get dialog item "+mDialog.getTag());
+        return super.dialog();
     }
 }

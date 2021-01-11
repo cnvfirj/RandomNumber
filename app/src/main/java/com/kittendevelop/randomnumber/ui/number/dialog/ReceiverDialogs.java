@@ -4,14 +4,14 @@ import androidx.fragment.app.DialogFragment;
 
 public abstract class ReceiverDialogs {
 
-    private final DialogFragment mDialog;
+    protected final DialogFragment mDialog;
 
     public ReceiverDialogs(DialogFragment mDialog) {
         this.mDialog = mDialog;
     }
 
     public void stop(){
-        if(isShowing())mDialog.dismiss();
+        if(mDialog!=null&&isShowing())mDialog.dismiss();
     }
 
     public void remove(){
@@ -19,10 +19,12 @@ public abstract class ReceiverDialogs {
     }
 
     public boolean isShowing(){
-        return mDialog.getDialog().isShowing();
+        return mDialog.isResumed()||mDialog.isVisible()||mDialog.isAdded()||mDialog.getDialog().isShowing();
     }
 
     public DialogFragment dialog(){
         return mDialog;
     }
+
+
 }

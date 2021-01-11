@@ -11,10 +11,16 @@ import com.kittendevelop.randomnumber.ui.number.work.ThreadWorkDB;
 
 import java.util.Set;
 
+import io.reactivex.MaybeObserver;
 import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
+import io.reactivex.observers.DisposableMaybeObserver;
+import io.reactivex.observers.DisposableObserver;
+import io.reactivex.observers.DisposableSingleObserver;
+import io.reactivex.schedulers.Schedulers;
 
 public class ModelNumb {
 
@@ -46,15 +52,35 @@ public class ModelNumb {
        return mThreadWorkDB.getAdapterDataSource(table).position(pos);
     }
 
-    @SuppressLint("CheckResult")
-    public void requestItemStory(long id, Consumer<BaseEntityItems>consumer){
-        mThreadWorkDB.data().workWithItems().idRx(id).subscribe(consumer);
-    }
+//    @SuppressLint("CheckResult")
+//    public void requestItemStory(long id, Consumer<BaseEntityItems>consumer){
+//        mThreadWorkDB.data().workWithItems().idRx(id).subscribe(consumer);
+//    }
 
     @SuppressLint("CheckResult")
-    public void requestItemEx(long id, Consumer<BaseEntityItems>consumer){
-        mThreadWorkDB.data().workWithEx().idRx(id).subscribe(consumer);
+    public void requestItemStory(long id, DisposableSingleObserver<BaseEntityItems>  consumer){
+        mThreadWorkDB.data().workWithItems().idRx(id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(consumer);
     }
+
+
+
+//    @SuppressLint("CheckResult")
+//    public void requestItemEx(long id, Consumer<BaseEntityItems>consumer){
+//        mThreadWorkDB.data().workWithEx().idRx(id).subscribe(consumer);
+//    }
+
+    @SuppressLint("CheckResult")
+    public void requestItemEx(long id, DisposableSingleObserver<BaseEntityItems> consumer){
+        mThreadWorkDB.data().workWithEx().idRx(id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(consumer);
+    }
+
+
 
     @SuppressLint("CheckResult")
     public void requestGeneratedNumber(Consumer<EntityGeneratedItem>consumer, long from, long to){
