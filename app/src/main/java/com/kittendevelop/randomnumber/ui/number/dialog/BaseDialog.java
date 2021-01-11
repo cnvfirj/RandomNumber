@@ -29,7 +29,6 @@ public abstract class BaseDialog extends DialogFragment implements DialogFeedbac
     @Override
     public void onDismiss(@NonNull DialogInterface dialog) {
         super.onDismiss(dialog);
-        MASSAGE("dissmis dialog "+getTag());
     }
 
     @Override

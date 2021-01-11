@@ -142,7 +142,6 @@ public class PresenterNumb{
                @Override
                public void onSuccess(@NonNull BaseEntityItems item) {
                    ReceiverWaiting.instance().stop();
-                   MASSAGE("dialog story "+item.mValue);
                    mFeedback.showDialog(ReceiverItem.instance().item(item).dialog(),ReceiverItem.TAG_STORY);
                }
 
@@ -160,7 +159,6 @@ public class PresenterNumb{
                 @Override
                 public void onSuccess(@NonNull BaseEntityItems item) {
                     ReceiverWaiting.instance().stop();
-                    MASSAGE("dialog story "+item.mValue);
                     mFeedback.showDialog(ReceiverItem.instance().item(item).dialog(),ReceiverItem.TAG_EX);
                 }
 

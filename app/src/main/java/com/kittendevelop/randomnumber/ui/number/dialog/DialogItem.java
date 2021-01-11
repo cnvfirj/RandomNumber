@@ -49,15 +49,4 @@ public class DialogItem extends BaseDialog {
         mPresenter.destroy();
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        MASSAGE("resume item "+getTag());
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        MASSAGE("pause item "+getTag());
-    }
 }

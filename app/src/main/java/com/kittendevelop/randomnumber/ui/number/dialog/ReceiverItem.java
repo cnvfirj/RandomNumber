@@ -46,9 +46,4 @@ public class ReceiverItem extends ReceiverDialogs{
         return mBundle;
     }
 
-    @Override
-    public DialogFragment dialog() {
-        Massages.MASSAGE("get dialog item "+mDialog.getTag());
-        return super.dialog();
-    }
 }
