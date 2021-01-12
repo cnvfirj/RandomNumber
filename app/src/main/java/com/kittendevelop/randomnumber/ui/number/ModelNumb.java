@@ -3,6 +3,7 @@ package com.kittendevelop.randomnumber.ui.number;
 import android.annotation.SuppressLint;
 
 import com.kittendevelop.randomnumber.ui.number.adapters.AdapterDataSource;
+import com.kittendevelop.randomnumber.ui.number.db.BaseEntity;
 import com.kittendevelop.randomnumber.ui.number.db.BaseEntityItems;
 import com.kittendevelop.randomnumber.ui.number.db.EntityGeneratedEx;
 import com.kittendevelop.randomnumber.ui.number.db.EntityGeneratedItem;
@@ -96,6 +97,18 @@ public class ModelNumb {
     public void requestGeneratedEx(Consumer<EntityGeneratedEx>consumer, long value, int source){
         mThreadWorkDB.insertWorkItemEx(value,source).subscribe(consumer);
     }
+
+    @SuppressLint("CheckResult")
+    public void deleteItemStory(BaseEntityItems item, Consumer<Boolean> consumer){
+         mThreadWorkDB.delItemStory((EntityGeneratedItem)item).subscribe(consumer);
+    }
+
+    @SuppressLint("CheckResult")
+    public void deleteItemEx(BaseEntityItems item, Consumer<Boolean> consumer){
+        mThreadWorkDB.delItemEx((EntityGeneratedEx)item).subscribe(consumer);
+    }
+
+
 
     private Function<Set<Long>,Observable<EntityGeneratedItem>>requestNumber(){
         return new Function<Set<Long>, Observable<EntityGeneratedItem>>() {

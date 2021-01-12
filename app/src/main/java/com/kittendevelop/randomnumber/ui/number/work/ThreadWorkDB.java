@@ -24,6 +24,9 @@ import java.util.TreeSet;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.Single;
+import io.reactivex.SingleEmitter;
+import io.reactivex.SingleOnSubscribe;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.schedulers.Schedulers;
@@ -104,5 +107,29 @@ public class ThreadWorkDB {
         }).observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io());
     }
+
+    public Single<Boolean>delItemStory(EntityGeneratedItem item){
+        return Single.create(new SingleOnSubscribe<Boolean>() {
+            @Override
+            public void subscribe(@NonNull SingleEmitter<Boolean> emitter) throws Exception {
+                mDataBaseItems.workWithItems().delete(item);
+                EntityGeneratedItem i = mDataBaseItems.workWithItems().id(item.getId());
+                emitter.onSuccess(i==null);
+            }
+        }).observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io());
+    }
+    public Single<Boolean>delItemEx(EntityGeneratedEx item){
+        return Single.create(new SingleOnSubscribe<Boolean>() {
+            @Override
+            public void subscribe(@NonNull SingleEmitter<Boolean> emitter) throws Exception {
+                mDataBaseItems.workWithEx().delete(item);
+                EntityGeneratedEx i = mDataBaseItems.workWithEx().id(item.getId());
+                emitter.onSuccess(i==null);
+            }
+        }).observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io());
+    }
+
 
 }

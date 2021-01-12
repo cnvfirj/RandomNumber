@@ -57,20 +57,21 @@ public class ResultModel {
     }
 
     private void createDate(){
-        mDate.append(mItem.getDay());
+        mDate.append(mItem.getDay()<10?"0"+mItem.getDay():mItem.getDay());
         mDate.append(":");
-        mDate.append(mItem.getMonth());
+        mDate.append(mItem.getMonth()<10?"0"+mItem.getMonth():mItem.getMonth());
         mDate.append(":");
         mDate.append(mItem.getYear());
         createTime();
     }
 
     private void createTime(){
-        mTime.append(mItem.getHour());
+
+        mTime.append(mItem.getHour()<10?"0"+mItem.getHour():mItem.getHour());
         mTime.append(":");
-        mTime.append(mItem.getMinute());
+        mTime.append(mItem.getMinute()<10?"0"+mItem.getMinute():mItem.getMinute());
         mTime.append(":");
-        mTime.append(mItem.getSecond());
+        mTime.append(mItem.getSecond()<10?"0"+mItem.getSecond():mItem.getSecond());
     }
 
 }

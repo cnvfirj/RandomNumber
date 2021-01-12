@@ -57,18 +57,18 @@ public class ItemModel {
 
 
     public void date(StringBuilder builder){
-       builder.append(mItem.mDay);
+       builder.append(mItem.getDay()<10?"0"+mItem.getDay():mItem.getDay());
        builder.append(":");
-       builder.append(mItem.mMonth);
+       builder.append(mItem.getMonth()<10?"0"+mItem.getMonth():mItem.getMonth());
        builder.append(":");
        builder.append(mItem.mYear);
     }
 
     public void time(StringBuilder builder){
-        builder.append(mItem.mHour);
+        builder.append(mItem.getHour()<10?"0"+mItem.getHour():mItem.getHour());
         builder.append(":");
-        builder.append(mItem.mMinute);
+        builder.append(mItem.getMinute()<10?"0"+mItem.getMinute():mItem.getMinute());
         builder.append(":");
-        builder.append(mItem.mSecond);
+        builder.append(mItem.getSecond()<10?"0"+mItem.getSecond():mItem.getSecond());
     }
 }

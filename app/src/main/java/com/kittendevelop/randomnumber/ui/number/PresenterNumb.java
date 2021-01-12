@@ -27,6 +27,7 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Consumer;
 import io.reactivex.observers.DisposableMaybeObserver;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.observers.DisposableSingleObserver;
@@ -127,6 +128,25 @@ public class PresenterNumb{
         );
     }
 
+    public void deleteItem(BaseEntityItems item, String tag){
+        if(tag.equals(ReceiverItem.TAG_STORY)){
+            mFeedback.showDialog(ReceiverWaiting.instance().dialog(),"WAITING");
+           mModelNumb.deleteItemStory(item, this::acceptDelItemStory);
+        } else if (tag.equals(ReceiverItem.TAG_EX)) {
+            mFeedback.showDialog(ReceiverWaiting.instance().dialog(),"WAITING");
+            mModelNumb.deleteItemEx(item, this::acceptDelItemEx);
+        }
+    }
+
+    public void clearTable(String tag){
+        if(tag.equals(ReceiverItem.TAG_STORY)){
+
+        } else if (tag.equals(ReceiverItem.TAG_EX)) {
+
+
+        }
+    }
+
     public void resultRequestEx(EntityGeneratedEx item) throws Exception{
         mAdapterEx.submitList(pagedList(mModelNumb.dataSource(1),config(20)));
     }
@@ -137,7 +157,6 @@ public class PresenterNumb{
         mAdapterEx.submitList(pagedList(mModelNumb.dataSource(1),config(20)));
         mAdapterStory.setListen(item -> {
             mFeedback.showDialog(ReceiverWaiting.instance().dialog(),"WAITING");
-//            mModelNumb.requestItemStory(item.mId,PresenterNumb.this::resultRequestStory);
            mModelNumb.requestItemStory(item.mId, new DisposableSingleObserver<BaseEntityItems>() {
                @Override
                public void onSuccess(@NonNull BaseEntityItems item) {
@@ -154,7 +173,6 @@ public class PresenterNumb{
         });
         mAdapterEx.setListen(item -> {
             mFeedback.showDialog(ReceiverWaiting.instance().dialog(),"WAITING");
-//            mModelNumb.requestItemEx(item.mId,PresenterNumb.this::resultRequestEx);
             mModelNumb.requestItemEx(item.mId, new DisposableSingleObserver<BaseEntityItems>() {
                 @Override
                 public void onSuccess(@NonNull BaseEntityItems item) {
@@ -185,6 +203,18 @@ public class PresenterNumb{
                 .setNotifyExecutor(new MainThreadExecutor())
                 .build();
     }
+
+    private void acceptDelItemStory(boolean isDel) throws Exception {
+        if(isDel)mAdapterStory.submitList(pagedList(mModelNumb.dataSource(0),config(80)));
+        ReceiverWaiting.instance().stop();
+    }
+
+
+    private void acceptDelItemEx(boolean isDel) throws Exception {
+        if(isDel)mAdapterEx.submitList(pagedList(mModelNumb.dataSource(1),config(20)));
+        ReceiverWaiting.instance().stop();
+    }
+
 
 
 

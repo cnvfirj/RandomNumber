@@ -25,7 +25,7 @@ public interface DaoGeneratedItem{
     int count();
 
     @Query("SELECT * FROM GENERATED_ITEM")
-    List<EntityGeneratedEx>all();
+    List<EntityGeneratedItem>all();
 
     @Query("SELECT * FROM GENERATED_ITEM WHERE source = :source")
     List<EntityGeneratedItem>source(int source);

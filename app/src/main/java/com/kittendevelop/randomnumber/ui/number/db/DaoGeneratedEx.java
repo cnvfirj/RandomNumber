@@ -54,7 +54,4 @@ public interface DaoGeneratedEx {
     @Query("SELECT * FROM GENERATED_EX WHERE id = :id")
     Single<EntityGeneratedEx>idRx(long id);
 
-
-
-
 }

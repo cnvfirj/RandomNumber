@@ -50,19 +50,27 @@
 
             <ImageButton style="@style/start_end_results_numb"
                 android:id="@+id/item_exit"
-                android:backgroundTint="@color/willingness_no"
+                android:backgroundTint="@color/willingness_yes"
                 android:src="@drawable/ic_baseline_close_24"
                 android:clickable="true"
                 android:onClick="@{(v)->presenter.click(v)}"/>
 
             <ImageButton style="@style/start_end_results_numb"
                 android:layout_width="match_parent"
+                android:layout_weight="1"
                 android:id="@+id/item_del"
+                android:backgroundTint="@color/willingness_no"
+                android:src="@drawable/ic_outline_delete_outline_24"
+                android:clickable="true"
                 android:onClick="@{(v)->presenter.click(v)}"/>
 
              <ImageButton style="@style/start_end_results_numb"
                 android:layout_width="match_parent"
+                 android:layout_weight="1"
                 android:id="@+id/item_clear"
+                 android:backgroundTint="@color/willingness_no"
+                 android:src="@drawable/ic_outline_backspace_24"
+                 android:clickable="true"
                 android:onClick="@{(v)->presenter.click(v)}"/>
 
 

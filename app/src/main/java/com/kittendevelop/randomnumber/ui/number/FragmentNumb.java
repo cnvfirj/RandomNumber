@@ -16,10 +16,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.kittendevelop.randomnumber.R;
 import com.kittendevelop.randomnumber.databinding.FragmentNumbBinding;
 import com.kittendevelop.randomnumber.mainDI.MainApplication;
+import com.kittendevelop.randomnumber.ui.number.db.BaseEntityItems;
 import com.kittendevelop.randomnumber.ui.number.db.EntityGeneratedEx;
 import com.kittendevelop.randomnumber.ui.number.dialog.ReceiverResult;
 
 import javax.inject.Inject;
+
+import static com.kittendevelop.randomnumber.help.Massages.MASSAGE;
 
 public class FragmentNumb extends Fragment implements FragmentFeedback, ParentFragmentCallback{
 
@@ -69,6 +72,16 @@ public class FragmentNumb extends Fragment implements FragmentFeedback, ParentFr
     @Override
     public void addToEx(long value, String tag) {
         if(tag.equals(ReceiverResult.TAG))mPresenter.addValueToEX(value, EntityGeneratedEx.SOURCE_AUTO);
+    }
+
+    @Override
+    public void delete(BaseEntityItems item, String tag) {
+        mPresenter.deleteItem(item, tag);
+    }
+
+    @Override
+    public void clear(String tag) {
+          mPresenter.clearTable(tag);
     }
 
     @Override

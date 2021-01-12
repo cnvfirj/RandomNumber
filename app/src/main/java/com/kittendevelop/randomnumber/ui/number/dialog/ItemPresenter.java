@@ -1,8 +1,10 @@
 package com.kittendevelop.randomnumber.ui.number.dialog;
 
+import android.annotation.SuppressLint;
 import android.view.View;
 
 import com.kittendevelop.randomnumber.R;
+import com.kittendevelop.randomnumber.ui.number.ParentFragmentCallback;
 import com.kittendevelop.randomnumber.ui.number.db.BaseEntityItems;
 
 import javax.inject.Inject;
@@ -12,6 +14,8 @@ public class ItemPresenter {
     private ItemModel mModel;
 
     private DialogFeedback mView;
+
+    private ParentFragmentCallback mParentCallback;
 
     @Inject
     public ItemPresenter(ItemModel mModel) {
@@ -41,14 +45,22 @@ public class ItemPresenter {
         }
     }
 
+    @SuppressLint("NonConstantResourceId")
     public void click(View v){
         switch (v.getId()){
             case R.id.item_exit:
                  mView.exitDialog();
                  break;
-            default:
-                 mView.exitDialog();
-                 break;
+            case R.id.item_del:
+                mParentCallback = ((ParentFragmentCallback)mView.fragment().getParentFragment());
+                if(mParentCallback!=null)mParentCallback.delete(mModel.getItem(),mModel.getTag());
+                mView.exitDialog();
+                break;
+            case R.id.item_clear:
+                mParentCallback = ((ParentFragmentCallback)mView.fragment().getParentFragment());
+                if(mParentCallback!=null)mParentCallback.clear(mModel.getTag());
+                mView.exitDialog();
+                break;
         }
     }
 
@@ -61,7 +73,7 @@ public class ItemPresenter {
         mModel.date(builder);
         builder.append(split[1]);
         mModel.time(builder);
-        builder.append(mView.context().getResources().getString(mModel.source()));
+        builder.append(" ").append(mView.context().getResources().getString(mModel.source()));
         return builder.toString();
     }
     
