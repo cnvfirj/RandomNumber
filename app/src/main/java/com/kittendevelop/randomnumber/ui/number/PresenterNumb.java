@@ -47,8 +47,8 @@ public class PresenterNumb{
     private final CallbackMainAppModule mAppCallback;
     private FragmentFeedback mFeedback;
 
-    private AdapterList mAdapterStory;
-    private AdapterList mAdapterEx;
+    private final AdapterList mAdapterStory;
+    private final AdapterList mAdapterEx;
 
 
     public PresenterNumb(SelectorInputBound inputBound,ModelNumb modelNumb,CallbackMainAppModule callback) {
@@ -114,18 +114,7 @@ public class PresenterNumb{
         ReceiverWaiting.instance().stop();
         mFeedback.showDialog(ReceiverResult.instance().result(item).dialog(),ReceiverResult.TAG);
         if(!item.getValue().equals("ERROR")){
-              mModelNumb.requestListStory(new DisposableSingleObserver<List<CommonValues>>() {
-                  @Override
-                  public void onSuccess(@NonNull List<CommonValues> list) {
-
-                      mAdapterStory.list(list);
-                  }
-
-                  @Override
-                  public void onError(@NonNull Throwable e) {
-
-                  }
-              });
+              fillAdapterStory();
         }
     }
 
@@ -147,25 +136,45 @@ public class PresenterNumb{
     }
 
     public void clearTable(String tag){
+        mFeedback.showDialog(ReceiverWaiting.instance().dialog(),"WAITING");
         if(tag.equals(ReceiverItem.TAG_STORY)){
+            mModelNumb.clearStory(new DisposableSingleObserver<Boolean>() {
+                @Override
+                public void onSuccess(@NonNull Boolean aBoolean) {
+                   if(aBoolean) {
+                       mAdapterStory.list(null);
+                       ReceiverWaiting.instance().stop();
+                   }
+                   else fillAdapterStory();
+                }
 
+                @Override
+                public void onError(@NonNull Throwable e) {
+
+                }
+            });
         } else if (tag.equals(ReceiverItem.TAG_EX)) {
+            mModelNumb.clearEx(new DisposableSingleObserver<Boolean>() {
+                @Override
+                public void onSuccess(@NonNull Boolean aBoolean) {
+                    if(aBoolean){
+                        mAdapterEx.list(null);
+                        ReceiverWaiting.instance().stop();
+                    }
+                    else fillAdapterEx();
+                }
+
+                @Override
+                public void onError(@NonNull Throwable e) {
+
+                }
+            });
 
         }
     }
 
     public void resultRequestEx(EntityGeneratedEx item) throws Exception{
-        mModelNumb.requestListEx(new DisposableSingleObserver<List<CommonValues>>() {
-            @Override
-            public void onSuccess(@NonNull List<CommonValues> list) {
-                mAdapterEx.list(list);
-            }
-
-            @Override
-            public void onError(@NonNull Throwable e) {
-
-            }
-        });
+        fillAdapterEx();
     }
 
     public void fillLists(RecyclerView st, RecyclerView ex){
@@ -173,11 +182,12 @@ public class PresenterNumb{
         fillListEx(ex);
     }
 
-    private void fillListEx(RecyclerView recycler){
-        mModelNumb.requestListEx(new DisposableSingleObserver<List<CommonValues>>() {
+    private void fillAdapterStory(){
+        mModelNumb.requestListStory(new DisposableSingleObserver<List<CommonValues>>() {
             @Override
-            public void onSuccess(@NonNull List<CommonValues> commonValues) {
-                mAdapterEx.list(commonValues);
+            public void onSuccess(@NonNull List<CommonValues> list) {
+                mAdapterStory.list(list);
+                ReceiverWaiting.instance().stop();
             }
 
             @Override
@@ -185,6 +195,25 @@ public class PresenterNumb{
 
             }
         });
+    }
+
+    private void fillAdapterEx(){
+        mModelNumb.requestListEx(new DisposableSingleObserver<List<CommonValues>>() {
+            @Override
+            public void onSuccess(@NonNull List<CommonValues> list) {
+                mAdapterEx.list(list);
+                ReceiverWaiting.instance().stop();
+            }
+
+            @Override
+            public void onError(@NonNull Throwable e) {
+
+            }
+        });
+    }
+
+    private void fillListEx(RecyclerView recycler){
+        fillAdapterEx();
         mAdapterEx.setListen((item, position) -> {
             mFeedback.showDialog(ReceiverWaiting.instance().dialog(),"WAITING");
             mModelNumb.requestItemEx(item.mId, new DisposableSingleObserver<BaseEntityItems>() {
@@ -205,17 +234,7 @@ public class PresenterNumb{
 
     private void fillListStory(RecyclerView recycler){
         correctColumnsListStory(recycler);
-        mModelNumb.requestListStory(new DisposableSingleObserver<List<CommonValues>>() {
-            @Override
-            public void onSuccess(@NonNull List<CommonValues> commonValues) {
-                mAdapterStory.list(commonValues);
-            }
-
-            @Override
-            public void onError(@NonNull Throwable e) {
-
-            }
-        });
+        fillAdapterStory();
         mAdapterStory.setListen((item, position) -> {
             mFeedback.showDialog(ReceiverWaiting.instance().dialog(),"WAITING");
             mModelNumb.requestItemStory(item.mId, new DisposableSingleObserver<BaseEntityItems>() {

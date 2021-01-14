@@ -11,15 +11,17 @@ public abstract class ReceiverDialogs {
     }
 
     public void stop(){
-        if(mDialog!=null&&isShowing())mDialog.dismiss();
+        if(mDialog!=null&&mDialog.getDialog()!=null){
+            if(isAdded()) mDialog.dismiss();
+        }
     }
 
     public void remove(){
         mDialog.dismiss();
     }
 
-    public boolean isShowing(){
-        return mDialog.isResumed()||mDialog.isVisible()||mDialog.isAdded()||mDialog.getDialog().isShowing();
+    public boolean isAdded(){
+        return mDialog.isResumed()||mDialog.isVisible()||mDialog.isAdded();
     }
 
     public DialogFragment dialog(){

@@ -90,6 +90,14 @@ public class ModelNumb {
         mThreadWorkDB.delItemEx((EntityGeneratedEx)item).subscribe(consumer);
     }
 
+    public void clearStory(DisposableSingleObserver<Boolean> consumer){
+        mThreadWorkDB.clearTable(0).subscribe(consumer);
+    }
+
+    public void clearEx(DisposableSingleObserver<Boolean> consumer){
+        mThreadWorkDB.clearTable(1).subscribe(consumer);
+    }
+
     private Function<Set<Long>,Observable<EntityGeneratedItem>>requestNumber(){
         return new Function<Set<Long>, Observable<EntityGeneratedItem>>() {
             @Override

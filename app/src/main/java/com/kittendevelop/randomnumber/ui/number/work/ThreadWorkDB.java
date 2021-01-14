@@ -101,6 +101,22 @@ public class ThreadWorkDB {
                 .subscribeOn(Schedulers.io());
     }
 
+    public Single<Boolean>clearTable(int table){
+        return Single.create(new SingleOnSubscribe<Boolean>() {
+            @Override
+            public void subscribe(@NonNull SingleEmitter<Boolean> emitter) throws Exception {
+                if(table==0){
+                    clearStory();
+                    emitter.onSuccess(mDataBaseItems.workWithItems().all().size()==0);
+                }else {
+                    clearEx();
+                    emitter.onSuccess(mDataBaseItems.workWithEx().all().size()==0);
+                }
+            }
+        }).observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io());
+    }
+
     public Single<List<CommonValues>>delItemStory(EntityGeneratedItem item){
         return Single.create(new SingleOnSubscribe<List<CommonValues>>() {
             @Override
@@ -148,6 +164,18 @@ public class ThreadWorkDB {
                 .subscribeOn(Schedulers.io());
     }
 
+
+    private void clearStory(){
+        for (EntityGeneratedItem item:mDataBaseItems.workWithItems().all()){
+            mDataBaseItems.workWithItems().delete(item);
+        }
+    }
+
+    private void clearEx(){
+        for (EntityGeneratedEx item:mDataBaseItems.workWithEx().all()){
+            mDataBaseItems.workWithEx().delete(item);
+        }
+    }
 
 
     private List<CommonValues> queryListCommonValues(int table){
