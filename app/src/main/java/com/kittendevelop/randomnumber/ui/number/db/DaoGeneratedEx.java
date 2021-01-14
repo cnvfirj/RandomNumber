@@ -48,6 +48,9 @@ public interface DaoGeneratedEx {
     @Query("SELECT id, number, value FROM GENERATED_EX")
     List<CommonValues>commonValues();
 
+    @Query("SELECT id,value,number FROM GENERATED_EX")
+    Single<List<CommonValues>>commonValuesRx();
+
     @Query("SELECT * FROM GENERATED_EX")
     Single<List<EntityGeneratedEx>> allRx();
 

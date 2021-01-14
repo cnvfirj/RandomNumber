@@ -51,6 +51,9 @@ public interface DaoGeneratedItem{
     @Query("SELECT id,value,number FROM GENERATED_ITEM")
     List<CommonValues>commonValues();
 
+    @Query("SELECT id,value,number FROM GENERATED_ITEM")
+    Single<List<CommonValues>>commonValuesRx();
+
     @Query("SELECT * FROM GENERATED_ITEM")
     Single<List<EntityGeneratedItem>> allRx();
 

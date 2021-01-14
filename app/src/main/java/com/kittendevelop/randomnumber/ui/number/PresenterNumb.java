@@ -2,17 +2,21 @@ package com.kittendevelop.randomnumber.ui.number;
 
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.content.res.Configuration;
 import android.os.Handler;
 import android.os.Looper;
+import android.os.Parcelable;
 import android.view.View;
 
 import androidx.paging.PagedList;
 import androidx.paging.PositionalDataSource;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.kittendevelop.randomnumber.R;
 import com.kittendevelop.randomnumber.mainDI.CallbackMainAppModule;
+import com.kittendevelop.randomnumber.ui.number.adapters.AdapterList;
 import com.kittendevelop.randomnumber.ui.number.adapters.EntityItemsAdapter;
 import com.kittendevelop.randomnumber.ui.number.db.BaseEntityItems;
 import com.kittendevelop.randomnumber.ui.number.db.CommonValues;
@@ -23,6 +27,7 @@ import com.kittendevelop.randomnumber.ui.number.dialog.ReceiverItem;
 import com.kittendevelop.randomnumber.ui.number.dialog.ReceiverResult;
 import com.kittendevelop.randomnumber.ui.number.dialog.ReceiverWaiting;
 
+import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
@@ -42,15 +47,20 @@ public class PresenterNumb{
     private final CallbackMainAppModule mAppCallback;
     private FragmentFeedback mFeedback;
 
-    private EntityItemsAdapter mAdapterStory;
-    private EntityItemsAdapter mAdapterEx;
+//    private EntityItemsAdapter mAdapterStory;
+//    private EntityItemsAdapter mAdapterEx;
+    private AdapterList mAdapterStory;
+    private AdapterList mAdapterEx;
+
 
     public PresenterNumb(SelectorInputBound inputBound,ModelNumb modelNumb,CallbackMainAppModule callback) {
         mSelectorInputBound = inputBound;
         mModelNumb = modelNumb;
         mAppCallback = callback;
-        mAdapterStory = DaggerComponentAdapter.create().adapter();
-        mAdapterEx = DaggerComponentAdapter.create().adapter();
+//        mAdapterStory = DaggerComponentAdapter.create().adapter();
+//        mAdapterEx = DaggerComponentAdapter.create().adapter();
+        mAdapterStory = DaggerComponentAdapter.create().adapterItems();
+        mAdapterEx = DaggerComponentAdapter.create().adapterItems();
         initSelector();
     }
 
@@ -69,6 +79,10 @@ public class PresenterNumb{
 
     public void pause(){
         mModelNumb.requestResultNumber().dispose();
+    }
+
+    public void start(){
+
     }
 
     private void initSelector(){
@@ -102,24 +116,22 @@ public class PresenterNumb{
     * В бд истории результат добавлен*/
     private void resultRequestEntity(EntityGeneratedItem item) throws Exception{
         ReceiverWaiting.instance().stop();
-//        ReceiverItem.instance().stop();
         mFeedback.showDialog(ReceiverResult.instance().result(item).dialog(),ReceiverResult.TAG);
-        if(!item.getValue().equals("ERROR"))
-            mAdapterStory.submitList(pagedList(mModelNumb.dataSource(0),config(80)));
+        if(!item.getValue().equals("ERROR")){
+              mModelNumb.requestListStory(new DisposableSingleObserver<List<CommonValues>>() {
+                  @Override
+                  public void onSuccess(@NonNull List<CommonValues> list) {
+
+                      mAdapterStory.list(list);
+                  }
+
+                  @Override
+                  public void onError(@NonNull Throwable e) {
+
+                  }
+              });
+        }
     }
-
-    private void resultRequestStory(BaseEntityItems item) throws Exception{
-        ReceiverWaiting.instance().stop();
-        MASSAGE("dialog story "+item.mValue);
-        mFeedback.showDialog(ReceiverItem.instance().item(item).dialog(),ReceiverItem.TAG_STORY);
-    }
-
-    private void resultRequestEx(BaseEntityItems item) throws Exception{
-        ReceiverWaiting.instance().stop();
-        mFeedback.showDialog(ReceiverItem.instance().item(item).dialog(),ReceiverItem.TAG_EX);
-    }
-
-
 
     /*добавляем исключение в бд*/
     public void addValueToEX(long value,int source){
@@ -143,35 +155,41 @@ public class PresenterNumb{
 
         } else if (tag.equals(ReceiverItem.TAG_EX)) {
 
-
         }
     }
 
     public void resultRequestEx(EntityGeneratedEx item) throws Exception{
-        mAdapterEx.submitList(pagedList(mModelNumb.dataSource(1),config(20)));
+        mModelNumb.requestListEx(new DisposableSingleObserver<List<CommonValues>>() {
+            @Override
+            public void onSuccess(@NonNull List<CommonValues> list) {
+                mAdapterEx.list(list);
+            }
+
+            @Override
+            public void onError(@NonNull Throwable e) {
+
+            }
+        });
     }
 
     public void fillLists(RecyclerView st, RecyclerView ex){
-        ((GridLayoutManager)st.getLayoutManager()).setSpanCount(5);
-        mAdapterStory.submitList(pagedList(mModelNumb.dataSource(0),config(680)));
-        mAdapterEx.submitList(pagedList(mModelNumb.dataSource(1),config(20)));
-        mAdapterStory.setListen(item -> {
-            mFeedback.showDialog(ReceiverWaiting.instance().dialog(),"WAITING");
-           mModelNumb.requestItemStory(item.mId, new DisposableSingleObserver<BaseEntityItems>() {
-               @Override
-               public void onSuccess(@NonNull BaseEntityItems item) {
-                   ReceiverWaiting.instance().stop();
-                   mFeedback.showDialog(ReceiverItem.instance().item(item).dialog(),ReceiverItem.TAG_STORY);
-               }
+        fillListStory(st);
+        fillListEx(ex);
+    }
 
-               @Override
-               public void onError(@NonNull Throwable e) {
+    private void fillListEx(RecyclerView recycler){
+        mModelNumb.requestListEx(new DisposableSingleObserver<List<CommonValues>>() {
+            @Override
+            public void onSuccess(@NonNull List<CommonValues> commonValues) {
+                mAdapterEx.list(commonValues);
+            }
 
-               }
-           });
+            @Override
+            public void onError(@NonNull Throwable e) {
 
+            }
         });
-        mAdapterEx.setListen(item -> {
+        mAdapterEx.setListen((item, position) -> {
             mFeedback.showDialog(ReceiverWaiting.instance().dialog(),"WAITING");
             mModelNumb.requestItemEx(item.mId, new DisposableSingleObserver<BaseEntityItems>() {
                 @Override
@@ -185,38 +203,77 @@ public class PresenterNumb{
 
                 }
             });
-
         });
-        st.setAdapter(mAdapterStory);
-        ex.setAdapter(mAdapterEx);
+        recycler.setAdapter(mAdapterEx);
     }
 
-    private PagedList.Config config(int pagedSize){
-        return new PagedList.Config.Builder()
-                .setPageSize(pagedSize)
-                .build();
+    private void fillListStory(RecyclerView recycler){
+        correctColumnsListStory(recycler);
+        mModelNumb.requestListStory(new DisposableSingleObserver<List<CommonValues>>() {
+            @Override
+            public void onSuccess(@NonNull List<CommonValues> commonValues) {
+                mAdapterStory.list(commonValues);
+            }
+
+            @Override
+            public void onError(@NonNull Throwable e) {
+
+            }
+        });
+        mAdapterStory.setListen((item, position) -> {
+            mFeedback.showDialog(ReceiverWaiting.instance().dialog(),"WAITING");
+            mModelNumb.requestItemStory(item.mId, new DisposableSingleObserver<BaseEntityItems>() {
+           @Override
+           public void onSuccess(@NonNull BaseEntityItems item) {
+               ReceiverWaiting.instance().stop();
+               mFeedback.showDialog(ReceiverItem.instance().item(item).dialog(),ReceiverItem.TAG_STORY);
+           }
+
+           @Override
+           public void onError(@NonNull Throwable e) {
+
+           }
+       });
+        });
+        recycler.setAdapter(mAdapterStory);
     }
 
-    private PagedList<CommonValues> pagedList(PositionalDataSource<CommonValues> source, PagedList.Config config){
-        return new PagedList.Builder<>(source,config)
-                .setFetchExecutor(Executors.newSingleThreadExecutor())
-                .setNotifyExecutor(new MainThreadExecutor())
-                .build();
+    private void correctColumnsListStory(RecyclerView st){
+        int orientation = mFeedback.context().getResources().getConfiguration().orientation;
+        if(orientation== Configuration.ORIENTATION_LANDSCAPE)((GridLayoutManager)st.getLayoutManager()).setSpanCount(10);
+        else ((GridLayoutManager)st.getLayoutManager()).setSpanCount(5);
     }
 
-    private void acceptDelItemStory(boolean isDel) throws Exception {
-        if(isDel)mAdapterStory.submitList(pagedList(mModelNumb.dataSource(0),config(80)));
-        ReceiverWaiting.instance().stop();
+    private void acceptDelItemStory(List<CommonValues> list) throws Exception {
+             mModelNumb.requestListStory(new DisposableSingleObserver<List<CommonValues>>() {
+                 @Override
+                 public void onSuccess(@NonNull List<CommonValues> list) {
+                     ReceiverWaiting.instance().stop();
+                     mAdapterStory.list(list);
+                 }
+
+                 @Override
+                 public void onError(@NonNull Throwable e) {
+                     ReceiverWaiting.instance().stop();
+                 }
+             });
+
     }
 
+    private void acceptDelItemEx(List<CommonValues> list) throws Exception {
+        mModelNumb.requestListEx(new DisposableSingleObserver<List<CommonValues>>() {
+            @Override
+            public void onSuccess(@NonNull List<CommonValues> list) {
+                ReceiverWaiting.instance().stop();
+                mAdapterEx.list(list);
+            }
 
-    private void acceptDelItemEx(boolean isDel) throws Exception {
-        if(isDel)mAdapterEx.submitList(pagedList(mModelNumb.dataSource(1),config(20)));
-        ReceiverWaiting.instance().stop();
+            @Override
+            public void onError(@NonNull Throwable e) {
+                ReceiverWaiting.instance().stop();
+            }
+        });
     }
-
-
-
 
     static class MainThreadExecutor implements Executor {
         private final Handler mHandler = new Handler(Looper.getMainLooper());
@@ -228,7 +285,7 @@ public class PresenterNumb{
     }
 
     public interface ListenItems{
-        void item(CommonValues item);
+        void item(CommonValues item, int position);
     }
 
 }

@@ -15,6 +15,8 @@ import com.kittendevelop.randomnumber.ui.number.db.FillNewBaseEntityItem;
 
 import java.security.acl.LastOwnerException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
@@ -108,27 +110,85 @@ public class ThreadWorkDB {
                 .subscribeOn(Schedulers.io());
     }
 
-    public Single<Boolean>delItemStory(EntityGeneratedItem item){
-        return Single.create(new SingleOnSubscribe<Boolean>() {
+    public Single<List<CommonValues>>delItemStory(EntityGeneratedItem item){
+        return Single.create(new SingleOnSubscribe<List<CommonValues>>() {
             @Override
-            public void subscribe(@NonNull SingleEmitter<Boolean> emitter) throws Exception {
+            public void subscribe(@NonNull SingleEmitter<List<CommonValues>> emitter) throws Exception {
                 mDataBaseItems.workWithItems().delete(item);
                 EntityGeneratedItem i = mDataBaseItems.workWithItems().id(item.getId());
-                emitter.onSuccess(i==null);
+                if(mDataBaseItems.workWithItems().id(item.getId())==null)
+                emitter.onSuccess(sort(queryListCommonValues(0),0));
+                else emitter.onError(new Throwable());
             }
         }).observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io());
     }
-    public Single<Boolean>delItemEx(EntityGeneratedEx item){
-        return Single.create(new SingleOnSubscribe<Boolean>() {
+
+    public Single<List<CommonValues>>delItemEx(EntityGeneratedEx item){
+        return Single.create(new SingleOnSubscribe<List<CommonValues>>() {
             @Override
-            public void subscribe(@NonNull SingleEmitter<Boolean> emitter) throws Exception {
+            public void subscribe(@NonNull SingleEmitter<List<CommonValues>> emitter) throws Exception {
                 mDataBaseItems.workWithEx().delete(item);
-                EntityGeneratedEx i = mDataBaseItems.workWithEx().id(item.getId());
-                emitter.onSuccess(i==null);
+                if(mDataBaseItems.workWithEx().id(item.getId())==null)
+                    emitter.onSuccess(sort(queryListCommonValues(1),1));
+                else emitter.onError(new Throwable());
             }
         }).observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io());
+    }
+
+    public Single<List<CommonValues>>exItems(){
+        return Single.create(new SingleOnSubscribe<List<CommonValues>>() {
+            @Override
+            public void subscribe(@NonNull SingleEmitter<List<CommonValues>> emitter) throws Exception {
+                emitter.onSuccess(sort(queryListCommonValues(1),1));
+            }
+        }).observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io());
+    }
+
+    public Single<List<CommonValues>>storyItems(){
+        return Single.create(new SingleOnSubscribe<List<CommonValues>>() {
+            @Override
+            public void subscribe(@NonNull SingleEmitter<List<CommonValues>> emitter) throws Exception {
+                emitter.onSuccess(sort(queryListCommonValues(0),0));
+            }
+        }).observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io());
+    }
+
+
+
+    private List<CommonValues> queryListCommonValues(int table){
+        if(table==0){
+            return mDataBaseItems.workWithItems().commonValues();
+        }else {
+            return mDataBaseItems.workWithEx().commonValues();
+        }
+    }
+
+    private List<CommonValues> sort(List<CommonValues> list,int compare){
+        if(compare==0) {
+            Collections.sort(list, new Comparator<CommonValues>() {
+                @Override
+                public int compare(CommonValues c1, CommonValues t1) {
+                    Long d1 = c1.mId;
+                    Long d2 = t1.mId;
+                    return d2.compareTo(d1);
+                }
+            });
+
+        }else {
+            Collections.sort(list, new Comparator<CommonValues>() {
+                @Override
+                public int compare(CommonValues c1, CommonValues t1) {
+                    Long d1 = c1.mNumber;
+                    Long d2 = t1.mNumber;
+                    return d1.compareTo(d2);
+                }
+            });
+        }
+        return list;
     }
 
 

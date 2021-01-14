@@ -3,6 +3,7 @@ package com.kittendevelop.randomnumber.ui.number;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -97,11 +98,24 @@ public class FragmentNumb extends Fragment implements FragmentFeedback, ParentFr
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        mPresenter.start();
+    }
+
+    @Override
     public void showDialog(DialogFragment fragment, String tag) {
             fragment.show(getChildFragmentManager(),tag);
     }
 
     private void initLists(View v){
         mPresenter.fillLists(v.findViewById(R.id.story_results_numb),v.findViewById(R.id.search_excluded_numb));
+    }
+
+    private void saveStateLists(){
+        RecyclerView st = getView().findViewById(R.id.story_results_numb);
+        st.getLayoutManager().onSaveInstanceState();
+        RecyclerView ex = getView().findViewById(R.id.search_excluded_numb);
+        ex.getLayoutManager().onSaveInstanceState();
     }
 }

@@ -20,6 +20,8 @@ import com.kittendevelop.randomnumber.ui.number.db.CommonValues;
 
 import javax.inject.Inject;
 
+
+/*delete*/
 public class EntityItemsAdapter extends PagedListAdapter<CommonValues, EntityItemsAdapter.ItemHolder> {
 
     private PresenterNumb.ListenItems mListenItems;
@@ -50,8 +52,8 @@ public class EntityItemsAdapter extends PagedListAdapter<CommonValues, EntityIte
                  .inflate(R.layout.item_number_list, parent, false));
     }
 
-    private void clickItem(CommonValues item){
-        if(mListenItems!=null)mListenItems.item(item);
+    private void clickItem(CommonValues item,int position){
+        if(mListenItems!=null)mListenItems.item(item,position);
     }
 
     protected class ItemHolder extends NumberHolder{
@@ -75,8 +77,7 @@ public class EntityItemsAdapter extends PagedListAdapter<CommonValues, EntityIte
 
         @Override
         public void click() {
-
-            clickItem(mBinding.getTitle());
+            clickItem(mBinding.getTitle(),getAdapterPosition());
         }
     }
 }

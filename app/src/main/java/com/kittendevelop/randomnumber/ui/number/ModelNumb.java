@@ -5,17 +5,20 @@ import android.annotation.SuppressLint;
 import com.kittendevelop.randomnumber.ui.number.adapters.AdapterDataSource;
 import com.kittendevelop.randomnumber.ui.number.db.BaseEntity;
 import com.kittendevelop.randomnumber.ui.number.db.BaseEntityItems;
+import com.kittendevelop.randomnumber.ui.number.db.CommonValues;
 import com.kittendevelop.randomnumber.ui.number.db.EntityGeneratedEx;
 import com.kittendevelop.randomnumber.ui.number.db.EntityGeneratedItem;
 import com.kittendevelop.randomnumber.ui.number.work.ThreadRequestResult;
 import com.kittendevelop.randomnumber.ui.number.work.ThreadWorkDB;
 
+import java.util.List;
 import java.util.Set;
 
 import io.reactivex.MaybeObserver;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.BiConsumer;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.observers.DisposableMaybeObserver;
@@ -38,25 +41,36 @@ public class ModelNumb {
         return mThreadRequest;
     }
 
-    public AdapterDataSource dataSource(int table){
-        return mThreadWorkDB.getAdapterDataSource(table);
-    }
-
-    public AdapterDataSource dataSource(int table,int pos){
-        return mThreadWorkDB.getAdapterDataSource(table).position(pos);
-    }
-
-
-
-
-    public AdapterDataSource jumpList(int table, int pos){
-       return mThreadWorkDB.getAdapterDataSource(table).position(pos);
-    }
+//    public AdapterDataSource dataSource(int table){
+//        return mThreadWorkDB.getAdapterDataSource(table);
+//    }
+//
+//    public AdapterDataSource dataSource(int table,int pos){
+//        return mThreadWorkDB.getAdapterDataSource(table).position(pos);
+//    }
+//
+//
+//
+//
+//    public AdapterDataSource jumpList(int table, int pos){
+//       return mThreadWorkDB.getAdapterDataSource(table).position(pos);
+//    }
 
 //    @SuppressLint("CheckResult")
 //    public void requestItemStory(long id, Consumer<BaseEntityItems>consumer){
 //        mThreadWorkDB.data().workWithItems().idRx(id).subscribe(consumer);
 //    }
+
+    public void requestListStory(DisposableSingleObserver<List<CommonValues>> consumer){
+        mThreadWorkDB.storyItems()
+                .subscribe(consumer);
+    }
+
+    public void requestListEx(DisposableSingleObserver<List<CommonValues>> consumer){
+        mThreadWorkDB.exItems()
+                .subscribe(consumer);
+    }
+
 
     @SuppressLint("CheckResult")
     public void requestItemStory(long id, DisposableSingleObserver<BaseEntityItems>  consumer){
@@ -99,16 +113,14 @@ public class ModelNumb {
     }
 
     @SuppressLint("CheckResult")
-    public void deleteItemStory(BaseEntityItems item, Consumer<Boolean> consumer){
+    public void deleteItemStory(BaseEntityItems item, Consumer<List<CommonValues>> consumer){
          mThreadWorkDB.delItemStory((EntityGeneratedItem)item).subscribe(consumer);
     }
 
     @SuppressLint("CheckResult")
-    public void deleteItemEx(BaseEntityItems item, Consumer<Boolean> consumer){
+    public void deleteItemEx(BaseEntityItems item, Consumer<List<CommonValues>> consumer){
         mThreadWorkDB.delItemEx((EntityGeneratedEx)item).subscribe(consumer);
     }
-
-
 
     private Function<Set<Long>,Observable<EntityGeneratedItem>>requestNumber(){
         return new Function<Set<Long>, Observable<EntityGeneratedItem>>() {

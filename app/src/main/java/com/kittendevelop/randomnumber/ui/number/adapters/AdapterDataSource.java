@@ -20,6 +20,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
+
+/*delete*/
 public class AdapterDataSource extends PositionalDataSource<CommonValues> {
 
     private DataBaseGeneratedItems mdb;
