@@ -2,8 +2,6 @@ package com.kittendevelop.randomnumber.ui.number;
 
 import android.annotation.SuppressLint;
 
-import com.kittendevelop.randomnumber.ui.number.adapters.AdapterDataSource;
-import com.kittendevelop.randomnumber.ui.number.db.BaseEntity;
 import com.kittendevelop.randomnumber.ui.number.db.BaseEntityItems;
 import com.kittendevelop.randomnumber.ui.number.db.CommonValues;
 import com.kittendevelop.randomnumber.ui.number.db.EntityGeneratedEx;
@@ -14,15 +12,11 @@ import com.kittendevelop.randomnumber.ui.number.work.ThreadWorkDB;
 import java.util.List;
 import java.util.Set;
 
-import io.reactivex.MaybeObserver;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
-import io.reactivex.functions.BiConsumer;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
-import io.reactivex.observers.DisposableMaybeObserver;
-import io.reactivex.observers.DisposableObserver;
 import io.reactivex.observers.DisposableSingleObserver;
 import io.reactivex.schedulers.Schedulers;
 
@@ -41,25 +35,6 @@ public class ModelNumb {
         return mThreadRequest;
     }
 
-//    public AdapterDataSource dataSource(int table){
-//        return mThreadWorkDB.getAdapterDataSource(table);
-//    }
-//
-//    public AdapterDataSource dataSource(int table,int pos){
-//        return mThreadWorkDB.getAdapterDataSource(table).position(pos);
-//    }
-//
-//
-//
-//
-//    public AdapterDataSource jumpList(int table, int pos){
-//       return mThreadWorkDB.getAdapterDataSource(table).position(pos);
-//    }
-
-//    @SuppressLint("CheckResult")
-//    public void requestItemStory(long id, Consumer<BaseEntityItems>consumer){
-//        mThreadWorkDB.data().workWithItems().idRx(id).subscribe(consumer);
-//    }
 
     public void requestListStory(DisposableSingleObserver<List<CommonValues>> consumer){
         mThreadWorkDB.storyItems()
@@ -79,13 +54,6 @@ public class ModelNumb {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(consumer);
     }
-
-
-
-//    @SuppressLint("CheckResult")
-//    public void requestItemEx(long id, Consumer<BaseEntityItems>consumer){
-//        mThreadWorkDB.data().workWithEx().idRx(id).subscribe(consumer);
-//    }
 
     @SuppressLint("CheckResult")
     public void requestItemEx(long id, DisposableSingleObserver<BaseEntityItems> consumer){

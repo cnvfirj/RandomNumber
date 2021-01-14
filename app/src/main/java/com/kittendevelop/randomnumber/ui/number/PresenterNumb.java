@@ -47,8 +47,6 @@ public class PresenterNumb{
     private final CallbackMainAppModule mAppCallback;
     private FragmentFeedback mFeedback;
 
-//    private EntityItemsAdapter mAdapterStory;
-//    private EntityItemsAdapter mAdapterEx;
     private AdapterList mAdapterStory;
     private AdapterList mAdapterEx;
 
@@ -57,8 +55,6 @@ public class PresenterNumb{
         mSelectorInputBound = inputBound;
         mModelNumb = modelNumb;
         mAppCallback = callback;
-//        mAdapterStory = DaggerComponentAdapter.create().adapter();
-//        mAdapterEx = DaggerComponentAdapter.create().adapter();
         mAdapterStory = DaggerComponentAdapter.create().adapterItems();
         mAdapterEx = DaggerComponentAdapter.create().adapterItems();
         initSelector();
@@ -273,15 +269,6 @@ public class PresenterNumb{
                 ReceiverWaiting.instance().stop();
             }
         });
-    }
-
-    static class MainThreadExecutor implements Executor {
-        private final Handler mHandler = new Handler(Looper.getMainLooper());
-
-        @Override
-        public void execute(Runnable command) {
-            mHandler.post(command);
-        }
     }
 
     public interface ListenItems{

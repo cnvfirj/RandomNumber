@@ -1,26 +1,18 @@
 package com.kittendevelop.randomnumber.ui.number.work;
 
-import android.content.Context;
-import android.net.ConnectivityManager;
 
 import com.kittendevelop.randomnumber.ui.number.adapters.AdapterDataSource;
-import com.kittendevelop.randomnumber.ui.number.db.BaseEntity;
 import com.kittendevelop.randomnumber.ui.number.db.BaseEntityItems;
 import com.kittendevelop.randomnumber.ui.number.db.CommonValues;
 import com.kittendevelop.randomnumber.ui.number.db.DataBaseGeneratedItems;
-import com.kittendevelop.randomnumber.ui.number.db.EntityExItems;
 import com.kittendevelop.randomnumber.ui.number.db.EntityGeneratedEx;
 import com.kittendevelop.randomnumber.ui.number.db.EntityGeneratedItem;
 import com.kittendevelop.randomnumber.ui.number.db.FillNewBaseEntityItem;
 
-import java.security.acl.LastOwnerException;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
-import java.util.SortedSet;
 import java.util.TreeSet;
 
 import io.reactivex.Observable;
@@ -33,7 +25,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.schedulers.Schedulers;
 
-import static com.kittendevelop.randomnumber.help.Massages.MASSAGE;
 
 public class ThreadWorkDB {
 

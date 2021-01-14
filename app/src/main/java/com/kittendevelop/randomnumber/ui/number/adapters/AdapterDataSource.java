@@ -1,5 +1,7 @@
 package com.kittendevelop.randomnumber.ui.number.adapters;
 
+import android.annotation.SuppressLint;
+
 import androidx.annotation.NonNull;
 import androidx.paging.PositionalDataSource;
 
@@ -40,23 +42,15 @@ public class AdapterDataSource extends PositionalDataSource<CommonValues> {
     }
 
     @Override
+    @SuppressLint("CheckResult")
     public void loadInitial(@NonNull LoadInitialParams params, @NonNull LoadInitialCallback<CommonValues> callback) {
-          query().subscribe(new Consumer<List<CommonValues>>() {
-              @Override
-              public void accept(List<CommonValues> commonValues) throws Exception {
-                  callback.onResult(commonValues,mPosition,commonValues.size());
-              }
-          });
+          query().subscribe(commonValues -> callback.onResult(commonValues,mPosition,commonValues.size()));
     }
 
+    @SuppressLint("CheckResult")
     @Override
     public void loadRange(@NonNull LoadRangeParams params, @NonNull LoadRangeCallback<CommonValues> callback) {
-         query().subscribe(new Consumer<List<CommonValues>>() {
-             @Override
-             public void accept(List<CommonValues> commonValues) throws Exception {
-                 callback.onResult(commonValues);
-             }
-         });
+         query().subscribe(commonValues -> callback.onResult(commonValues));
     }
 
     private Observable<List<CommonValues>>query(){
