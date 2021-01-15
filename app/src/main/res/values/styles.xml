@@ -16,7 +16,7 @@
         <item name="android:background">@drawable/background_fields</item>
         <item name="android:inputType">numberSigned</item>
         <item name="android:gravity">center</item>
-        <item name="android:layout_margin">5dp</item>
+        <item name="android:layout_margin">@dimen/main_margin</item>
         <item name="android:maxLength">18</item>
     </style>
 
@@ -25,7 +25,7 @@
         <item name="android:layout_height">85dp</item>
         <item name="android:background">@drawable/background_fields</item>
         <item name="android:gravity">center</item>
-        <item name="android:layout_margin">5dp</item>
+        <item name="android:layout_margin">@dimen/main_margin</item>
     </style>
 
     <style name="hints_search_numb">

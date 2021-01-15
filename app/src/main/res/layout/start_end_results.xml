@@ -24,10 +24,13 @@
     android:padding="3dp">
     
 
-      <Button style="@style/start_end_results_numb"
+      <ImageView style="@style/start_end_results_numb"
+          android:clickable="true"
         android:id="@+id/search_number"
-          android:backgroundTint="@color/teal_700"
-          android:onClick="@{(v)->listener.click(v)}"/>
+          android:src="@drawable/ic_lamp"
+          android:backgroundTint="@color/purple_500"
+          android:onClick="@{(v)->listener.click(v)}"
+          android:focusable="true" />
 
       <view class="androidx.recyclerview.widget.RecyclerView"
           style="@style/start_end_results_numb"

@@ -7,7 +7,11 @@ import com.kittendevelop.randomnumber.ui.number.db.BaseEntity;
 import com.kittendevelop.randomnumber.ui.number.db.DataBaseGeneratedItems;
 import com.kittendevelop.randomnumber.ui.number.db.EntityGeneratedItem;
 import com.kittendevelop.randomnumber.ui.number.db.FillNewBaseEntityItem;
+import com.kittendevelop.randomnumber.ui.number.work.rest.NetService;
+import com.kittendevelop.randomnumber.ui.number.work.rest.PojoNumber;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -20,6 +24,11 @@ import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+import static com.kittendevelop.randomnumber.help.Massages.MASSAGE;
 
 public class ThreadRequestResult {
 
@@ -28,11 +37,11 @@ public class ThreadRequestResult {
     private long mTo;
     private Observable<EntityGeneratedItem>mObservable;
     private Disposable mDisposable;
-    private ConnectivityManager mConnect;
+    private NetService mNetService;
 
     /*получаем элемент для проверки интернет соединения*/
-    public ThreadRequestResult(ConnectivityManager connect) {
-        this.mConnect = connect;
+    public ThreadRequestResult(NetService netService) {
+        this.mNetService = netService;
     }
 
     public ThreadRequestResult setEx(Set<Long> ex){
@@ -69,17 +78,44 @@ public class ThreadRequestResult {
             public void subscribe(@NonNull ObservableEmitter<EntityGeneratedItem> emitter) throws Exception {
                 EntityGeneratedItem entity = new EntityGeneratedItem().confines(mFrom,mTo);
                 FillNewBaseEntityItem.fill(entity);
-                if(SearchRandomNumberNetwork.check()){
-                    addParams(entity,EntityGeneratedItem.SOURCE_NET,SearchRandomNumberNetwork.searchInNet(mEx,mFrom,mTo));
+                if(mNetService.check()){
+                    generateNumberInNet(entity,emitter);
 
                 }else {
-                    addParams(entity,EntityGeneratedItem.SOURCE_APP,SearchRandomNumberNonNet.generate(mEx,mFrom,mTo));
+                    generateNumberDev(entity,emitter);
                 }
-                emitter.onNext(entity);
-                emitter.onComplete();
             }
         }).observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.computation());
+    }
+
+    private void generateNumberInNet(EntityGeneratedItem entity,ObservableEmitter<EntityGeneratedItem> emitter){
+        mNetService
+                .call(8)
+                .enqueue(new Callback<PojoNumber>() {
+            @Override
+            public void onResponse(Call<PojoNumber> call, Response<PojoNumber> response) {
+                if(response.body()!=null&&response.body().getData()!=null) {
+                    String code = response.body().getData().get(0);
+                    BigInteger result = new BigInteger(code, 16);
+                    long number = Math.abs(result.longValue());
+                    addParams(entity, EntityGeneratedItem.SOURCE_NET, SearchRandomNumberNetwork.generate(mEx, mFrom, mTo, number));
+                    emitter.onNext(entity);
+                    emitter.onComplete();
+                }else generateNumberDev(entity,emitter);
+            }
+
+            @Override
+            public void onFailure(Call<PojoNumber> call, Throwable t) {
+               generateNumberDev(entity,emitter);
+            }
+        });
+    }
+
+    private void generateNumberDev(EntityGeneratedItem entity,ObservableEmitter<EntityGeneratedItem> emitter){
+        addParams(entity,EntityGeneratedItem.SOURCE_APP,SearchRandomNumberNonNet.generate(mEx,mFrom,mTo));
+        emitter.onNext(entity);
+        emitter.onComplete();
     }
 
     private void addParams(EntityGeneratedItem item, int source, long value){

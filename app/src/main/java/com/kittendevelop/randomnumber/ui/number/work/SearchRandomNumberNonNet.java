@@ -56,11 +56,7 @@ public class SearchRandomNumberNonNet {
     /*поиск числа из диапазона, с проверкой в списе исключений*/
     /*если список длинный то это громоздко*/
     public static long searchInDevice3(Set<Long> ex, long from, long to){
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+
         long delta = (to-from)+1;
         long val = (long)(Math.random()*delta)+from;
         if(ex!=null&&ex.contains(val))return searchInDevice3(ex,from,to);

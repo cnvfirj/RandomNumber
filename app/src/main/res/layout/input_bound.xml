@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="3dp">
+        android:padding="@dimen/item_list_margin">
 
     <TextView
         android:text="@string/hint_input"

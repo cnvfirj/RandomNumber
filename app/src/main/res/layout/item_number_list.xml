@@ -18,7 +18,7 @@
     android:background="@drawable/background_fields"
     android:backgroundTint="@color/white"
     android:id="@+id/result_container"
-    android:layout_margin="2dp">
+    android:layout_margin="@dimen/item_list_margin">
 
 
 

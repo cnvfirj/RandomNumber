@@ -255,8 +255,21 @@ public class PresenterNumb{
 
     private void correctColumnsListStory(RecyclerView st){
         int orientation = mFeedback.context().getResources().getConfiguration().orientation;
-        if(orientation== Configuration.ORIENTATION_LANDSCAPE)((GridLayoutManager)st.getLayoutManager()).setSpanCount(10);
-        else ((GridLayoutManager)st.getLayoutManager()).setSpanCount(5);
+        int width = mAppCallback.resources().getDisplayMetrics().widthPixels;
+        int height = mAppCallback.resources().getDisplayMetrics().heightPixels;
+        int margin = (int) mAppCallback.resources().getDimension(R.dimen.item_list_margin);
+        int item = (int)mAppCallback.resources().getDimension(R.dimen.item_width);
+        int main = (int)(mAppCallback.resources().getDimension(R.dimen.main_margin))*2;
+
+        if(orientation== Configuration.ORIENTATION_LANDSCAPE){
+            int w = height-main;
+            int count = (w/(item+margin*2));
+            ((GridLayoutManager)st.getLayoutManager()).setSpanCount(count);
+        } else {
+            int w = width-main;
+            int count = (w/(item+margin*2));
+            ((GridLayoutManager)st.getLayoutManager()).setSpanCount(count);
+        }
     }
 
     private void acceptDelItemStory(List<CommonValues> list) throws Exception {

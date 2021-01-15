@@ -15,6 +15,7 @@ import com.kittendevelop.randomnumber.ui.number.SelectorInputBound;
 import com.kittendevelop.randomnumber.ui.number.db.DataBaseGeneratedItems;
 import com.kittendevelop.randomnumber.ui.number.work.ThreadRequestResult;
 import com.kittendevelop.randomnumber.ui.number.work.ThreadWorkDB;
+import com.kittendevelop.randomnumber.ui.number.work.rest.NetService;
 
 import java.lang.annotation.Retention;
 
@@ -23,6 +24,7 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import retrofit2.Retrofit;
 
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
@@ -88,7 +90,7 @@ public class MainApplicationModule implements CallbackMainAppModule{
     }
 
     private ThreadRequestResult workNumb(){
-        return new ThreadRequestResult(connection());
+        return new ThreadRequestResult(new NetService(new Retrofit.Builder()));
     }
     private ThreadWorkDB workDBNumb(){
         return new ThreadWorkDB(dataGeneratedItems());
