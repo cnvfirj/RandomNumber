@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         inject();
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.container, FragmentNumb.newInstance())
+                    .replace(R.id.container, FragmentNumb.newInstance(true))
                     .commitNow();
         }
 
@@ -36,9 +36,9 @@ public class MainActivity extends AppCompatActivity {
         ((MainApplication)getApplication()).component().inject(this);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu,menu);
-        return super.onCreateOptionsMenu(menu);
-    }
+
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        return super.onCreateOptionsMenu(menu);
+//    }
 }

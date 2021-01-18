@@ -1,10 +1,14 @@
 package com.kittendevelop.randomnumber.ui.number;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -31,14 +35,26 @@ public class FragmentNumb extends Fragment implements FragmentFeedback, ParentFr
     @Inject
     PresenterNumb mPresenter;
 
+    private boolean mActiveFragment;
+
     public static FragmentNumb newInstance(){
         return new FragmentNumb();
     }
+    public static FragmentNumb newInstance(boolean activate){
+        Bundle b = new Bundle();
+        b.putBoolean("ACTIVATE",activate);
+        return new FragmentNumb();
+    }
+
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mPresenter.bindView(this);
+        Bundle b = getArguments();
+        if(b!=null){
+            mActiveFragment = b.getBoolean("ACTIVATE");
+        }
         return create(inflater);
     }
 
@@ -52,6 +68,7 @@ public class FragmentNumb extends Fragment implements FragmentFeedback, ParentFr
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ((MainApplication)getActivity().getApplication()).component().inject(this);
+        setHasOptionsMenu(true);
     }
 
     private View create(LayoutInflater inflater){
@@ -82,10 +99,33 @@ public class FragmentNumb extends Fragment implements FragmentFeedback, ParentFr
           else   mPresenter.deleteItem(item, tag);
     }
 
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        inflater.inflate(R.menu.menu,menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @SuppressLint("NonConstantResourceId")
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.menu_add_ex:
+                MASSAGE("click add");
+                break;
+            case R.id.menu_info:
+                MASSAGE("click add");
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     @Override
     public void clear(String tag) {
           mPresenter.clearTable(tag);
     }
+
+
 
     @Override
     public void onDestroy() {
@@ -113,11 +153,11 @@ public class FragmentNumb extends Fragment implements FragmentFeedback, ParentFr
     private void initLists(View v){
         mPresenter.fillLists(v.findViewById(R.id.story_results_numb),v.findViewById(R.id.search_excluded_numb));
     }
-
-    private void saveStateLists(){
-        RecyclerView st = getView().findViewById(R.id.story_results_numb);
-        st.getLayoutManager().onSaveInstanceState();
-        RecyclerView ex = getView().findViewById(R.id.search_excluded_numb);
-        ex.getLayoutManager().onSaveInstanceState();
-    }
+//
+//    private void saveStateLists(){
+//        RecyclerView st = getView().findViewById(R.id.story_results_numb);
+//        st.getLayoutManager().onSaveInstanceState();
+//        RecyclerView ex = getView().findViewById(R.id.search_excluded_numb);
+//        ex.getLayoutManager().onSaveInstanceState();
+//    }
 }
