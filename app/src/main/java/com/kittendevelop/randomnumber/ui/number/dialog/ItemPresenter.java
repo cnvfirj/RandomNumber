@@ -1,6 +1,8 @@
 package com.kittendevelop.randomnumber.ui.number.dialog;
 
 import android.annotation.SuppressLint;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.view.View;
 
 import com.kittendevelop.randomnumber.R;
@@ -30,6 +32,14 @@ public class ItemPresenter {
     public ItemPresenter bindView(DialogFeedback view){
         mView = view;
         return this;
+    }
+
+    public Drawable iconApply(){
+        return mView.context().getResources().getDrawable(mModel.getIcon(),null);
+    }
+
+    public int colorApply(){
+        return mView.context().getResources().getColor(mModel.getTint(),null);
     }
 
     public String value(){

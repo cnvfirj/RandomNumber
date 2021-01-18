@@ -53,6 +53,17 @@ public class ItemModel {
         }
     }
 
+    public int getIcon(){
+        if(mTag.equals(ReceiverItem.TAG_STORY)){
+            return R.drawable.ic_add_ex;
+        }else return R.drawable.ic_remove_ex;
+    }
+
+    public int getTint(){
+        if(mTag.equals(ReceiverItem.TAG_STORY)){
+            return R.color.purple_500;
+        }else return R.color.willingness_no;
+    }
 
 
 

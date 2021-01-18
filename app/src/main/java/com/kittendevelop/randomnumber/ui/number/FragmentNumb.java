@@ -19,6 +19,7 @@ import com.kittendevelop.randomnumber.databinding.FragmentNumbBinding;
 import com.kittendevelop.randomnumber.mainDI.MainApplication;
 import com.kittendevelop.randomnumber.ui.number.db.BaseEntityItems;
 import com.kittendevelop.randomnumber.ui.number.db.EntityGeneratedEx;
+import com.kittendevelop.randomnumber.ui.number.dialog.ReceiverItem;
 import com.kittendevelop.randomnumber.ui.number.dialog.ReceiverResult;
 
 import javax.inject.Inject;
@@ -77,7 +78,8 @@ public class FragmentNumb extends Fragment implements FragmentFeedback, ParentFr
 
     @Override
     public void delete(BaseEntityItems item, String tag) {
-        mPresenter.deleteItem(item, tag);
+        if(tag.equals(ReceiverItem.TAG_STORY))addToEx(item.mNumber, ReceiverResult.TAG);
+          else   mPresenter.deleteItem(item, tag);
     }
 
     @Override

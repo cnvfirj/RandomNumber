@@ -42,6 +42,9 @@ public interface DaoGeneratedEx {
     @Query("SELECT * FROM GENERATED_EX WHERE value = :value")
     EntityGeneratedEx value(String value);
 
+    @Query("SELECT * FROM GENERATED_EX WHERE number = :number")
+    EntityGeneratedEx numb(long number);
+
     @Query("SELECT * FROM GENERATED_EX WHERE id = :id")
     EntityGeneratedEx id(long id);
 

@@ -89,12 +89,14 @@ public class ThreadWorkDB {
         return Observable.create(new ObservableOnSubscribe<EntityGeneratedEx>() {
             @Override
             public void subscribe(@NonNull ObservableEmitter<EntityGeneratedEx> emitter) throws Exception {
-                EntityGeneratedEx entity = new EntityGeneratedEx();
-                entity.value(value).source(source);
-                FillNewBaseEntityItem.fill(entity);
-                mDataBaseItems.workWithEx().insert(entity);
-                EntityGeneratedEx e = mDataBaseItems.workWithEx().id(entity.getId());
-                if(e!=null)emitter.onNext(e);
+                if(mDataBaseItems.workWithEx().numb(value)==null) {
+                    EntityGeneratedEx entity = new EntityGeneratedEx();
+                    entity.value(value).source(source);
+                    FillNewBaseEntityItem.fill(entity);
+                    mDataBaseItems.workWithEx().insert(entity);
+                    EntityGeneratedEx e = mDataBaseItems.workWithEx().id(entity.getId());
+                    if (e != null) emitter.onNext(e);
+                }
                 emitter.onComplete();
             }
         }).observeOn(AndroidSchedulers.mainThread())
