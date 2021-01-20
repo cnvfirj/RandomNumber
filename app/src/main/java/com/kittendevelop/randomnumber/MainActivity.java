@@ -19,14 +19,17 @@ public class MainActivity extends AppCompatActivity {
     @Inject
     DataBaseGeneratedItems db;
 
+    private FragmentNumb mNumb;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mNumb = FragmentNumb.newInstance();
         setContentView(R.layout.activity_main);
         inject();
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.container, FragmentNumb.newInstance(true))
+                    .replace(R.id.container, mNumb.activate(true))
                     .commitNow();
         }
 

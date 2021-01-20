@@ -2,11 +2,7 @@ package com.kittendevelop.randomnumber.ui.number.dialog;
 
 import android.os.Bundle;
 
-import androidx.fragment.app.DialogFragment;
-
-import com.kittendevelop.randomnumber.help.Massages;
 import com.kittendevelop.randomnumber.ui.number.db.BaseEntityItems;
-import com.kittendevelop.randomnumber.ui.number.db.EntityGeneratedItem;
 import com.kittendevelop.randomnumber.ui.number.di.DaggerComponentDialogs;
 
 import javax.inject.Inject;

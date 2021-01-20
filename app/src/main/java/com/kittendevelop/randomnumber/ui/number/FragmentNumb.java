@@ -23,6 +23,7 @@ import com.kittendevelop.randomnumber.databinding.FragmentNumbBinding;
 import com.kittendevelop.randomnumber.mainDI.MainApplication;
 import com.kittendevelop.randomnumber.ui.number.db.BaseEntityItems;
 import com.kittendevelop.randomnumber.ui.number.db.EntityGeneratedEx;
+import com.kittendevelop.randomnumber.ui.number.dialog.ReceiverInfo;
 import com.kittendevelop.randomnumber.ui.number.dialog.ReceiverItem;
 import com.kittendevelop.randomnumber.ui.number.dialog.ReceiverResult;
 
@@ -40,10 +41,18 @@ public class FragmentNumb extends Fragment implements FragmentFeedback, ParentFr
     public static FragmentNumb newInstance(){
         return new FragmentNumb();
     }
+
     public static FragmentNumb newInstance(boolean activate){
         Bundle b = new Bundle();
         b.putBoolean("ACTIVATE",activate);
         return new FragmentNumb();
+    }
+
+    public FragmentNumb activate(boolean b){
+        Bundle bundle = new Bundle();
+        bundle.putBoolean("ACTIVATE",b);
+        setArguments(bundle);
+        return this;
     }
 
 
@@ -62,6 +71,15 @@ public class FragmentNumb extends Fragment implements FragmentFeedback, ParentFr
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initLists(view);
+    }
+
+
+    @Override
+    public void setArguments(@Nullable Bundle args) {
+        super.setArguments(args);
+        Bundle b = getArguments();
+        if(b!=null)
+        getArguments().putBoolean("ACTIVATE",args.getBoolean("ACTIVATE",true));
     }
 
     @Override
@@ -109,12 +127,13 @@ public class FragmentNumb extends Fragment implements FragmentFeedback, ParentFr
     @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(mActiveFragment)
         switch (item.getItemId()){
             case R.id.menu_add_ex:
-                MASSAGE("click add");
+                MASSAGE("click add "+mActiveFragment);
                 break;
             case R.id.menu_info:
-                MASSAGE("click add");
+                showDialog(ReceiverInfo.instance().dialog(),"INFO");
                 break;
         }
         return super.onOptionsItemSelected(item);

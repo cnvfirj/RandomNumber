@@ -11,13 +11,11 @@ import android.view.View;
 import androidx.paging.PagedList;
 import androidx.paging.PositionalDataSource;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.kittendevelop.randomnumber.R;
 import com.kittendevelop.randomnumber.mainDI.CallbackMainAppModule;
 import com.kittendevelop.randomnumber.ui.number.adapters.AdapterList;
-import com.kittendevelop.randomnumber.ui.number.adapters.EntityItemsAdapter;
 import com.kittendevelop.randomnumber.ui.number.db.BaseEntityItems;
 import com.kittendevelop.randomnumber.ui.number.db.CommonValues;
 import com.kittendevelop.randomnumber.ui.number.db.EntityGeneratedEx;
@@ -28,19 +26,11 @@ import com.kittendevelop.randomnumber.ui.number.dialog.ReceiverResult;
 import com.kittendevelop.randomnumber.ui.number.dialog.ReceiverWaiting;
 
 import java.util.List;
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
 
 import io.reactivex.annotations.NonNull;
-import io.reactivex.functions.Consumer;
-import io.reactivex.observers.DisposableMaybeObserver;
-import io.reactivex.observers.DisposableObserver;
 import io.reactivex.observers.DisposableSingleObserver;
 
-import static com.kittendevelop.randomnumber.help.Massages.MASSAGE;
-
 public class PresenterNumb{
-
 
     private final SelectorInputBound mSelectorInputBound;
     private final ModelNumb mModelNumb;
