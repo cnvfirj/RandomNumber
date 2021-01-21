@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="presenter"
+            type="com.kittendevelop.randomnumber.ui.number.dialog.EnterExPresenter" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/background_fields"
+        android:padding="@dimen/item_list_margin">
+
+        <EditText style="@style/input_bound_field_numb"
+            android:layout_width="match_parent"
+            android:backgroundTint="@color/willingness_yes"
+            android:id="@+id/input_ex_field"
+            android:hint="@string/start_text_input_ex"
+            android:text="@{presenter.value()}"
+            app:addTextChangedListener="@{presenter.text}"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageButton style="@style/start_end_results_numb"
+                android:id="@+id/input_ex_exit"
+                android:backgroundTint="@color/willingness_no"
+                android:src="@drawable/ic_baseline_arrow_back_24"
+                android:onClick="@{(v)->presenter.click(v)}"/>
+
+            <ImageButton style="@style/start_end_results_numb"
+                android:layout_width="match_parent"
+                android:id="@+id/input_ex_apply"
+                android:src="@drawable/ic_add_ex"
+                android:backgroundTint="@color/purple_500"
+                android:onClick="@{(v)->presenter.click(v)}"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>

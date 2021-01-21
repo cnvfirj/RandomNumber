@@ -1,21 +1,16 @@
 package com.kittendevelop.randomnumber.ui.number.adapters;
 
-import android.app.LauncherActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.databinding.DataBindingUtil;
 import androidx.paging.PagedListAdapter;
-import androidx.recyclerview.widget.AsyncDifferConfig;
 import androidx.recyclerview.widget.DiffUtil;
 
 import com.kittendevelop.randomnumber.R;
 import com.kittendevelop.randomnumber.databinding.ItemNumberListBinding;
-import com.kittendevelop.randomnumber.help.Massages;
 import com.kittendevelop.randomnumber.ui.number.PresenterNumb;
-import com.kittendevelop.randomnumber.ui.number.db.BaseEntityItems;
 import com.kittendevelop.randomnumber.ui.number.db.CommonValues;
 
 import javax.inject.Inject;

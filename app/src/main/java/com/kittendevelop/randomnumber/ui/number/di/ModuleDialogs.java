@@ -1,6 +1,7 @@
 package com.kittendevelop.randomnumber.ui.number.di;
 
 
+import com.kittendevelop.randomnumber.ui.number.dialog.DialogEnterEx;
 import com.kittendevelop.randomnumber.ui.number.dialog.DialogInfo;
 import com.kittendevelop.randomnumber.ui.number.dialog.DialogItem;
 import com.kittendevelop.randomnumber.ui.number.dialog.DialogResult;
@@ -31,6 +32,12 @@ public class ModuleDialogs {
     @Provides
     DialogInfo dialogInfo(){
         return new DialogInfo();
+    }
+
+
+    @Provides
+    DialogEnterEx dialogEnterEx(){
+        return new DialogEnterEx();
     }
 
 }

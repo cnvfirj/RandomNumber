@@ -23,6 +23,7 @@ import com.kittendevelop.randomnumber.databinding.FragmentNumbBinding;
 import com.kittendevelop.randomnumber.mainDI.MainApplication;
 import com.kittendevelop.randomnumber.ui.number.db.BaseEntityItems;
 import com.kittendevelop.randomnumber.ui.number.db.EntityGeneratedEx;
+import com.kittendevelop.randomnumber.ui.number.dialog.ReceiverEnterEx;
 import com.kittendevelop.randomnumber.ui.number.dialog.ReceiverInfo;
 import com.kittendevelop.randomnumber.ui.number.dialog.ReceiverItem;
 import com.kittendevelop.randomnumber.ui.number.dialog.ReceiverResult;
@@ -109,6 +110,7 @@ public class FragmentNumb extends Fragment implements FragmentFeedback, ParentFr
     @Override
     public void addToEx(long value, String tag) {
         if(tag.equals(ReceiverResult.TAG))mPresenter.addValueToEX(value, EntityGeneratedEx.SOURCE_AUTO);
+        else if(tag.equals(ReceiverEnterEx.TAG))mPresenter.addValueToEX(value, EntityGeneratedEx.SOURCE_MANUAL);
     }
 
     @Override
@@ -130,7 +132,7 @@ public class FragmentNumb extends Fragment implements FragmentFeedback, ParentFr
         if(mActiveFragment)
         switch (item.getItemId()){
             case R.id.menu_add_ex:
-                MASSAGE("click add "+mActiveFragment);
+                showDialog(ReceiverEnterEx.instance().dialog(), "ENTER_EX");
                 break;
             case R.id.menu_info:
                 showDialog(ReceiverInfo.instance().dialog(),"INFO");
