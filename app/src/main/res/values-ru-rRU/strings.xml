@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">RandomNumber</string>
+
+    <string name="input_from">від</string>
+    <string name="input_to">до</string>
+    <string name="input_quantity">quantity</string>
+    <string name="hint_input">Диапазон поиска</string>
+    <string name="hint_search">Старт пошуку та виключені значення</string>
+    <string name="hint_story">Минулы результати</string>
+    <string name="max_length">Досягнуто максимальне значення числа, що вводиться</string>
+
+    <!--    <string name="result_report">Результат сгенерирован %date% в %time%, в заданных пределах от %from% до %to%, %resource%</string>-->
+    <string name="massage_report">Результат згенерований %% в %%, в заданих межах від %% до %% %%</string>
+    <string name="result_report_error">Результат згенерувати немождиво. Отредактуй виключення.</string>
+    <string name="add_to_ex">Додай в виключення значення</string>
+    <string name="source_app"> за допомогою ресурсів додатка</string>
+    <string name="source_net"> за допомогою сервіса, наданого Австралійським Національним Університетом</string>
+
+    <string name="redact_report_ex">Виключення сгенеровано %% в %%, </string>
+    <string name="redact_report_manual_enter"> за допомогою ручного введення</string>
+    <string name="redact_report_result_enter"> з отриманого результату</string>
+
+
+    <string name="start_text_input_ex">Введи число</string>
+
+
+    <string name="report_info">
+        Випадкові числа генеруються в режимі реального часу в лабораторії Австралійського Національного Університету шляхом вимірювання квантових флуктуацій вакууму.
+         Цей сервіс буде використаний в разі робочого підключення до мережі.
+    </string>
+</resources>
