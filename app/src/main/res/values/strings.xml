@@ -5,27 +5,27 @@
     <string name = "input_to"> to </string>
     <string name = "input_quantity"> quantity </string>
     <string name = "hint_input"> Search range </string>
-    <string name = "hint_search"> Start search and excluded items </string>
-    <string name = "hint_story"> Past Results </string>
-    <string name = "max_length"> The maximum value of the entered number has been reached </string>
+    <string name = "hint_search"> Beginning of a search and excluded elements </string>
+    <string name = "hint_story"> Previous Results </string>
+    <string name = "max_length"> Reached maximum value of the input </string>
 
-    <string name = "massage_report"> Result generated %% in %%, within the specified range from %% to %% %% </string>
-    <string name = "result_report_error"> The result cannot be generated. Edit the exceptions. </string>
-    <string name = "add_to_ex"> Add to excluded values ​​</string>
-    <string name = "source_app"> using application resources </string>
-    <string name = "source_net"> via a service provided by the Australian National University </string>
+    <string name = "massage_report"> The result was generated %% at %%, in a set range from %% to %% %% </string>
+    <string name = "result_report_error"> The result cannot be generated. please edit the exceptions. </string>
+    <string name = "add_to_ex"> Input excluded values ​​</string>
+    <string name = "source_app"> using app resources </string>
+    <string name = "source_net"> using a service provided by Australian National University </string>
 
-    <string name = "redact_report_ex"> An exception was thrown by %% in %%, </string>
-    <string name = "redact_report_manual_enter"> using manual input </string>
-    <string name = "redact_report_result_enter"> from the received result </string>
+    <string name = "redact_report_ex"> Exception was generated %% in %%, </string>
+    <string name = "redact_report_manual_enter"> with manual input </string>
+    <string name = "redact_report_result_enter"> from acquired result </string>
 
 
-    <string name = "start_text_input_ex"> Enter a number </string>
+    <string name = "start_text_input_ex"> Input a value </string>
 
 
     <string name = "report_info">
-        Random numbers are generated in real time in the laboratory of the Australian National University by measuring the quantum fluctuations of the vacuum.
-        This service will be used in case of a working connection to the network.
+        Random values are generated in real-time in the laboratory of Australian National University by measuring vacuum state fluctuations.
+        This service will be used if the internet connection is present.
     </string>
 
 
