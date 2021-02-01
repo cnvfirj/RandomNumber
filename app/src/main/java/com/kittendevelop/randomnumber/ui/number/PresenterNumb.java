@@ -107,7 +107,7 @@ public class PresenterNumb{
     private void resultRequestEntity(EntityGeneratedItem item) throws Exception{
         ReceiverWaiting.instance().stop();
         mFeedback.showDialog(ReceiverResult.instance().result(item).dialog(),ReceiverResult.TAG);
-        if(!item.getValue().equals("ERROR")){
+        if(item.getNumber()>Long.MIN_VALUE&&item.getNumber()<Long.MAX_VALUE){
               fillAdapterStory();
         }
     }

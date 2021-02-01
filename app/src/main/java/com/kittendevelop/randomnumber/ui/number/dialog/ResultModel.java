@@ -29,7 +29,7 @@ public class ResultModel {
     }
 
     public String lastResult(){
-        if(mItem.getNumber()==Long.MIN_VALUE)return "ERROR";
+        if(mItem.getNumber()==Long.MIN_VALUE||mItem.getNumber()==Long.MAX_VALUE)return "ERROR";
         else return mItem.getValue();
     }
 
