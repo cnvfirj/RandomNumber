@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    
+    
+    <style name="main_style" parent="Theme.AppCompat.Light">
+        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimaryDark">@color/purple_700</item>
+        <item name="colorAccent">@color/teal_200</item>
+        <item name="android:textColorPrimary">@color/white</item>
+
+    </style>
 
     <style name="input_bound_field">
         <item name="android:layout_width">match_parent</item>

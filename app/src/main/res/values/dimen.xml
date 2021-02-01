@@ -7,6 +7,6 @@
     <dimen name="result_dialog_height">50%</dimen>
     <dimen name="main_margin">5dp</dimen>
     <dimen name="item_list_margin">3dp</dimen>
-    <dimen name="item_width">75dp</dimen>
+    <dimen name="item_width">70dp</dimen>
 
 </resources>

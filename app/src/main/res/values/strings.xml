@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">RandomNumber</string>
+    <string name="app_name">AnyRandomaizer</string>
 
     <string name = "input_from"> from </string>
     <string name = "input_to"> to </string>

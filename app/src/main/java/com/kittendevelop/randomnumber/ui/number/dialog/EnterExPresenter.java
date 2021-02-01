@@ -50,10 +50,14 @@ public class EnterExPresenter {
                 if(mView!=null)mView.exitDialog();
                 break;
             case R.id.input_ex_apply:
-                ParentFragmentCallback mCallback = (ParentFragmentCallback) mView.fragment().getParentFragment();
-                if (mCallback != null)
-                    mCallback.addToEx(Long.parseLong(mModel.getValue()), ReceiverEnterEx.TAG);
-                if(mView!=null)mView.exitDialog();
+                if(mView!=null) {
+                    if(!mModel.getValue().equals("")&&!mModel.getValue().equals("-")) {
+                        ParentFragmentCallback mCallback = (ParentFragmentCallback) mView.fragment().getParentFragment();
+                        if (mCallback != null)
+                            mCallback.addToEx(Long.parseLong(mModel.getValue()), ReceiverEnterEx.TAG);
+                    }
+                    mView.exitDialog();
+                }
                 break;
         }
     }

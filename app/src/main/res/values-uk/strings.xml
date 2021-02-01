@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">RandomNumber</string>
+    <string name="app_name">AnyRandomaizer</string>
 
     <string name="input_from">від</string>
     <string name="input_to">до</string>
     <string name="input_quantity">quantity</string>
-    <string name="hint_input">Диапазон поиска</string>
+    <string name="hint_input">Диапазон пошуку</string>
     <string name="hint_search">Старт пошуку та виключені значення</string>
     <string name="hint_story">Минулы результати</string>
     <string name="max_length">Досягнуто максимальне значення числа, що вводиться</string>
