@@ -42,10 +42,14 @@ public class ResultModel {
     }
 
     public int idSource(){
-        if(mItem.getNumber()!=Long.MIN_VALUE) {
+        if(mItem.getNumber()==Long.MIN_VALUE) {
+            return R.string.result_report_error_1;
+        }else if(mItem.getNumber()==Long.MAX_VALUE){
+            return R.string.result_report_error_2;
+        }else {
             if (mItem.getSource() == EntityGeneratedItem.SOURCE_NET) return R.string.source_net;
             else return R.string.source_app;
-        }else return R.string.result_report_error;
+        }
     }
 
     public String getDate() {

@@ -12,7 +12,9 @@
 
     <!--    <string name="result_report">Результат сгенерирован %date% в %time%, в заданных пределах от %from% до %to%, %resource%</string>-->
     <string name="massage_report">Результат згенерований %% в %%, в заданих межах від %% до %% %%</string>
-    <string name="result_report_error">Результат згенерувати немождиво. Отредактуй виключення.</string>
+    <string name="result_report_error_1">Результат згенерувати немождиво. Відредагуй виключення.</string>
+    <string name="result_report_error_2">Результат згенерувати немождиво. Відредагуй межі запиту.</string>
+
     <string name="add_to_ex">Додай в виключення значення</string>
     <string name="source_app"> за допомогою ресурсів додатка</string>
     <string name="source_net"> за допомогою сервіса, наданого Австралійським Національним Університетом</string>

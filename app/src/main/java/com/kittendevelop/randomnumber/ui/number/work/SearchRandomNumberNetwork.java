@@ -21,6 +21,7 @@ public class SearchRandomNumberNetwork {
 
 
     public static long generate(Set<Long> ex, long from, long to, long source){
+        if(from==to)return Long.MAX_VALUE;
         if(Math.abs(to-from)<10000)return searchInNet2(ex, from, to,source);
         else return searchInNet(ex, from, to,source);
     }

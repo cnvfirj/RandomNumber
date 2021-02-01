@@ -145,7 +145,7 @@ public class SelectorInputBound {
     }
 
     private void switchColorBackground(){
-        if(mFrom<mTo&&mValueFrom.length()>0&&mValueTo.length()>0){
+        if(mFrom<mTo&&mValueFrom.length()>0&&mValueTo.length()>0&&!mValueTo.equals("-")&&!mValueFrom.equals("-")){
             mColorBackground.set(mColorYes);
             mReadiness = true;
         }else {

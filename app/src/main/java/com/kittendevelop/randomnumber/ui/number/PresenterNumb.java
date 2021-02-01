@@ -93,10 +93,12 @@ public class PresenterNumb{
     }
 
     public void click(View v){
-        mFeedback.showDialog(ReceiverWaiting.instance().dialog(),"WAITING");
-        mModelNumb.requestGeneratedNumber(
-                this::resultRequestEntity,mSelectorInputBound.getFrom(),mSelectorInputBound.getTo()
-        );
+        if(mSelectorInputBound.isReadiness()) {
+            mFeedback.showDialog(ReceiverWaiting.instance().dialog(), "WAITING");
+            mModelNumb.requestGeneratedNumber(
+                    this::resultRequestEntity, mSelectorInputBound.getFrom(), mSelectorInputBound.getTo()
+            );
+        }
     }
 
     /*после выполнения всей работы закрываем ожидание

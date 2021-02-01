@@ -10,7 +10,9 @@
     <string name = "max_length"> Reached maximum value of the input </string>
 
     <string name = "massage_report"> The result was generated %% at %%, in a set range from %% to %% %% </string>
-    <string name = "result_report_error"> The result cannot be generated. please edit the exceptions. </string>
+    <string name = "result_report_error_1"> The result cannot be generated. Please edit the exceptions. </string>
+    <string name = "result_report_error_2"> The result cannot be generated. Please еdit request boundaries . </string>
+
     <string name = "add_to_ex"> Input excluded values ​​</string>
     <string name = "source_app"> using app resources </string>
     <string name = "source_net"> using a service provided by Australian National University </string>

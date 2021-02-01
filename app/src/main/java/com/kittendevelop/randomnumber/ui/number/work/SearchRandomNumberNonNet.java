@@ -14,6 +14,7 @@ public class SearchRandomNumberNonNet {
 
 
     public static long generate(Set<Long> ex,long from,long to){
+        if(from==to)return Long.MAX_VALUE;
         if(Math.abs(to-from)<10000)return searchInDevice2(ex, from, to);
         else return searchInDevice(ex, from, to);
     }

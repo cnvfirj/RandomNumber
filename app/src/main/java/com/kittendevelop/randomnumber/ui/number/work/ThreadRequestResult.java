@@ -80,7 +80,6 @@ public class ThreadRequestResult {
                 FillNewBaseEntityItem.fill(entity);
                 if(mNetService.check()){
                     generateNumberInNet(entity,emitter);
-
                 }else {
                     generateNumberDev(entity,emitter);
                 }
