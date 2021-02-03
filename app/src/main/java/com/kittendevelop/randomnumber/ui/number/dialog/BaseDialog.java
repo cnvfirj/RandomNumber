@@ -14,8 +14,6 @@ import androidx.fragment.app.DialogFragment;
 
 import com.kittendevelop.randomnumber.R;
 
-import static com.kittendevelop.randomnumber.help.Massages.MASSAGE;
-
 public abstract class BaseDialog extends DialogFragment implements DialogFeedback{
 
 

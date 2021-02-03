@@ -1,7 +1,5 @@
 package com.kittendevelop.randomnumber.ui.number.work;
 
-import static com.kittendevelop.randomnumber.help.Massages.MASSAGE;
-
 public class CheckResult {
 
     /*поиск совпадений в массиве*/

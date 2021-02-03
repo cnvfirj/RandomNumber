@@ -5,7 +5,6 @@ import android.view.View;
 
 import com.kittendevelop.randomnumber.R;
 import com.kittendevelop.randomnumber.ui.number.ParentFragmentCallback;
-import com.kittendevelop.randomnumber.ui.number.db.EntityGeneratedEx;
 import com.kittendevelop.randomnumber.ui.number.db.EntityGeneratedItem;
 
 import javax.inject.Inject;

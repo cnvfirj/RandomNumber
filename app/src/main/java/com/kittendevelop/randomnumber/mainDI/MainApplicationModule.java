@@ -1,6 +1,5 @@
 package com.kittendevelop.randomnumber.mainDI;
 
-import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;

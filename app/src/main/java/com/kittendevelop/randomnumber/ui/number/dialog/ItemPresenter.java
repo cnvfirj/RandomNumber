@@ -1,7 +1,6 @@
 package com.kittendevelop.randomnumber.ui.number.dialog;
 
 import android.annotation.SuppressLint;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 

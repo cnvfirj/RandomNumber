@@ -1,7 +1,6 @@
 package com.kittendevelop.randomnumber.ui.number.dialog;
 
 import android.annotation.SuppressLint;
-import android.content.SharedPreferences;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;

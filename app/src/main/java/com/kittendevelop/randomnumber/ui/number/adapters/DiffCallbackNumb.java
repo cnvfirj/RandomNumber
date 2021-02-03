@@ -3,7 +3,6 @@ package com.kittendevelop.randomnumber.ui.number.adapters;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 
-import com.kittendevelop.randomnumber.ui.number.db.BaseEntityItems;
 import com.kittendevelop.randomnumber.ui.number.db.CommonValues;
 
 

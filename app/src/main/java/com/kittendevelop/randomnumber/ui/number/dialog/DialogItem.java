@@ -7,11 +7,9 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.DialogFragment;
 
 import com.kittendevelop.randomnumber.R;
 import com.kittendevelop.randomnumber.databinding.RedactBinding;
-import com.kittendevelop.randomnumber.databinding.ResultBinding;
 import com.kittendevelop.randomnumber.ui.number.db.BaseEntityItems;
 import com.kittendevelop.randomnumber.ui.number.di.DaggerComponentDialogs;
 

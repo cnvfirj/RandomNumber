@@ -5,12 +5,9 @@ import android.annotation.SuppressLint;
 import androidx.annotation.NonNull;
 import androidx.paging.PositionalDataSource;
 
-import com.kittendevelop.randomnumber.help.Massages;
-import com.kittendevelop.randomnumber.ui.number.db.BaseEntityItems;
 import com.kittendevelop.randomnumber.ui.number.db.CommonValues;
 import com.kittendevelop.randomnumber.ui.number.db.DataBaseGeneratedItems;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -19,7 +16,6 @@ import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 

@@ -3,9 +3,6 @@ package com.kittendevelop.randomnumber.ui.number.db;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-
 @Entity
 public abstract class BaseEntityItems extends BaseEntity{
 

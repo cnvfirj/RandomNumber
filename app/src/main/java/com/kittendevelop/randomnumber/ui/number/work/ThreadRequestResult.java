@@ -1,20 +1,12 @@
 package com.kittendevelop.randomnumber.ui.number.work;
 
-import android.net.ConnectivityManager;
-import android.util.Pair;
-
-import com.kittendevelop.randomnumber.ui.number.db.BaseEntity;
-import com.kittendevelop.randomnumber.ui.number.db.DataBaseGeneratedItems;
 import com.kittendevelop.randomnumber.ui.number.db.EntityGeneratedItem;
 import com.kittendevelop.randomnumber.ui.number.db.FillNewBaseEntityItem;
 import com.kittendevelop.randomnumber.ui.number.work.rest.NetService;
 import com.kittendevelop.randomnumber.ui.number.work.rest.PojoNumber;
 
-import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.util.List;
 import java.util.Set;
-import java.util.TreeSet;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
@@ -27,8 +19,6 @@ import io.reactivex.schedulers.Schedulers;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-import static com.kittendevelop.randomnumber.help.Massages.MASSAGE;
 
 public class ThreadRequestResult {
 

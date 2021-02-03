@@ -6,11 +6,6 @@ import android.text.TextWatcher;
 
 import androidx.databinding.ObservableField;
 
-import javax.inject.Inject;
-import javax.inject.Singleton;
-
-import static com.kittendevelop.randomnumber.help.Massages.MASSAGE;
-
 public class SelectorInputBound {
 
     private String mValueFrom;

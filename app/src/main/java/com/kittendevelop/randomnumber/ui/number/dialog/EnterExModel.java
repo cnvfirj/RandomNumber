@@ -1,7 +1,5 @@
 package com.kittendevelop.randomnumber.ui.number.dialog;
 
-import com.kittendevelop.randomnumber.R;
-
 import javax.inject.Inject;
 
 public class EnterExModel {

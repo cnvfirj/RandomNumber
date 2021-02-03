@@ -6,9 +6,6 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
-import androidx.recyclerview.widget.DiffUtil.Callback;
-import androidx.recyclerview.widget.DiffUtil.DiffResult;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.kittendevelop.randomnumber.R;
@@ -16,7 +13,6 @@ import com.kittendevelop.randomnumber.databinding.ItemNumberListBinding;
 import com.kittendevelop.randomnumber.ui.number.PresenterNumb;
 import com.kittendevelop.randomnumber.ui.number.db.CommonValues;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;

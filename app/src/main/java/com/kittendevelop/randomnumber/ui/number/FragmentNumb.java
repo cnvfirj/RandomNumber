@@ -1,10 +1,8 @@
 package com.kittendevelop.randomnumber.ui.number;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -16,7 +14,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.kittendevelop.randomnumber.R;
 import com.kittendevelop.randomnumber.databinding.FragmentNumbBinding;
@@ -29,8 +26,6 @@ import com.kittendevelop.randomnumber.ui.number.dialog.ReceiverItem;
 import com.kittendevelop.randomnumber.ui.number.dialog.ReceiverResult;
 
 import javax.inject.Inject;
-
-import static com.kittendevelop.randomnumber.help.Massages.MASSAGE;
 
 public class FragmentNumb extends Fragment implements FragmentFeedback, ParentFragmentCallback{
 

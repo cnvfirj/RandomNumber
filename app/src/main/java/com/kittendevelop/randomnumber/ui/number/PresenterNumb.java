@@ -30,8 +30,6 @@ import java.util.List;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.observers.DisposableSingleObserver;
 
-import static com.kittendevelop.randomnumber.help.Massages.MASSAGE;
-
 public class PresenterNumb{
 
     private final SelectorInputBound mSelectorInputBound;

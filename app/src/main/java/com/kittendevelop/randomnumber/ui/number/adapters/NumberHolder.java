@@ -1,13 +1,9 @@
 package com.kittendevelop.randomnumber.ui.number.adapters;
 
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.kittendevelop.randomnumber.R;

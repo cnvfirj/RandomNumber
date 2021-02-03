@@ -1,21 +1,7 @@
 package com.kittendevelop.randomnumber.ui.number.work;
 
-import android.media.MediaActionSound;
-
-import java.io.IOException;
-import java.net.InetSocketAddress;
-import java.net.Socket;
-import java.net.SocketAddress;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
-import java.util.TreeSet;
-
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
-
-import static com.kittendevelop.randomnumber.help.Massages.MASSAGE;
 
 public class SearchRandomNumberNetwork {
 

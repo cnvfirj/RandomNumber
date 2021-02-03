@@ -1,12 +1,7 @@
 package com.kittendevelop.randomnumber.ui.number.work;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
-import java.util.SortedSet;
-import java.util.TreeSet;
-
-import static com.kittendevelop.randomnumber.help.Massages.MASSAGE;
 
 public class SearchRandomNumberNonNet {
 

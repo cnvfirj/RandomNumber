@@ -3,7 +3,6 @@ package com.kittendevelop.randomnumber.ui.number.db;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
-import androidx.room.PrimaryKey;
 
 @Entity(tableName = "EX_ITEMS")
 public class EntityExItems extends BaseEntity{

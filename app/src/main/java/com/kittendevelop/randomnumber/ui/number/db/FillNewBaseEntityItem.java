@@ -3,8 +3,6 @@ package com.kittendevelop.randomnumber.ui.number.db;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-import static com.kittendevelop.randomnumber.help.Massages.MASSAGE;
-
 public class FillNewBaseEntityItem {
 
     /*месяц почему то считается с нуля*/

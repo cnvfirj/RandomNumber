@@ -2,7 +2,6 @@ package com.kittendevelop.randomnumber.ui.number.dialog;
 
 import com.kittendevelop.randomnumber.R;
 import com.kittendevelop.randomnumber.ui.number.db.BaseEntityItems;
-import com.kittendevelop.randomnumber.ui.number.db.EntityExItems;
 import com.kittendevelop.randomnumber.ui.number.db.EntityGeneratedEx;
 import com.kittendevelop.randomnumber.ui.number.db.EntityGeneratedItem;
 

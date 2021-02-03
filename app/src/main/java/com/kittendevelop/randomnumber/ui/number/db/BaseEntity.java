@@ -5,10 +5,6 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-
-import static com.kittendevelop.randomnumber.help.Massages.MASSAGE;
 
 
 @Entity
