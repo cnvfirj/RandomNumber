@@ -7,7 +7,7 @@
     <string name="input_quantity">quantity</string>
     <string name="hint_input">Диапазон пошуку</string>
     <string name="hint_search">Старт пошуку та виключені значення</string>
-    <string name="hint_story">Минулы результати</string>
+    <string name="hint_story">Минулі результати</string>
     <string name="max_length">Досягнуто максимальне значення числа, що вводиться</string>
 
     <!--    <string name="result_report">Результат сгенерирован %date% в %time%, в заданных пределах от %from% до %to%, %resource%</string>-->
