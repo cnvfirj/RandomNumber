@@ -3,7 +3,6 @@ package com.kittendevelop.randomnumber;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.view.Menu;
 
 import com.kittendevelop.randomnumber.mainDI.MainApplication;
 import com.kittendevelop.randomnumber.ui.number.FragmentNumb;
@@ -11,7 +10,6 @@ import com.kittendevelop.randomnumber.ui.number.db.DataBaseGeneratedItems;
 
 import javax.inject.Inject;
 
-import static com.kittendevelop.randomnumber.help.Massages.MASSAGE;
 
 public class MainActivity extends AppCompatActivity {
 

@@ -3,13 +3,8 @@ package com.kittendevelop.randomnumber.ui.number;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.res.Configuration;
-import android.os.Handler;
-import android.os.Looper;
-import android.os.Parcelable;
 import android.view.View;
 
-import androidx.paging.PagedList;
-import androidx.paging.PositionalDataSource;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 

@@ -1,7 +1,6 @@
 package com.kittendevelop.randomnumber.ui.number.work;
 
 
-import com.kittendevelop.randomnumber.ui.number.adapters.AdapterDataSource;
 import com.kittendevelop.randomnumber.ui.number.db.BaseEntityItems;
 import com.kittendevelop.randomnumber.ui.number.db.CommonValues;
 import com.kittendevelop.randomnumber.ui.number.db.DataBaseGeneratedItems;
@@ -29,8 +28,7 @@ import io.reactivex.schedulers.Schedulers;
 public class ThreadWorkDB {
 
     private DataBaseGeneratedItems mDataBaseItems;
-    private AdapterDataSource mDataStory;
-    private AdapterDataSource mDataEx;
+
 
     public ThreadWorkDB(DataBaseGeneratedItems dataBaseItems) {
         this.mDataBaseItems = dataBaseItems;
@@ -40,15 +38,7 @@ public class ThreadWorkDB {
         return mDataBaseItems;
     }
 
-    public AdapterDataSource getAdapterDataSource(int table){
-        if(table==0){
-            if(mDataStory==null)mDataStory = new AdapterDataSource(mDataBaseItems,table);
-            return mDataStory;
-        }else {
-            if(mDataEx==null)mDataEx = new AdapterDataSource(mDataBaseItems,table);
-            return mDataEx;
-        }
-    }
+//
 
     /*запрос в бд на исключенные числа*/
     public Observable<Set<Long>>listExValues(){
